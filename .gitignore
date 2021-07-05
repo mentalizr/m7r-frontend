@@ -1,0 +1,14 @@
+*~
+.idea/
+.gradle/*
+gradle/
+gradlew
+gradlew.bat
+dist/
+js-out/*
+node_modules/*
+
+
+
+
+

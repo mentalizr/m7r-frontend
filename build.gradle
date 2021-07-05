@@ -1,0 +1,27 @@
+
+task webpack(type: Exec) {
+
+    // siehe hier:
+    // https://guides.gradle.org/running-webpack-with-gradle/
+
+    inputs.dir("src")
+    outputs.dir("dist")
+
+    commandLine "$projectDir/node_modules/.bin/webpack"
+}
+
+task tsc(type: Exec) {
+
+//    println System.getenv("PATH")
+
+    // siehe hier:
+    // https://guides.gradle.org/running-webpack-with-gradle/
+
+    inputs.dir("src")
+    outputs.dir("js-out")
+
+    commandLine "$projectDir/node_modules/.bin/tsc"
+}
+
+webpack.dependsOn tsc
+
