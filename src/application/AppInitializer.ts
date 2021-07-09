@@ -6,6 +6,8 @@ import {AbstractAppController} from "./AbstractAppController";
 import {PatientAppController} from "../patient/general/controller/PatientAppController";
 import {Logger} from "../helper/Logger";
 import {EntrypointOption} from "../routing/EntryPointOptions/EntrypointOption";
+import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
+import {TherapistAppController} from "../therapist/TherapistAppController";
 
 const USER_ROLE_PATIENT = "PATIENT";
 const USER_ROLE_THERAPIST = "THERAPIST";
@@ -52,8 +54,13 @@ export class AppInitializer {
             AppInitializer.abstractAppChunkFetch = new AppChunkFetchPatient();
             AppInitializer.abstractAppController = new PatientAppController();
 
+        } else if (sessionStatus.userRole.toLowerCase() === USER_ROLE_THERAPIST.toLowerCase()) {
+            AppInitializer.abstractAppChunkFetch = new AppChunkFetchTherapist();
+            AppInitializer.abstractAppController = new TherapistAppController();
+
         } else {
-            Logger("Error: Unrecognized user role: " + sessionStatus.userRole);
+
+            Logger("Unrecognized user role: [" + sessionStatus.userRole + "].");
         }
 
         // TODO Add further roles here

@@ -1,7 +1,7 @@
 import {ID_BACK_BUTTON, ID_NEXT_BUTTON, ID_SAVE_BUTTON, ID_SEND_BUTTON} from "../ButtonBarIDs";
 import {SendConfirmModalController} from "../../mainContent/formDataPersist/SendConfirmModalController";
 import {Model} from "../../../general/model/Model";
-import {AppController} from "../../../general/controller/AppController";
+import {ErrorHandler} from "../../../general/controller/ErrorHandler";
 import {FormDataValidator} from "../../mainContent/formDataPersist/FormDataValidator";
 import {BackdropSpinnerController} from "../../../general/controller/BackdropSpinnerController";
 import {FormDataSavePageScope} from "../../mainContent/formDataPersist/rest/save/FormDataSavePageScope";
@@ -10,6 +10,7 @@ import {FormDataSaveProgramNamedScope} from "../../mainContent/formDataPersist/r
 import {GeneralAlertController} from "../../generalAlert/GeneralAlertController";
 import {MainContentView} from "../../mainContent/MainContentView";
 import {ButtonBarController} from "./ButtonBarController";
+import {PatientAppController} from "../../../general/controller/PatientAppController";
 
 export class ButtonBarControllerEvents {
 
@@ -36,7 +37,7 @@ export class ButtonBarControllerEvents {
 
     private static actionContentNextButton(): void {
         Model.incStepIndex();
-        AppController.stepUpdate();
+        PatientAppController.stepUpdate();
     }
 
     private static actionContentBackButton(): void {
@@ -50,12 +51,12 @@ export class ButtonBarControllerEvents {
 
     private static actionBackFromInfotextToLastStep(): void {
         Model.updateStatusClearInfotext();
-        AppController.stepUpdate();
+        PatientAppController.stepUpdate();
     }
 
     private static actionBackToPrevStep(): void {
         Model.decStepIndex();
-        AppController.stepUpdate();
+        PatientAppController.stepUpdate();
     }
 
     public static actionContentSaveButton(): void {

@@ -1,6 +1,6 @@
 import {Model} from "../model/Model";
 import * as Mustache from "mustache";
-import {AppController} from "./AppController";
+import {ErrorHandler} from "./ErrorHandler";
 import {AppConfig} from "../../appFrame/model/AppConfig";
 import {AppConfigFetch} from "../fetch/AppConfigFetch";
 import {
@@ -14,6 +14,7 @@ import {
     ID_SIDEBAR_DIARIES_HEADING,
     ID_SIDEBAR_DIARIES_MOOD
 } from "../../../Globals";
+import {PatientAppController} from "./PatientAppController";
 
 const ID_MENU_ITEM_TEMPLATE = "menu-item-template";
 const ID_MENU_ITEM_LIST = "menu-item-list";
@@ -148,7 +149,7 @@ export class MenuController {
     private static actionSubmoduleSelected(submoduleId: string): void {
         const stepId = Model.getFirstStepId(submoduleId);
         Model.updateStatus(stepId);
-        AppController.stepUpdate();
+        PatientAppController.stepUpdate();
     }
 
 }

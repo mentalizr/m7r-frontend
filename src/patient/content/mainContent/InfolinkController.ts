@@ -1,6 +1,7 @@
 import {Model} from "../../general/model/Model";
 import {ID_MAIN_CONTENT} from "../../../Globals";
-import {AppController} from "../../general/controller/AppController";
+import {ErrorHandler} from "../../general/controller/ErrorHandler";
+import {PatientAppController} from "../../general/controller/PatientAppController";
 
 const CLASS_INFOLINK = "infolink";
 
@@ -25,7 +26,7 @@ export class InfolinkController {
 
     private static actionInfolinkClicked(infotextId): void {
         Model.updateStatusInfotextShown(infotextId);
-        AppController.stepUpdate();
+        PatientAppController.stepUpdate();
     }
 
 }
