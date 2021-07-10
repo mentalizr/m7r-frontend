@@ -1,6 +1,6 @@
-import {SERVICE_BASE} from "../../../Globals";
-import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
-import {RestResponse} from "../../../helper/RestResponse";
+import {SERVICE_BASE} from "../../Globals";
+import {FormDataFetchHelper} from "../../patient/content/mainContent/formDataPersist/rest/FormDataFetchHelper";
+import {RestResponse} from "../../helper/RestResponse";
 
 const SERVICE_NAME = "logout";
 

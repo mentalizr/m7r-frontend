@@ -1,4 +1,4 @@
-import {LogoutRest} from "../logout/LogoutRest";
+import {LogoutRest} from "../../../general/logout/LogoutRest";
 import {FetchResponseError} from "../../content/mainContent/formDataPersist/rest/FetchResponseError";
 import {Modal} from "../../../helper/Modal";
 import {AppInitializer} from "../../../application/AppInitializer";

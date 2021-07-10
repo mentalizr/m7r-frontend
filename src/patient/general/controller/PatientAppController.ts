@@ -20,7 +20,7 @@ import {BreadcrumbController} from "./BreadcrumbController";
 import {StartpageController} from "./StartpageController";
 import {ScrollUpController} from "./ScrollUpController";
 import {TimeoutController} from "./TimeoutController";
-import {LogoutController} from "../logout/LogoutController";
+import {LogoutController} from "../../../general/logout/LogoutController";
 import {ButtonBarControllerEvents} from "../../content/buttonBar/controller/ButtonBarControllerEvents";
 import {MainContentController} from "../../content/mainContent/MainContentController";
 import {InfolinkController} from "../../content/mainContent/InfolinkController";
