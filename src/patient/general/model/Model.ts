@@ -11,7 +11,7 @@ export class Model {
     public static appConfig: AppConfig;
     public static program: Program;
     public static stepIdList: StepIdList;
-    public static threrapeut: Therapeut = undefined;
+    public static therapist: User = undefined;
     // public static patient: Patient = undefined;
     public static user: User = undefined;
 

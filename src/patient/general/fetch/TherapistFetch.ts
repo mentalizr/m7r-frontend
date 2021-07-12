@@ -3,7 +3,7 @@ import {Model} from "../model/Model";
 import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
 
-const SERVICE_NAME = "therapeut";
+const SERVICE_NAME = "patient/therapist";
 
 export class TherapistFetch {
 
@@ -26,7 +26,7 @@ export class TherapistFetch {
     }
 
     private static updateModel(data) {
-        Model.threrapeut = data;
+        Model.therapist = data;
         // console.log("therapist: " + JSON.stringify(Model.threrapeut));
     }
 

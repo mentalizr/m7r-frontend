@@ -13,7 +13,7 @@ import {UserFetch} from "../fetch/UserFetch";
 import {TherapistFetch} from "../fetch/TherapistFetch";
 import {ProgramFetch} from "../fetch/ProgramFetch";
 import {MenuController} from "./MenuController";
-import {TherapeutController} from "./TherapeutController";
+import {TherapistController} from "./TherapistController";
 import {UserController} from "./UserController";
 import {ButtonBarController} from "../../content/buttonBar/controller/ButtonBarController";
 import {BreadcrumbController} from "./BreadcrumbController";
@@ -65,7 +65,7 @@ export class PatientAppController extends AbstractAppController {
 
                 PatientAppController.initView();
                 MenuController.initView();
-                TherapeutController.initView();
+                TherapistController.initView();
                 UserController.updateView();
 
                 // MainContentController.updateView();
