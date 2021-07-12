@@ -9,12 +9,12 @@ import {FeedbackData} from "../../content/mainContent/model/formData/FeedbackDat
 import {StepModel} from "../../content/mainContent/model/StepModel";
 import {SplashController} from "./SplashController";
 import {AppConfigFetch} from "../fetch/AppConfigFetch";
-import {PatientFetch} from "../fetch/PatientFetch";
+import {UserFetch} from "../fetch/UserFetch";
 import {TherapistFetch} from "../fetch/TherapistFetch";
 import {ProgramFetch} from "../fetch/ProgramFetch";
 import {MenuController} from "./MenuController";
 import {TherapeutController} from "./TherapeutController";
-import {PatientController} from "./PatientController";
+import {UserController} from "./UserController";
 import {ButtonBarController} from "../../content/buttonBar/controller/ButtonBarController";
 import {BreadcrumbController} from "./BreadcrumbController";
 import {StartpageController} from "./StartpageController";
@@ -51,14 +51,14 @@ export class PatientAppController extends AbstractAppController {
 
         // let htmlChunkUserFetch = HtmlChunkUserFetch.execute();
         let appConfigFetch = AppConfigFetch.execute();
-        let patientFetch = PatientFetch.execute();
+        let userFetch = UserFetch.execute();
         let therapistFetch = TherapistFetch.execute();
         let stepContentPromise = ProgramFetch.execute()
             .then(function() {
                 return PatientAppController.getStepContentPromise();
             })
 
-        return Promise.all([appConfigFetch, patientFetch, therapistFetch, stepContentPromise])
+        return Promise.all([appConfigFetch, userFetch, therapistFetch, stepContentPromise])
             .then(function () {
 
                 // console.log("Initialisierung des Modells abgeschlossen.");
@@ -66,7 +66,7 @@ export class PatientAppController extends AbstractAppController {
                 PatientAppController.initView();
                 MenuController.initView();
                 TherapeutController.initView();
-                PatientController.updateView();
+                UserController.updateView();
 
                 // MainContentController.updateView();
                 ButtonBarController.updateView();

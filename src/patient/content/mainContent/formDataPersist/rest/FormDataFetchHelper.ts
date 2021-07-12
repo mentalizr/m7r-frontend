@@ -1,4 +1,3 @@
-import {FetchResponseError} from "./FetchResponseError";
 import {FormData, FormElementDataList} from "../../model/formData/FormData";
 import {Model} from "../../../../general/model/Model";
 
@@ -23,7 +22,7 @@ export class FormDataFetchHelper {
         // TODO property editable: rework feedback
 
         let formData = <FormData>{};
-        formData.userId = Model.patient.userId;
+        formData.userId = Model.user.userId;
         formData.contentId = contentId;
         formData.formElementDataList = new Array<FormElementDataList>();
 

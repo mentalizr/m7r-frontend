@@ -4,6 +4,7 @@ import {Therapeut} from "../entities/Therapeut";
 import {Patient} from "../entities/Patient";
 import {Logger} from "../../../helper/Logger";
 import {AppConfig} from "../../appFrame/model/AppConfig";
+import {User} from "../entities/User";
 
 export class Model {
 
@@ -11,7 +12,8 @@ export class Model {
     public static program: Program;
     public static stepIdList: StepIdList;
     public static threrapeut: Therapeut = undefined;
-    public static patient: Patient = undefined;
+    // public static patient: Patient = undefined;
+    public static user: User = undefined;
 
     public static curStepIndex: number;
     public static curInfotextId: string = null;
