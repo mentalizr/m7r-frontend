@@ -8,7 +8,7 @@ import {FeedbackDataFetch} from "../../content/mainContent/formDataPersist/rest/
 import {FeedbackData} from "../../content/mainContent/model/formData/FeedbackData";
 import {StepModel} from "../../content/mainContent/model/StepModel";
 import {SplashController} from "./SplashController";
-import {AppConfigFetch} from "../fetch/AppConfigFetch";
+import {AppConfigPatientFetch} from "../fetch/AppConfigPatientFetch";
 import {UserFetch} from "../fetch/UserFetch";
 import {TherapistFetch} from "../fetch/TherapistFetch";
 import {ProgramFetch} from "../fetch/ProgramFetch";
@@ -27,7 +27,7 @@ import {InfolinkController} from "../../content/mainContent/InfolinkController";
 import {MCInitializer} from "../../../../../m7r-web-components";
 import {BackdropSpinnerController} from "./BackdropSpinnerController";
 import {MediaElementCleaner} from "../../content/mainContent/MediaElementCleaner";
-import {AppConfig} from "../../appFrame/model/AppConfig";
+import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {Model} from "../model/Model";
 
 export class PatientAppController extends AbstractAppController {
@@ -50,7 +50,7 @@ export class PatientAppController extends AbstractAppController {
     private static initAppPatient() {
 
         // let htmlChunkUserFetch = HtmlChunkUserFetch.execute();
-        let appConfigFetch = AppConfigFetch.execute();
+        let appConfigFetch = AppConfigPatientFetch.execute();
         let userFetch = UserFetch.execute();
         let therapistFetch = TherapistFetch.execute();
         let stepContentPromise = ProgramFetch.execute()
@@ -121,7 +121,7 @@ export class PatientAppController extends AbstractAppController {
 
     private static initView(): void {
 
-        const appConfig: AppConfig = Model.appConfig;
+        const appConfig: AppConfigPatient = Model.appConfigPatient;
         document.title = appConfig.name;
 
     }

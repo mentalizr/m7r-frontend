@@ -1,4 +1,4 @@
-export interface AppConfig {
+export interface AppConfigPatient {
     name: string;
     logo: string;
     program: boolean;

@@ -3,12 +3,12 @@ import {StepIdList} from "./StepIdList";
 import {Therapeut} from "../entities/Therapeut";
 import {Patient} from "../entities/Patient";
 import {Logger} from "../../../helper/Logger";
-import {AppConfig} from "../../appFrame/model/AppConfig";
+import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {User} from "../entities/User";
 
 export class Model {
 
-    public static appConfig: AppConfig;
+    public static appConfigPatient: AppConfigPatient;
     public static program: Program;
     public static stepIdList: StepIdList;
     public static therapist: User = undefined;

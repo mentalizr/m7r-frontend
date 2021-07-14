@@ -1,5 +1,5 @@
 import {Model} from "../model/Model";
-import {AppConfig} from "../../appFrame/model/AppConfig";
+import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {ID_TOPBAR_THERAPIST} from "../../../Globals";
 
 const ID_THERAPEUT_LABEL = "therapeut-label";
@@ -9,7 +9,7 @@ export class TherapistController {
 
     public static initView() {
 
-        const appConfig: AppConfig = Model.appConfig;
+        const appConfig: AppConfigPatient = Model.appConfigPatient;
 
         if (!appConfig.therapist) return;
 

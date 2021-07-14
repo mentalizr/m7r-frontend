@@ -1,8 +1,8 @@
 import {Model} from "../model/Model";
 import * as Mustache from "mustache";
 import {ErrorHandler} from "./ErrorHandler";
-import {AppConfig} from "../../appFrame/model/AppConfig";
-import {AppConfigFetch} from "../fetch/AppConfigFetch";
+import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
+import {AppConfigPatientFetch} from "../fetch/AppConfigPatientFetch";
 import {
     ID_LOGO,
     ID_SIDEBAR_COMMUNICATION_DIVIDER,
@@ -40,7 +40,7 @@ export class MenuController {
 
     private static renderIcon() {
 
-        const appConfig: AppConfig = Model.appConfig;
+        const appConfig: AppConfigPatient = Model.appConfigPatient;
         const logo: string = "../resrc/img/" + appConfig.logo;
 
         document.getElementById(ID_LOGO).setAttribute("src", logo);
@@ -102,7 +102,7 @@ export class MenuController {
 
     public static renderDiaries(): void {
 
-        const appConfig: AppConfig = Model.appConfig;
+        const appConfig: AppConfigPatient = Model.appConfigPatient;
         const hasDiaries: boolean = (appConfig.activityDiary || appConfig.moodDiary);
 
         if (hasDiaries) {
@@ -121,7 +121,7 @@ export class MenuController {
 
     public static renderCommunication(): void {
 
-        const appConfig: AppConfig = Model.appConfig;
+        const appConfig: AppConfigPatient = Model.appConfigPatient;
         const hasCommunicationItems: boolean = (appConfig.questioning || appConfig.videoConference || appConfig.messages);
 
         if (hasCommunicationItems) {
