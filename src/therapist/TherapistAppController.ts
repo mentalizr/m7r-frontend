@@ -7,6 +7,7 @@ import {AppConfigTherapistFetch} from "./general/fetch/AppConfigTherapistFetch";
 import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
+import {PatientsOverviewFetch} from "./general/fetch/PatientsOverviewFetch";
 
 
 export class TherapistAppController extends AbstractAppController {
@@ -30,8 +31,9 @@ export class TherapistAppController extends AbstractAppController {
 
         let appConfigFetch = AppConfigTherapistFetch.execute();
         let userFetch = UserFetch.execute();
+        let patientsOverviewFetch = PatientsOverviewFetch.execute();
 
-        return Promise.all([userFetch, appConfigFetch])
+        return Promise.all([userFetch, appConfigFetch, patientsOverviewFetch])
             .then(function () {
                 ModelTherapist.initialize();
                 TherapistAppController.initView();
