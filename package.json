@@ -18,7 +18,7 @@
   "license": "ISC",
   "homepage": "https://github.com/mentalizr/m7r-frontend",
   "devDependencies": {
-    "@types/chai": "^4.2.19",
+    "@types/chai": "^4.2.21",
     "@types/mocha": "^7.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "chai": "^4.3.4",
@@ -32,15 +32,15 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@types/bootstrap": "^4.6.0",
-    "@types/jquery": "^3.5.5",
-    "@types/mustache": "^0.8.32",
+    "@types/bootstrap": "^4.6.1",
+    "@types/jquery": "^3.5.6",
+    "@types/mustache": "^4.1.2",
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.5.0",
     "jquery": "^3.6.0",
     "json-query": "^2.2.2",
     "m7r-web-components": "file:../m7r-web-components",
-    "mustache": "^3.0.1",
+    "mustache": "^4.2.0",
     "popper.js": "^1.14.7",
     "startbootstrap-sb-admin-2": "^4.1.4"
   }
