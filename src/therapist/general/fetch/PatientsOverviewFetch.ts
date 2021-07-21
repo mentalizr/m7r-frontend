@@ -1,6 +1,7 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {ModelTherapist} from "../model/ModelTherapist";
+import {PatientOverview} from "../entities/PatientsOverview";
 
 const SERVICE_NAME = "therapist/patientsOverview";
 
@@ -27,7 +28,10 @@ export class PatientsOverviewFetch {
     private static updateModel(data) {
         ModelTherapist.patientsOverview = data;
         // TODO debug
-        console.log("AppConfig: " + JSON.stringify(ModelTherapist.patientsOverview));
+        // console.log("AppConfig: " + JSON.stringify(ModelTherapist.patientsOverview));
+        // for (let patientOverview of ModelTherapist.patientsOverview.patientOverviews) {
+        //     console.log("displayName: " + patientOverview.displayName + "; hasReceiveStatus: " + patientOverview.hasReceiveStatus + "; received: " + patientOverview.received);
+        // }
     }
 
 }

@@ -8,7 +8,8 @@ import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
 import {PatientsOverviewFetch} from "./general/fetch/PatientsOverviewFetch";
-
+import {PatientAppController} from "../patient/general/controller/PatientAppController";
+import {PatientsOverviewController} from "./general/controller/PatientsOverviewController";
 
 export class TherapistAppController extends AbstractAppController {
 
@@ -27,7 +28,6 @@ export class TherapistAppController extends AbstractAppController {
     }
 
     private static initAppTherapist() {
-        console.log("Controller for therapist is going to be initialized here ...");
 
         let appConfigFetch = AppConfigTherapistFetch.execute();
         let userFetch = UserFetch.execute();
@@ -41,6 +41,7 @@ export class TherapistAppController extends AbstractAppController {
                 UserController.updateView();
                 LogoutController.registerClickLogout();
                 MenuTherapistController.registerUserEvents();
+                PatientsOverviewController.initView();
             });
     }
 
@@ -48,6 +49,5 @@ export class TherapistAppController extends AbstractAppController {
         const appConfig: AppConfigTherapist = ModelTherapist.appConfigTherapist;
         document.title = appConfig.name;
     }
-
 
 }

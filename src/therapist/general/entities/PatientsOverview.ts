@@ -6,7 +6,7 @@ export interface PatientOverview {
     overviewMessage: string;
     lastActiveDate: string;
     hasReceiveStatus: boolean;
-    isReceived: boolean;
+    received: boolean;
 }
 
 export interface PatientsOverview {
