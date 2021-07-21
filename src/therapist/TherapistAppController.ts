@@ -42,6 +42,7 @@ export class TherapistAppController extends AbstractAppController {
                 LogoutController.registerClickLogout();
                 MenuTherapistController.registerUserEvents();
                 PatientsOverviewController.initView();
+                PatientsOverviewController.registerEvents();
             });
     }
 
