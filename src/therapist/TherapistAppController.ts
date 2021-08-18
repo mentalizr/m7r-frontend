@@ -8,7 +8,6 @@ import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
 import {PatientsOverviewFetch} from "./general/fetch/PatientsOverviewFetch";
-import {PatientAppController} from "../patient/general/controller/PatientAppController";
 import {PatientsOverviewController} from "./general/controller/PatientsOverviewController";
 
 export class TherapistAppController extends AbstractAppController {
