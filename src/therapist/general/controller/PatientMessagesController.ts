@@ -2,6 +2,8 @@ import {SplashController} from "../../../patient/general/controller/SplashContro
 import {PatientMessagesFetch} from "../fetch/PatientMessagesFetch";
 import {Logger} from "../../../helper/Logger";
 import {ModelTherapist} from "../model/ModelTherapist";
+import {AbstractMessageComponent} from "./messages/AbstractMessageComponent";
+import {MessageComponentFactory} from "./messages/MessageComponentFactory";
 
 export class PatientMessagesController {
 
@@ -18,14 +20,23 @@ export class PatientMessagesController {
     }
 
     private static initPatientMessages(patientId: string) {
-
         let patientMessagesFetch = PatientMessagesFetch.execute(patientId);
 
         return Promise.all([patientMessagesFetch])
             .then(function() {
                 Logger(JSON.stringify(ModelTherapist.patientMessages));
+                PatientMessagesController.render();
             });
+    }
 
+    private static render() {
+        let patientMessages = ModelTherapist.patientMessages;
+
+        for (let patientMessage of patientMessages.patientMessages) {
+            const messageComponent: AbstractMessageComponent
+                = MessageComponentFactory.createMessageComponent(patientMessage);
+            messageComponent.render();
+        }
     }
 
 }

@@ -2,6 +2,7 @@ export interface PatientMessageBase {
     senderId: string;
     date: string;
     new: boolean;
+    readByReceiver: boolean;
     text: string;
 }
 
