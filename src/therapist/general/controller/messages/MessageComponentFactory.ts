@@ -4,6 +4,8 @@ import {MessagePlainSentComponent} from "./MessagePlainSentComponent";
 import {Model} from "../../../../patient/general/model/Model";
 import {MessagePlainReceivedComponent} from "./MessagePlainReceivedComponent";
 import {MessageFeedbackComponent} from "./MessageFeedbackComponent";
+import {Logger} from "../../../../helper/Logger";
+import {MessageExerciseComponent} from "./MessageExerciseComponent";
 
 export class MessageComponentFactory {
 
@@ -19,10 +21,11 @@ export class MessageComponentFactory {
             }
         } else if (patientMessage.patientMessageFeedback != null) {
             return new MessageFeedbackComponent(patientMessage);
+        } else if (patientMessage.patientMessageExercise != null) {
+            return new MessageExerciseComponent(patientMessage);
+        } else {
+            Logger("Unknown type of message.");
         }
-
-        // TODO ...
-
     }
 
 }
