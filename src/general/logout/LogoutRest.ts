@@ -1,5 +1,4 @@
 import {SERVICE_BASE} from "../../Globals";
-import {FormDataFetchHelper} from "../../patient/content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../helper/RestResponse";
 
 const SERVICE_NAME = "logout";
@@ -7,9 +6,7 @@ const SERVICE_NAME = "logout";
 export class LogoutRest {
 
     public static execute() {
-
         const serviceUrl = SERVICE_BASE + "/" + SERVICE_NAME;
-
         return fetch(serviceUrl, {credentials: "include"})
             .then(LogoutRest.checkStatus);
     }

@@ -1,5 +1,5 @@
 import {AbstractAppController} from "../application/AbstractAppController";
-import {SplashController} from "../patient/general/controller/SplashController";
+import {SplashController} from "../general/controller/SplashController";
 import {LogoutController} from "../general/logout/LogoutController";
 import {UserFetch} from "../patient/general/fetch/UserFetch";
 import {UserController} from "../patient/general/controller/UserController";
@@ -9,6 +9,14 @@ import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
 import {PatientsOverviewFetch} from "./general/fetch/PatientsOverviewFetch";
 import {PatientsOverviewController} from "./general/controller/PatientsOverviewController";
+import {AppStateTherapist} from "./general/model/AppStateTherapist";
+import {NavbarTherapistController} from "./general/controller/NavbarTherapistController";
+import {Logger} from "../helper/Logger";
+import {PatientMessagesController} from "./general/controller/PatientMessagesController";
+import {ScrollUpController} from "../general/controller/ScrollUpController";
+
+const ID_MAIN_CONTENT = "main-content";
+const ID_MESSAGE_CONTENT = "message-content";
 
 export class TherapistAppController extends AbstractAppController {
 
@@ -34,20 +42,63 @@ export class TherapistAppController extends AbstractAppController {
 
         return Promise.all([userFetch, appConfigFetch, patientsOverviewFetch])
             .then(function () {
-                ModelTherapist.initialize();
-                TherapistAppController.initView();
-                MenuTherapistController.initView();
-                UserController.updateView();
-                LogoutController.registerClickLogout();
-                MenuTherapistController.registerUserEvents();
-                PatientsOverviewController.initView();
-                PatientsOverviewController.registerEvents();
+                TherapistAppController.globalInit();
+                // TherapistAppController.initView();
+                // MenuTherapistController.initView();
+                // UserController.updateView();
+                // LogoutController.registerClickLogout();
+                // MenuTherapistController.registerUserEvents();
+
+                TherapistAppController.contentInit();
+                // AppStateTherapist.initialize();
+                // PatientsOverviewController.initView();
+                // PatientsOverviewController.registerEvents();
             });
+    }
+
+    public static refreshAppTherapist(backToOverview: boolean) {
+        if (AppStateTherapist.isStateOverview() || backToOverview) {
+            let patientsOverviewFetch = PatientsOverviewFetch.execute();
+
+            SplashController.show();
+
+            return Promise.all([patientsOverviewFetch])
+                .then(function () {
+                    TherapistAppController.contentInit();
+                    SplashController.hide();
+                });
+        } else if (AppStateTherapist.isStateMessages()) {
+            const patientId = AppStateTherapist.getStateMessages().userIdPatient;
+            return PatientMessagesController.initialize(patientId);
+        } else {
+            Logger("Unknown state of therapist app.");
+        }
+    }
+
+    private static globalInit() {
+        TherapistAppController.initView();
+        MenuTherapistController.initView();
+        UserController.updateView();
+        LogoutController.registerClickLogout();
+        MenuTherapistController.registerUserEvents();
+        ScrollUpController.register();
+        NavbarTherapistController.registerUserEvents();
+    }
+
+    private static contentInit() {
+        AppStateTherapist.initialize();
+        PatientsOverviewController.initView();
+        PatientsOverviewController.registerEvents();
     }
 
     private static initView(): void {
         const appConfig: AppConfigTherapist = ModelTherapist.appConfigTherapist;
         document.title = appConfig.name;
+    }
+
+    public static cleanView(): void {
+        document.getElementById(ID_MAIN_CONTENT).innerHTML = "";
+        document.getElementById(ID_MESSAGE_CONTENT).innerHTML = "";
     }
 
 }

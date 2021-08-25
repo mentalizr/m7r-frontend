@@ -1,3 +1,5 @@
+import {Logger} from "../../../helper/Logger";
+
 export interface PatientOverview {
     userId: string;
     displayName: string;
@@ -11,4 +13,15 @@ export interface PatientOverview {
 
 export interface PatientsOverview {
     patientOverviews: PatientOverview[];
+}
+
+export class PatientsOverviewHelper {
+
+    public static getPatientOverviewForUser(patientsOverview: PatientsOverview, userId: string): PatientOverview {
+        for (let patientOverview of patientsOverview.patientOverviews) {
+            if (patientOverview.userId == userId) return patientOverview;
+        }
+        Logger("Could not find overview element for user: " + userId);
+    }
+
 }

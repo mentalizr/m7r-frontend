@@ -1,4 +1,4 @@
-import {Fader} from "../../../helper/Fader";
+import {Fader} from "../../helper/Fader";
 
 const ID_SCROLL_UP_LINK = "global-scroll_up--link";
 
@@ -15,7 +15,6 @@ export class ScrollUpController {
         ScrollUpController.isShown = false;
         let scrollUpButton: HTMLElement = document.getElementById(ID_SCROLL_UP_LINK);
         scrollUpButton.style.display = "none";
-
     }
 
     private static registerShow() {

@@ -3,7 +3,7 @@ import {MainContentView} from "./MainContentView";
 import {GeneralAlertController} from "../generalAlert/GeneralAlertController";
 import {FormDataUpdater} from "./formDataPersist/FormDataUpdater";
 import {FormDataModel} from "./model/formData/FormDataModel";
-import {ScrollUpController} from "../../general/controller/ScrollUpController";
+import {ScrollUpController} from "../../../general/controller/ScrollUpController";
 
 export class MainContentController {
 

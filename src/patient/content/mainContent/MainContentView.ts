@@ -2,7 +2,7 @@ import {CSS_CLASS_NS_INPUT, CSS_CLASS_NS_RADIOGROUP, ID_MAIN_CONTENT} from "../.
 import {FeedbackData} from "./model/formData/FeedbackData";
 import * as Mustache from "mustache";
 import {Fader} from "../../../helper/Fader";
-import {ScrollUpController} from "../../general/controller/ScrollUpController";
+import {ScrollUpController} from "../../../general/controller/ScrollUpController";
 
 const ID_FEEDBACK_TEMPLATE = "feedback-template";
 const ID_NO_FEEDBACK_TEMPLATE = "no-feedback-template";

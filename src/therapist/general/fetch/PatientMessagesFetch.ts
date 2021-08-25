@@ -1,10 +1,13 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {ModelTherapist} from "../model/ModelTherapist";
+import {PatientMessages} from "../entities/PatientMessages";
 
 const SERVICE_NAME = "therapist/patientMessages";
 
 export class PatientMessagesFetch {
+
+    public static patientMessages: PatientMessages = undefined;
 
     public static execute(patientId: string) {
 
@@ -25,7 +28,7 @@ export class PatientMessagesFetch {
     }
 
     private static updateModel(data) {
-        ModelTherapist.patientMessages = data;
+        PatientMessagesFetch.patientMessages = data;
         // TODO debug
         // console.log("AppConfig: " + JSON.stringify(ModelTherapist.patientsOverview));
         // for (let patientOverview of ModelTherapist.patientsOverview.patientOverviews) {

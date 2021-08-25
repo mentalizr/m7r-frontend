@@ -1,7 +1,6 @@
-import {Modal} from "../../../helper/Modal";
+import {Modal} from "../../helper/Modal";
 
 const ID_GENERAL_LOADING_MODAL = "general-splash--modal";
-
 
 export class SplashController {
 
@@ -17,6 +16,5 @@ export class SplashController {
         Modal.hide(ID_GENERAL_LOADING_MODAL);
         // $("#" + ID_GENERAL_LOADING_MODAL).modal('hide');
     }
-
 
 }

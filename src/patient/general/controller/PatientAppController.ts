@@ -7,7 +7,7 @@ import {FormDataFetchProgramNamedScope} from "../../content/mainContent/formData
 import {FeedbackDataFetch} from "../../content/mainContent/formDataPersist/rest/load/FeedbackDataFetch";
 import {FeedbackData} from "../../content/mainContent/model/formData/FeedbackData";
 import {StepModel} from "../../content/mainContent/model/StepModel";
-import {SplashController} from "./SplashController";
+import {SplashController} from "../../../general/controller/SplashController";
 import {AppConfigPatientFetch} from "../fetch/AppConfigPatientFetch";
 import {UserFetch} from "../fetch/UserFetch";
 import {TherapistFetch} from "../fetch/TherapistFetch";
@@ -18,7 +18,7 @@ import {UserController} from "./UserController";
 import {ButtonBarController} from "../../content/buttonBar/controller/ButtonBarController";
 import {BreadcrumbController} from "./BreadcrumbController";
 import {StartpageController} from "./StartpageController";
-import {ScrollUpController} from "./ScrollUpController";
+import {ScrollUpController} from "../../../general/controller/ScrollUpController";
 import {TimeoutController} from "./TimeoutController";
 import {LogoutController} from "../../../general/logout/LogoutController";
 import {ButtonBarControllerEvents} from "../../content/buttonBar/controller/ButtonBarControllerEvents";

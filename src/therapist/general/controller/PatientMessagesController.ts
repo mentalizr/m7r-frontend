@@ -1,9 +1,11 @@
-import {SplashController} from "../../../patient/general/controller/SplashController";
+import {SplashController} from "../../../general/controller/SplashController";
 import {PatientMessagesFetch} from "../fetch/PatientMessagesFetch";
 import {Logger} from "../../../helper/Logger";
-import {ModelTherapist} from "../model/ModelTherapist";
 import {AbstractMessageComponent} from "./messages/AbstractMessageComponent";
 import {MessageComponentFactory} from "./messages/MessageComponentFactory";
+import {AppStateTherapist} from "../model/AppStateTherapist";
+import {TherapistAppController} from "../../TherapistAppController";
+import {NavbarTherapistController} from "./NavbarTherapistController";
 
 export class PatientMessagesController {
 
@@ -24,19 +26,25 @@ export class PatientMessagesController {
 
         return Promise.all([patientMessagesFetch])
             .then(function() {
-                Logger(JSON.stringify(ModelTherapist.patientMessages));
+                Logger(JSON.stringify(PatientMessagesFetch.patientMessages));
+                AppStateTherapist.setStateMessages(patientId);
                 PatientMessagesController.render();
+                NavbarTherapistController.showArrowBack();
+                NavbarTherapistController.showPatient(patientId);
             });
     }
 
     private static render() {
-        let patientMessages = ModelTherapist.patientMessages;
+        TherapistAppController.cleanView();
 
+        let patientMessages = AppStateTherapist.getStateMessages().patientMessages;
         for (let patientMessage of patientMessages.patientMessages) {
             const messageComponent: AbstractMessageComponent
                 = MessageComponentFactory.createMessageComponent(patientMessage);
             messageComponent.render();
         }
+
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
 }
