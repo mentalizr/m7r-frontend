@@ -6,6 +6,7 @@ describe("Program", () => {
 
     it("program", () => {
         const program: Program = JSON.parse("{\n" +
+            "    \"blocking\": false,\n" +
             "    \"id\": \"test\",\n" +
             "    \"infotexts\": [\n" +
             "        {\n" +
@@ -133,6 +134,7 @@ describe("Program", () => {
 
         assert.equal(program.id, "test", "id");
         assert.equal(program.name, "Test", "name");
+        assert.isFalse(program.blocking, "blocking");
 
         assert.equal(program.infotexts.length, 4, "number of infotexts");
 

@@ -25,4 +25,5 @@ export interface Program {
     infotexts: Infotext[];
     modules: Module[];
     name: string;
+    blocking: boolean;
 }
