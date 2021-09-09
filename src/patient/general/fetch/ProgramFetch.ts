@@ -3,7 +3,7 @@ import {SERVICE_BASE} from "../../../Globals";
 import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
 
-const SERVICE_NAME = "program";
+const SERVICE_NAME = "patient/program";
 
 export class ProgramFetch {
 
