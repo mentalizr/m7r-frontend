@@ -6,17 +6,22 @@ export interface Infotext {
 export interface Step {
     id: string;
     name: string;
+    exercise: boolean;
+    feedback: boolean;
+    accessible: boolean;
 }
 
 export interface Submodule {
     id: string;
     name: string;
+    accessible: boolean;
     steps: Step[];
 }
 
 export interface Module {
     id: string;
     name: string;
+    accessible: boolean;
     submodules: Submodule[];
 }
 

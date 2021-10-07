@@ -5,8 +5,9 @@ import {Program} from "../../src/patient/general/entities/Program";
 describe("Program", () => {
 
     it("program", () => {
+        // json from m7r-backend-test/Program-Test
         const program: Program = JSON.parse("{\n" +
-            "    \"blocking\": false,\n" +
+            "    \"blocking\": true,\n" +
             "    \"id\": \"test\",\n" +
             "    \"infotexts\": [\n" +
             "        {\n" +
@@ -28,72 +29,110 @@ describe("Program", () => {
             "    ],\n" +
             "    \"modules\": [\n" +
             "        {\n" +
+            "            \"accessible\": true,\n" +
             "            \"id\": \"test_m1\",\n" +
             "            \"name\": \"Eingabefelder\",\n" +
             "            \"submodules\": [\n" +
             "                {\n" +
+            "                    \"accessible\": true,\n" +
             "                    \"id\": \"test_m1_sm1\",\n" +
             "                    \"name\": \"page scope\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm1_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm1_s2\",\n" +
             "                            \"name\": \"Schritt 2\"\n" +
             "                        }\n" +
             "                    ]\n" +
             "                },\n" +
             "                {\n" +
+            "                    \"accessible\": true,\n" +
             "                    \"id\": \"test_m1_sm2\",\n" +
             "                    \"name\": \"generic program scope\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm2_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm2_s2\",\n" +
             "                            \"name\": \"Schritt 2\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm2_s3\",\n" +
             "                            \"name\": \"Schritt 3\"\n" +
             "                        }\n" +
             "                    ]\n" +
             "                },\n" +
             "                {\n" +
+            "                    \"accessible\": true,\n" +
             "                    \"id\": \"test_m1_sm3\",\n" +
             "                    \"name\": \"program scope\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm3_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm3_s2\",\n" +
             "                            \"name\": \"Schritt 2\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm3_s3\",\n" +
             "                            \"name\": \"Schritt 3\"\n" +
             "                        }\n" +
             "                    ]\n" +
             "                },\n" +
             "                {\n" +
+            "                    \"accessible\": true,\n" +
             "                    \"id\": \"test_m1_sm4\",\n" +
             "                    \"name\": \"program scope inc\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm4_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm4_s2\",\n" +
             "                            \"name\": \"Schritt 2\"\n" +
             "                        },\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m1_sm4_s3\",\n" +
             "                            \"name\": \"Schritt 3\"\n" +
             "                        }\n" +
@@ -102,24 +141,40 @@ describe("Program", () => {
             "            ]\n" +
             "        },\n" +
             "        {\n" +
+            "            \"accessible\": true,\n" +
             "            \"id\": \"test_m2\",\n" +
             "            \"name\": \"Dummy\",\n" +
             "            \"submodules\": [\n" +
             "                {\n" +
+            "                    \"accessible\": true,\n" +
             "                    \"id\": \"test_m2_sm1\",\n" +
             "                    \"name\": \"Erstes Submodul\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": true,\n" +
+            "                            \"exercise\": true,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m2_sm1_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
+            "                        },\n" +
+            "                        {\n" +
+            "                            \"accessible\": false,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": true,\n" +
+            "                            \"id\": \"test_m2_sm1_s2\",\n" +
+            "                            \"name\": \"Schritt 2\"\n" +
             "                        }\n" +
             "                    ]\n" +
             "                },\n" +
             "                {\n" +
+            "                    \"accessible\": false,\n" +
             "                    \"id\": \"test_m2_sm2\",\n" +
             "                    \"name\": \"Zweites Submodul\",\n" +
             "                    \"steps\": [\n" +
             "                        {\n" +
+            "                            \"accessible\": false,\n" +
+            "                            \"exercise\": false,\n" +
+            "                            \"feedback\": false,\n" +
             "                            \"id\": \"test_m2_sm2_s1\",\n" +
             "                            \"name\": \"Schritt 1\"\n" +
             "                        }\n" +
@@ -134,7 +189,7 @@ describe("Program", () => {
 
         assert.equal(program.id, "test", "id");
         assert.equal(program.name, "Test", "name");
-        assert.isFalse(program.blocking, "blocking");
+        assert.isTrue(program.blocking, "blocking");
 
         assert.equal(program.infotexts.length, 4, "number of infotexts");
 
@@ -154,15 +209,22 @@ describe("Program", () => {
 
         assert.equal(program.modules[0].id, "test_m1", "id of first module");
         assert.equal(program.modules[0].name, "Eingabefelder", "name of first module");
+        assert.isTrue(program.modules[0].accessible);
 
         assert.equal(program.modules[0].submodules.length, 4, "number of submodules of first module");
 
         assert.equal(program.modules[0].submodules[0].id, "test_m1_sm1");
         assert.equal(program.modules[0].submodules[0].name, "page scope");
+        assert.isTrue(program.modules[0].submodules[0].accessible);
         assert.equal(program.modules[0].submodules[0].steps.length, 2);
         assert.equal(program.modules[0].submodules[0].steps[0].id, "test_m1_sm1_s1");
         assert.equal(program.modules[0].submodules[0].steps[0].name, "Schritt 1");
+        assert.isTrue(program.modules[0].submodules[0].steps[0].accessible);
 
+        assert.isTrue(program.modules[1].accessible);
+        assert.isTrue(program.modules[1].submodules[0].accessible);
+        assert.isTrue(program.modules[1].submodules[0].steps[0].accessible);
+        assert.isFalse(program.modules[1].submodules[0].steps[1].accessible);
     });
 
 })
