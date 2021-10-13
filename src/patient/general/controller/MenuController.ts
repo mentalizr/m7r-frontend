@@ -1,12 +1,11 @@
 import {Model} from "../model/Model";
 import * as Mustache from "mustache";
-import {ErrorHandler} from "./ErrorHandler";
 import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
-import {AppConfigPatientFetch} from "../fetch/AppConfigPatientFetch";
 import {
     ID_LOGO,
     ID_SIDEBAR_COMMUNICATION_DIVIDER,
-    ID_SIDEBAR_COMMUNICATION_HEADING, ID_SIDEBAR_COMMUNICATION_MESSAGES,
+    ID_SIDEBAR_COMMUNICATION_HEADING,
+    ID_SIDEBAR_COMMUNICATION_MESSAGES,
     ID_SIDEBAR_COMMUNICATION_QUESTIONING,
     ID_SIDEBAR_COMMUNICATION_VIDEOCONFERENCE,
     ID_SIDEBAR_DIARIES_ACTIVITIES,
@@ -15,6 +14,7 @@ import {
     ID_SIDEBAR_DIARIES_MOOD
 } from "../../../Globals";
 import {PatientAppController} from "./PatientAppController";
+import {SideMenuGenerator} from "../../../generator/SideMenuGenerator";
 
 const ID_MENU_ITEM_TEMPLATE = "menu-item-template";
 const ID_MENU_ITEM_LIST = "menu-item-list";
@@ -47,9 +47,8 @@ export class MenuController {
     }
 
     private static renderMenu() {
-        const template = document.getElementById(ID_MENU_ITEM_TEMPLATE).innerHTML;
-        const rendered: string = Mustache.render(template, Model.program);
-        document.getElementById(ID_MENU_ITEM_LIST).innerHTML = rendered;
+        document.getElementById(ID_MENU_ITEM_LIST).innerHTML
+            = SideMenuGenerator.generate(Model.program);
     }
 
     private static renderProgramName() {
