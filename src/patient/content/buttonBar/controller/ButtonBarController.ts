@@ -6,7 +6,7 @@ export class ButtonBarController {
 
     public static updateView(): void {
 
-        if (Model.isInfotextShown()) {
+        if (Model.infotextStatus.isInfotextDisplayed()) {
             ButtonBarView.disableNextButton();
             ButtonBarView.enableBackButton();
             ButtonBarView.hideSaveButton();
@@ -25,13 +25,13 @@ export class ButtonBarController {
                 ButtonBarView.hideSendButton();
             }
 
-            if (Model.hasNextContentStep()) {
+            if (Model.programStepper.hasAccessibleNextStep()) {
                 ButtonBarView.enableNextButton();
             } else {
                 ButtonBarView.disableNextButton();
             }
 
-            if (Model.hasPreviousContentStep()) {
+            if (Model.programStepper.hasPreviousStep()) {
                 ButtonBarView.enableBackButton();
             } else {
                 ButtonBarView.disableBackButton();

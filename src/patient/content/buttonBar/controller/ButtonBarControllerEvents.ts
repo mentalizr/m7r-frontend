@@ -36,13 +36,13 @@ export class ButtonBarControllerEvents {
     }
 
     private static actionContentNextButton(): void {
-        Model.incStepIndex();
+        Model.programStepper.stepForward();
         PatientAppController.stepUpdate();
     }
 
     private static actionContentBackButton(): void {
 
-        if (Model.isInfotextShown()) {
+        if (Model.infotextStatus.isInfotextDisplayed()) {
             ButtonBarControllerEvents.actionBackFromInfotextToLastStep();
         } else {
             ButtonBarControllerEvents.actionBackToPrevStep();
@@ -50,12 +50,12 @@ export class ButtonBarControllerEvents {
     }
 
     private static actionBackFromInfotextToLastStep(): void {
-        Model.updateStatusClearInfotext();
+        Model.infotextStatus.updateStatusInfotextNotDisplayed();
         PatientAppController.stepUpdate();
     }
 
     private static actionBackToPrevStep(): void {
-        Model.decStepIndex();
+        Model.programStepper.stepBackwards();
         PatientAppController.stepUpdate();
     }
 

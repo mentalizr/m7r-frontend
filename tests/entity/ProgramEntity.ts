@@ -1,4 +1,4 @@
-import {Program} from "../../src/patient/general/entities/Program";
+import {Program, Step} from "../../src/patient/general/entities/Program";
 
 export class ProgramEntity {
 
@@ -184,7 +184,6 @@ export class ProgramEntity {
             "    ],\n" +
             "    \"name\": \"Test\"\n" +
             "}");
-
     }
 
 }

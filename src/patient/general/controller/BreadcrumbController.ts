@@ -11,7 +11,7 @@ export class BreadcrumbController {
 
     private static getBreadcrumbString(): string {
 
-        return Model.isInfotextShown() ? BreadcrumbController.getBreadcrumbStringForCurrentInfotext() : BreadcrumbController.getBreadcrumbStringForCurStep();
+        return Model.infotextStatus.isInfotextDisplayed() ? BreadcrumbController.getBreadcrumbStringForCurrentInfotext() : BreadcrumbController.getBreadcrumbStringForCurStep();
 
         // if (Model.isInfotextShown()) {
         //     return BreadcrumbController.getBreadcrumbStringForCurrentInfotext();
@@ -21,13 +21,13 @@ export class BreadcrumbController {
     }
 
     public static getBreadcrumbStringForCurrentInfotext(): string {
-        return "Infotext: " + Model.getCurInfotextName();
+        return "Infotext: " + Model.infotextStatus.getCurrentInfotextName();
     }
 
     private static getBreadcrumbStringForCurStep(): string {
 
-        const stepId = Model.getCurStepId();
-        const modules = Model.program.modules;
+        const stepId = Model.programStepper.getCurrentStepId();
+        const modules = Model.programStepper.getProgram().modules;
         let breadcrumb = "";
 
         for (let i=0; i < modules.length; i++) {

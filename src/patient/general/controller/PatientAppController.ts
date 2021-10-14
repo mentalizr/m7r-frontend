@@ -4,9 +4,6 @@ import {ProgramContentFetch} from "../fetch/ProgramContentFetch";
 import {FormDataFetchPageScope} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScope";
 import {FormDataFetchProgramGenericScope} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchProgramGenericScope";
 import {FormDataFetchProgramNamedScope} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchProgramNamedScope";
-import {FeedbackDataFetch} from "../../content/mainContent/formDataPersist/rest/load/FeedbackDataFetch";
-import {FeedbackData} from "../../content/mainContent/model/formData/FeedbackData";
-import {StepModel} from "../../content/mainContent/model/StepModel";
 import {SplashController} from "../../../general/controller/SplashController";
 import {AppConfigPatientFetch} from "../fetch/AppConfigPatientFetch";
 import {UserFetch} from "../fetch/UserFetch";
@@ -132,12 +129,12 @@ export class PatientAppController extends AbstractAppController {
                 return Promise.all(
                     [FormDataFetchPageScope.execute(),
                         FormDataFetchProgramGenericScope.execute(),
-                        FormDataFetchProgramNamedScope.execute(),
-                        FeedbackDataFetch.execute()]);
+                        FormDataFetchProgramNamedScope.execute()]);
+                        // FeedbackDataFetch.execute()]);
             })
             .then(function() {
-                const feedbackData: FeedbackData = FeedbackDataFetch.getFeedbackData();
-                StepModel.setFeedbackData(feedbackData);
+                // const feedbackData: FeedbackData = FeedbackDataFetch.getFeedbackData();
+                // StepModel.setFeedbackData(feedbackData);
                 // StepModel.getFormDataModel().debugOut();
             });
     }

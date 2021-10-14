@@ -1,7 +1,6 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
 import {StepModel} from "../../content/mainContent/model/StepModel";
-import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "programContent";
@@ -13,10 +12,10 @@ export class ProgramContentFetch {
 
     public static execute() {
 
-        if (Model.isInfotextShown()) {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/" + Model.curInfotextId;
+        if (Model.infotextStatus.isInfotextDisplayed()) {
+            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/" + Model.infotextStatus.getCurrentInfotextId();
         } else {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/" + Model.getCurStepId();
+            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/" + Model.programStepper.getCurrentStepId();
         }
 
         return fetch(ProgramContentFetch._service, {credentials: "include"})
