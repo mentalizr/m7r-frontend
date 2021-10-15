@@ -1,7 +1,6 @@
 import {ID_BACK_BUTTON, ID_NEXT_BUTTON, ID_SAVE_BUTTON, ID_SEND_BUTTON} from "../ButtonBarIDs";
 import {SendConfirmModalController} from "../../mainContent/formDataPersist/SendConfirmModalController";
 import {Model} from "../../../general/model/Model";
-import {ErrorHandler} from "../../../general/controller/ErrorHandler";
 import {FormDataValidator} from "../../mainContent/formDataPersist/FormDataValidator";
 import {BackdropSpinnerController} from "../../../general/controller/BackdropSpinnerController";
 import {FormDataSavePageScope} from "../../mainContent/formDataPersist/rest/save/FormDataSavePageScope";
@@ -36,13 +35,13 @@ export class ButtonBarControllerEvents {
     }
 
     private static actionContentNextButton(): void {
-        Model.programStepper.stepForward();
+        Model.getProgramModel().stepForward();
         PatientAppController.stepUpdate();
     }
 
     private static actionContentBackButton(): void {
 
-        if (Model.infotextStatus.isInfotextDisplayed()) {
+        if (Model.getInfotextStatus().isInfotextDisplayed()) {
             ButtonBarControllerEvents.actionBackFromInfotextToLastStep();
         } else {
             ButtonBarControllerEvents.actionBackToPrevStep();
@@ -50,12 +49,12 @@ export class ButtonBarControllerEvents {
     }
 
     private static actionBackFromInfotextToLastStep(): void {
-        Model.infotextStatus.updateStatusInfotextNotDisplayed();
+        Model.getInfotextStatus().updateStatusInfotextNotDisplayed();
         PatientAppController.stepUpdate();
     }
 
     private static actionBackToPrevStep(): void {
-        Model.programStepper.stepBackwards();
+        Model.getProgramModel().stepBackwards();
         PatientAppController.stepUpdate();
     }
 

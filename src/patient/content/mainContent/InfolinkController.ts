@@ -18,14 +18,14 @@ export class InfolinkController {
             element.addEventListener("click", function (event) {
                 event.preventDefault();
                 const linkId = this.id;
-                const infotextId = Model.infotextStatus.getInfotextIdForLinkId(linkId);
+                const infotextId = Model.getInfotextStatus().getInfotextIdForLinkId(linkId);
                 InfolinkController.actionInfolinkClicked(infotextId);
             });
         });
     }
 
     private static actionInfolinkClicked(infotextId): void {
-        Model.infotextStatus.updateStatusInfotextIsDisplayed(infotextId);
+        Model.getInfotextStatus().updateStatusInfotextIsDisplayed(infotextId);
         PatientAppController.stepUpdate();
     }
 

@@ -7,16 +7,16 @@ export class ButtonBarView {
         Button.disable(ID_NEXT_BUTTON);
     }
 
-    public static enableNextButton(): void {
-        Button.enable(ID_NEXT_BUTTON);
+    public static displayNextButton(): void {
+        Button.display(ID_NEXT_BUTTON);
     }
 
     public static disableBackButton(): void {
         Button.disable(ID_BACK_BUTTON);
     }
 
-    public static enableBackButton(): void {
-        Button.enable(ID_BACK_BUTTON);
+    public static displayBackButton(): void {
+        Button.display(ID_BACK_BUTTON);
     }
 
     public static displaySaveButton(): void {

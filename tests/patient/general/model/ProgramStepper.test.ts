@@ -4,14 +4,14 @@ import {it} from "mocha";
 import {assert} from "chai";
 import {Program} from "../../../../src/patient/general/entities/Program";
 import {ProgramEntity} from "../../../entity/ProgramEntity";
-import {ProgramStepper} from "../../../../src/patient/general/model/ProgramStepper";
+import {ProgramModel} from "../../../../src/patient/general/model/ProgramModel";
 
 describe("ProgramStepper", () => {
 
     it("program", () => {
         const program: Program = ProgramEntity.get();
 
-        const programStepper: ProgramStepper = new ProgramStepper(program);
+        const programStepper: ProgramModel = new ProgramModel(program);
 
         assert.equal(programStepper.getCurrentStepId(), "test_m1_sm1_s1");
         assert.isFalse(programStepper.isLastStep());

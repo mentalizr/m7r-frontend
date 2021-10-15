@@ -1,6 +1,6 @@
 import {Program, Step} from "../entities/Program";
 
-export class ProgramStepper {
+export class ProgramModel {
 
     private readonly program: Program;
     private readonly stepList: Array<Step>;

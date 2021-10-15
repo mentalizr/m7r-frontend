@@ -48,12 +48,12 @@ export class MenuController {
 
     private static renderMenu() {
         document.getElementById(ID_MENU_ITEM_LIST).innerHTML
-            = SideMenuGenerator.generate(Model.programStepper.getProgram());
+            = SideMenuGenerator.generate(Model.getProgramModel().getProgram());
     }
 
     private static renderProgramName() {
         const template = document.getElementById(ID_PROGRAM_NAME_HEADING).innerHTML;
-        const rendered = Mustache.render(template, Model.programStepper.getProgram());
+        const rendered = Mustache.render(template, Model.getProgramModel().getProgram());
         document.getElementById(ID_PROGRAM_NAME_HEADING).innerHTML = rendered;
     }
 
@@ -146,8 +146,8 @@ export class MenuController {
     }
 
     private static actionSubmoduleSelected(submoduleId: string): void {
-        const stepId = Model.programStepper.getFirstStepIdOfSubmodule(submoduleId);
-        Model.programStepper.gotoStep(stepId);
+        const stepId = Model.getProgramModel().getFirstStepIdOfSubmodule(submoduleId);
+        Model.getProgramModel().gotoStep(stepId);
         // Model.updateStatus(stepId);
         PatientAppController.stepUpdate();
     }

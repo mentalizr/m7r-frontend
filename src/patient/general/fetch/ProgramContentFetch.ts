@@ -12,10 +12,12 @@ export class ProgramContentFetch {
 
     public static execute() {
 
-        if (Model.infotextStatus.isInfotextDisplayed()) {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/" + Model.infotextStatus.getCurrentInfotextId();
+        if (Model.getInfotextStatus().isInfotextDisplayed()) {
+            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/"
+                + Model.getInfotextStatus().getCurrentInfotextId();
         } else {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/" + Model.programStepper.getCurrentStepId();
+            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
+                + Model.getProgramModel().getCurrentStepId();
         }
 
         return fetch(ProgramContentFetch._service, {credentials: "include"})
