@@ -1,6 +1,5 @@
 import {Model} from "../../../general/model/Model";
 import {ButtonBarView} from "../ButtonBarView";
-import {StepModel} from "../../mainContent/model/StepModel";
 
 export class ButtonBarController {
 
@@ -40,7 +39,7 @@ export class ButtonBarController {
     }
 
     private static hasSavableContent(): boolean {
-        return (StepModel.hasPersistableContent() && StepModel.isEditable());
+        return (Model.getStepModel().hasPersistableContent() && Model.getStepModel().isEditable());
     }
 
     private static hasSendableContent(): boolean {

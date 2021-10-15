@@ -6,103 +6,103 @@ import {FormDataModel} from "./formData/FormDataModel";
 
 export class StepModel {
 
-    private static _contentHtml: string = undefined;
-    private static _inputElementsRegistry: InputElementsRegistry = undefined;
+    private readonly _contentHtml: string = undefined;
+    private readonly _inputElementsRegistry: InputElementsRegistry = undefined;
 
-    private static _formDataModel: FormDataModel = undefined;
-    private static _feedbackData: FeedbackData = undefined;
+    private _formDataModel: FormDataModel = undefined;
+    private _feedbackData: FeedbackData = undefined;
 
-    private static _taggedAsExercise: boolean = undefined;
-    private static _taggedAsFeedback: boolean = undefined;
+    private _taggedAsExercise: boolean = undefined;
+    private _taggedAsFeedback: boolean = undefined;
 
-    public static initialize(contentHtml: string) {
+    constructor(contentHtml: string) {
 
-        StepModel._contentHtml = contentHtml;
-        StepModel._inputElementsRegistry = InputElementsRegistryFactory.getInstance(contentHtml);
-        StepModel._formDataModel = new FormDataModel();
-        StepModel.parseGlobalDirectives(contentHtml);
+        this._contentHtml = contentHtml;
+        this._inputElementsRegistry = InputElementsRegistryFactory.getInstance(contentHtml);
+        this._formDataModel = new FormDataModel();
+        this.parseGlobalDirectives(contentHtml);
 
         // StepModel._inputElementsRegistry.debugOut();
     }
 
-    public static getAllProgramScopeIds(): Array<string> {
+    public getAllProgramScopeIds(): Array<string> {
         return this._inputElementsRegistry.getProgramNamedScopeElements().getScopeIdsAsArray();
     }
 
-    public static getContentHtml(): string {
-        if (StepModel._contentHtml == undefined) {
+    public getContentHtml(): string {
+        if (this._contentHtml == undefined) {
             console.log("[StepModel] Assertion Error: Not initialized.");
             console.trace();
         }
-        return StepModel._contentHtml;
+        return this._contentHtml;
     }
 
-    public static getInputElementsRegistry(): InputElementsRegistry {
+    public getInputElementsRegistry(): InputElementsRegistry {
         return this._inputElementsRegistry;
     }
 
-    public static setFeedbackData(feedbackData: FeedbackData) {
-        StepModel._feedbackData = feedbackData;
+    public setFeedbackData(feedbackData: FeedbackData) {
+        this._feedbackData = feedbackData;
     }
 
-    public static getFeedbackData(): FeedbackData {
-        if (StepModel._taggedAsFeedback && StepModel._feedbackData == undefined) {
+    public getFeedbackData(): FeedbackData {
+        if (this._taggedAsFeedback && this._feedbackData == undefined) {
             console.log("[StepModel] Assertion Error: Not initialized completely. FeedbackData is missing.");
         }
-        return StepModel._feedbackData;
+        return this._feedbackData;
     }
 
-    public static setFormDataModel(formDataModel: FormDataModel) {
-        StepModel._formDataModel = formDataModel;
+    public setFormDataModel(formDataModel: FormDataModel) {
+        this._formDataModel = formDataModel;
     }
 
-    public static getFormDataModel(): FormDataModel {
-        return StepModel._formDataModel;
+    public getFormDataModel(): FormDataModel {
+        return this._formDataModel;
     }
 
-    public static isTaggedAsExercise(): boolean {
-        return StepModel._taggedAsExercise;
+    public isTaggedAsExercise(): boolean {
+        return this._taggedAsExercise;
     }
 
-    public static isTaggedAsFeedback(): boolean {
-        return StepModel._taggedAsFeedback;
+    public isTaggedAsFeedback(): boolean {
+        return this._taggedAsFeedback;
     }
 
-    public static hasPersistableContent(): boolean {
+    public hasPersistableContent(): boolean {
         return this._inputElementsRegistry.hasElements();
-        // return StepModel._taggedAsPersistent || StepModel._taggedAsExercise;
+        // return this._taggedAsPersistent || this._taggedAsExercise;
     }
 
-    public static isEditable(): boolean {
+    public isEditable(): boolean {
         // TODO rework feedback
         return true;
-        // if (StepModel._formDataModel.getInPageScope()) {
-        //     return StepModel._formDataModel.getInPageScope().editable;
+        // if (this._formDataModel.getInPageScope()) {
+        //     return this._formDataModel.getInPageScope().editable;
         // }
         // return false;
     }
 
-    private static parseGlobalDirectives(contentHtml: string) {
+    private parseGlobalDirectives(contentHtml: string) {
 
         // const regexPersistentTag = "<!--[\\s\\S]*" + TAG_PERSISTENT + "[\\s\\S]*-->";
         // if (contentHtml.match(regexPersistentTag)) {
-        //     StepModel._taggedAsPersistent = true;
+        //     this._taggedAsPersistent = true;
         // } else {
-        //     StepModel._taggedAsPersistent = false;
+        //     this._taggedAsPersistent = false;
         // }
 
         const regexExerciseTag = "<!--[\\s\\S]*" + TAG_EXERCISE + "[\\s\\S]*-->";
         if (contentHtml.match(regexExerciseTag)) {
-            StepModel._taggedAsExercise = true;
+            this._taggedAsExercise = true;
         } else {
-            StepModel._taggedAsExercise = false;
+            this._taggedAsExercise = false;
         }
 
         const regexFeedbackTag = "<!--[\\s\\S]*" + TAG_FEEDBACK + "[\\s\\S]*-->";
         if (contentHtml.match(regexFeedbackTag)) {
-            StepModel._taggedAsFeedback = true;
+            this._taggedAsFeedback = true;
         } else {
-            StepModel._taggedAsFeedback = false;
+            this._taggedAsFeedback = false;
         }
 
     }

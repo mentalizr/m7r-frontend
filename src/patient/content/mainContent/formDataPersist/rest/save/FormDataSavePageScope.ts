@@ -1,10 +1,10 @@
-import {StepModel} from "../../../model/StepModel";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {FormData} from "../../../model/formData/FormData";
 import {AbstractInputElement} from "../../../model/InputElementsRegistry/AbstractInputElement";
 import {FormDataUpdater} from "../../FormDataUpdater";
 import {FormDataSave} from "./FormDataSave";
 import {ContentId} from "../ContentId";
+import {Model} from "../../../../../general/model/Model";
 
 export class FormDataSavePageScope {
 
@@ -17,7 +17,7 @@ export class FormDataSavePageScope {
     }
 
     private static hasNoElementsInScopePage() {
-        return (!StepModel.getInputElementsRegistry().hasElementsInScopePage());
+        return (!Model.getStepModel().getInputElementsRegistry().hasElementsInScopePage());
     }
 
     private static getFormData(): FormData {
@@ -31,7 +31,7 @@ export class FormDataSavePageScope {
     }
 
     private static getPageScopeElements(): Set<AbstractInputElement> {
-        return StepModel.getInputElementsRegistry().getPageScopeElements();
+        return Model.getStepModel().getInputElementsRegistry().getPageScopeElements();
     }
 
     private static createFormDataEnvelope(): FormData {
@@ -44,6 +44,6 @@ export class FormDataSavePageScope {
     }
 
     private static updateStepModel(formData: FormData): void {
-        StepModel.getFormDataModel().setInPageScope(formData);
+        Model.getStepModel().getFormDataModel().setInPageScope(formData);
     }
 }

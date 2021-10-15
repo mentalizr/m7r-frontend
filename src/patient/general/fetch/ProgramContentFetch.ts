@@ -1,6 +1,5 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
-import {StepModel} from "../../content/mainContent/model/StepModel";
 import {RestResponse} from "../../../helper/RestResponse";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "programContent";
@@ -36,7 +35,8 @@ export class ProgramContentFetch {
     }
 
     private static updateModel(contentHtml: string) {
-        StepModel.initialize(contentHtml);
+        Model.updateStepModel(contentHtml);
+        // StepModel.initialize(contentHtml);
         // console.log("contentHtml: " + ProgramContentFetch._programContentHtml);
     }
 

@@ -2,7 +2,6 @@ import {SERVICE_BASE} from "../../../../../../Globals";
 import {Model} from "../../../../../general/model/Model";
 import {FormData} from "../../../model/formData/FormData";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
-import {StepModel} from "../../../model/StepModel";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
@@ -12,7 +11,7 @@ export class FormDataFetchProgramNamedScope {
 
     public static execute(): Promise<unknown> {
 
-        const programScopeIds: Array<string> = StepModel.getAllProgramScopeIds();
+        const programScopeIds: Array<string> = Model.getStepModel().getAllProgramScopeIds();
 
         let fetchPromises: Array<Promise<unknown>> = FormDataFetchProgramNamedScope.buildArrayOfFetchPromises(programScopeIds);
 
@@ -45,7 +44,7 @@ export class FormDataFetchProgramNamedScope {
     }
 
     private static addToFromDataModel(programScopeId: string, formData: FormData) {
-        StepModel.getFormDataModel().addInProgramNamedScope(programScopeId, formData);
+        Model.getStepModel().getFormDataModel().addInProgramNamedScope(programScopeId, formData);
     }
 
     private static buildArrayOfFetchPromises(programScopeIds: Array<string>): Array<Promise<unknown>> {

@@ -1,9 +1,9 @@
-import {StepModel} from "./model/StepModel";
 import {MainContentView} from "./MainContentView";
 import {GeneralAlertController} from "../generalAlert/GeneralAlertController";
 import {FormDataUpdater} from "./formDataPersist/FormDataUpdater";
 import {FormDataModel} from "./model/formData/FormDataModel";
 import {ScrollUpController} from "../../../general/controller/ScrollUpController";
+import {Model} from "../../general/model/Model";
 
 export class MainContentController {
 
@@ -11,13 +11,15 @@ export class MainContentController {
 
         // console.log("[DEBUG] MainContentController.initView()");
 
-        const feedbackData = StepModel.getFeedbackData();
+        const stepModel = Model.getStepModel();
+        const feedbackData = stepModel.getFeedbackData();
+
         // console.log("[DEBUG] feedbackData: " + JSON.stringify(feedbackData));
         // END DEBUG
 
-        let html = StepModel.getContentHtml();
+        let html = stepModel.getContentHtml();
 
-        if (StepModel.isTaggedAsFeedback()) {
+        if (stepModel.isTaggedAsFeedback()) {
 
             // console.log("[DEBUB] [MainContentController]: StepModel.isTaggedAsFeedback = true");
 
@@ -40,7 +42,8 @@ export class MainContentController {
 
     private static updateViewFormData(): void {
 
-        const formDataModel: FormDataModel = StepModel.getFormDataModel();
+        const stepModel = Model.getStepModel();
+        const formDataModel: FormDataModel = stepModel.getFormDataModel();
 
         if (formDataModel.hasInPageScope()) {
             const formDataPageScope = formDataModel.getInPageScope();
@@ -52,7 +55,7 @@ export class MainContentController {
             FormDataUpdater.refreshView(formDataProgramGenericScope);
         }
 
-        const scopeIds: Array<string> = StepModel.getAllProgramScopeIds();
+        const scopeIds: Array<string> = stepModel.getAllProgramScopeIds();
         for (let scopeId of scopeIds) {
                 const formDataProgramNamedScope = formDataModel.getInProgramNamedScope(scopeId);
                 FormDataUpdater.refreshView(formDataProgramNamedScope);

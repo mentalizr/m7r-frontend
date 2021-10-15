@@ -19,7 +19,7 @@ export class FormDataSaveProgramGenericScope {
     }
 
     private static hasNoElementsInScopeProgramGeneric() {
-        return (!StepModel.getInputElementsRegistry().hasElementsInScopeProgramGeneric());
+        return (!Model.getStepModel().getInputElementsRegistry().hasElementsInScopeProgramGeneric());
     }
 
     private static getFormData(): FormData {
@@ -29,7 +29,7 @@ export class FormDataSaveProgramGenericScope {
     }
 
     private static getElementsInScopeProgramGeneric(): Set<AbstractInputElement> {
-        return StepModel.getInputElementsRegistry().getProgramGenericScopeElements();
+        return Model.getStepModel().getInputElementsRegistry().getProgramGenericScopeElements();
     }
 
     private static createFormDataEnvelope(): FormData {

@@ -1,9 +1,9 @@
 import {SERVICE_BASE} from "../../../../../../Globals";
 import {FormData} from "../../../model/formData/FormData";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
-import {StepModel} from "../../../model/StepModel";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
+import {Model} from "../../../../../general/model/Model";
 
 const SERVICE_NAME = "formData";
 
@@ -48,7 +48,7 @@ export class FormDataFetchProgramGenericScope {
     }
 
     private static addToFormDataModel(formData: FormData) {
-        StepModel.getFormDataModel().setInProgramGenericScope(formData);
+        Model.getStepModel().getFormDataModel().setInProgramGenericScope(formData);
     }
 
     private static castJsonToFormData(data): FormData {
@@ -57,7 +57,7 @@ export class FormDataFetchProgramGenericScope {
     }
 
     private static hasInputElementsInProgramGeneric(): boolean {
-        return StepModel.getInputElementsRegistry().hasElementsInScopeProgramGeneric();
+        return Model.getStepModel().getInputElementsRegistry().hasElementsInScopeProgramGeneric();
     }
 
     private static getContentId(): string {

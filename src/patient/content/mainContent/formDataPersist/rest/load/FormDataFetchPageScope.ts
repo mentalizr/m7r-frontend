@@ -2,7 +2,6 @@ import {SERVICE_BASE} from "../../../../../../Globals";
 import {Model} from "../../../../../general/model/Model";
 import {FormData} from "../../../model/formData/FormData";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
-import {StepModel} from "../../../model/StepModel";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
@@ -53,7 +52,7 @@ export class FormDataFetchPageScope {
     }
 
     private static addToFormDataModel(formData: FormData) {
-        StepModel.getFormDataModel().setInPageScope(formData);
+        Model.getStepModel().getFormDataModel().setInPageScope(formData);
     }
 
     private static getContentId(): string {
@@ -61,7 +60,7 @@ export class FormDataFetchPageScope {
     }
 
     private static hasInputElementsInScopePage(): boolean {
-        return StepModel.getInputElementsRegistry().hasElementsInScopePage();
+        return Model.getStepModel().getInputElementsRegistry().hasElementsInScopePage();
     }
 
 }

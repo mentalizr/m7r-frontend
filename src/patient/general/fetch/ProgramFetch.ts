@@ -26,7 +26,7 @@ export class ProgramFetch {
     }
 
     private static updateModel(data) {
-        Model.initialize(data);
+        Model.updateProgram(data);
     }
 
 }

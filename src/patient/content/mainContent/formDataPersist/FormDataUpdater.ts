@@ -1,6 +1,6 @@
 import {AbstractInputElement} from "../model/InputElementsRegistry/AbstractInputElement";
 import {FormData, FormElementDataList} from "../model/formData/FormData";
-import {StepModel} from "../model/StepModel";
+import {Model} from "../../../general/model/Model";
 
 export class FormDataUpdater {
 
@@ -21,7 +21,7 @@ export class FormDataUpdater {
 
     public static refreshView(formData: FormData): void {
 
-        const inputElementsRegistry = StepModel.getInputElementsRegistry();
+        const inputElementsRegistry = Model.getStepModel().getInputElementsRegistry();
 
         for (let formDataList of formData.formElementDataList) {
 

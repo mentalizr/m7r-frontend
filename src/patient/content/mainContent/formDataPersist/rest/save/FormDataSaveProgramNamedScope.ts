@@ -5,12 +5,13 @@ import {FormData} from "../../../model/formData/FormData";
 import {FormDataUpdater} from "../../FormDataUpdater";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {ContentId} from "../ContentId";
+import {Model} from "../../../../../general/model/Model";
 
 export class FormDataSaveProgramNamedScope {
 
     public static execute(): Promise<unknown> {
 
-        const programScopeIds: Array<string> = StepModel.getAllProgramScopeIds();
+        const programScopeIds: Array<string> = Model.getStepModel().getAllProgramScopeIds();
 
         let savePromises: Array<Promise<unknown>>
             = FormDataSaveProgramNamedScope.buildArrayOfSavePromises(programScopeIds);
@@ -40,7 +41,7 @@ export class FormDataSaveProgramNamedScope {
     }
 
     private static getElementsInProgramNamedScope(scopeId: string): Set<AbstractInputElement> {
-        return StepModel.getInputElementsRegistry().getProgramNamedScopeElements().getElementsForScopeId(scopeId);
+        return Model.getStepModel().getInputElementsRegistry().getProgramNamedScopeElements().getElementsForScopeId(scopeId);
     }
 
     private static createFormDataEnvelope(scopeId: string): FormData {
