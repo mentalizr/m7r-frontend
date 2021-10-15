@@ -61,11 +61,7 @@ export class MainContentController {
                 FormDataUpdater.refreshView(formDataProgramNamedScope);
         }
 
-        // TODO: rework feedback
-        // const formDataPageScope = formDataModel.getInPageScope();
-        // if (formDataPageScope.editable == false) {
-        //     MainContentView.disableForm();
-        // }
+        if (formDataModel.hasSentExercise()) MainContentView.disableForm();
     }
 
 }

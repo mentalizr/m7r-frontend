@@ -1,9 +1,9 @@
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
-import {FormData} from "../../../model/formData/FormData";
+import {Exercise, FormData} from "../../../model/formData/FormData";
 import {AbstractInputElement} from "../../../model/InputElementsRegistry/AbstractInputElement";
 import {FormDataUpdater} from "../../FormDataUpdater";
 import {ContentId} from "../ContentId";
-import {FormDataSend} from "./FormDataSend";
+import {FormDataSendService} from "./FormDataSendService";
 import {Model} from "../../../../../general/model/Model";
 
 export class FormDataSendPageScope {
@@ -14,7 +14,7 @@ export class FormDataSendPageScope {
 
         let formData: FormData = FormDataSendPageScope.getFormData();
 
-        return FormDataSend.execute(formData);
+        return FormDataSendService.execute(formData);
     }
 
     private static hasNoElementsInScopePage() {
@@ -27,7 +27,15 @@ export class FormDataSendPageScope {
         // TODO feedback rework: editable flag beachten!
         // Hier muss ein in der DB persistiertes Flag übernommen werden.
         let formData: FormData = FormDataSendPageScope.createFormDataEnvelope();
-        return FormDataUpdater.refreshFormData(formData, inputElements);
+        formData = FormDataUpdater.refreshFormData(formData, inputElements);
+
+        formData.exercise = <Exercise> {};
+        formData.exercise.lastModifiedTimestamp = new Date(0).toISOString();
+        formData.exercise.seenByTherapist = false;
+        formData.exercise.seenByTherapistTimestamp = new Date(0).toISOString();
+        formData.exercise.sent = false;
+
+        return formData;
     }
 
     private static getPageScopeElements(): Set<AbstractInputElement> {

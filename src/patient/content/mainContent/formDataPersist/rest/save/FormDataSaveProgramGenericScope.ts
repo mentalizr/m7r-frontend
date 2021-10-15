@@ -4,7 +4,7 @@ import {Model} from "../../../../../general/model/Model";
 import {FormData} from "../../../model/formData/FormData";
 import {AbstractInputElement} from "../../../model/InputElementsRegistry/AbstractInputElement";
 import {FormDataUpdater} from "../../FormDataUpdater";
-import {FormDataSave} from "./FormDataSave";
+import {FormDataSaveService} from "./FormDataSaveService";
 import {ContentId} from "../ContentId";
 
 export class FormDataSaveProgramGenericScope {
@@ -15,7 +15,7 @@ export class FormDataSaveProgramGenericScope {
 
         let formData: FormData = FormDataSaveProgramGenericScope.getFormData();
 
-        return FormDataSave.execute(formData);
+        return FormDataSaveService.execute(formData);
     }
 
     private static hasNoElementsInScopeProgramGeneric() {

@@ -1,6 +1,6 @@
 import {StepModel} from "../../../model/StepModel";
 import {AbstractInputElement} from "../../../model/InputElementsRegistry/AbstractInputElement";
-import {FormDataSave} from "./FormDataSave";
+import {FormDataSaveService} from "./FormDataSaveService";
 import {FormData} from "../../../model/formData/FormData";
 import {FormDataUpdater} from "../../FormDataUpdater";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
@@ -28,7 +28,7 @@ export class FormDataSaveProgramNamedScope {
             const formData: FormData = FormDataSaveProgramNamedScope.getFormData(programScopeId);
 
             savePromises.push(
-                FormDataSave.execute(formData)
+                FormDataSaveService.execute(formData)
             );
         }
         return savePromises;

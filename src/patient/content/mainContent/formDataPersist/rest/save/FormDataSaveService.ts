@@ -3,9 +3,9 @@ import {SERVICE_BASE} from "../../../../../../Globals";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
-const SERVICE_NAME = "sendFormData";
+const SERVICE_NAME = "patient/formData/save";
 
-export class FormDataSend {
+export class FormDataSaveService {
 
     public static execute(formData: FormData): Promise<unknown> {
 
@@ -23,7 +23,7 @@ export class FormDataSend {
                 body: formDataJSON
             },
         )
-            .then(FormDataSend.checkStatus);
+            .then(FormDataSaveService.checkStatus);
     }
 
     private static checkStatus(response): Promise<unknown> {

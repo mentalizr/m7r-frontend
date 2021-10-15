@@ -3,16 +3,16 @@ import {SERVICE_BASE} from "../../../../../../Globals";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
-const SERVICE_NAME = "saveFormData";
+const SERVICE_NAME = "patient/formData/send";
 
-export class FormDataSave {
+export class FormDataSendService {
 
     public static execute(formData: FormData): Promise<unknown> {
 
         const formDataJSON: string = JSON.stringify(formData);
         const serviceUrl = SERVICE_BASE + "/" + SERVICE_NAME;
 
-        console.log("FormDataSave serviceUrl: " + serviceUrl);
+        console.log("FormDataSend serviceUrl: " + serviceUrl);
         console.log("formData: " + formDataJSON);
 
         return fetch(serviceUrl,
@@ -23,7 +23,7 @@ export class FormDataSave {
                 body: formDataJSON
             },
         )
-            .then(FormDataSave.checkStatus);
+            .then(FormDataSendService.checkStatus);
     }
 
     private static checkStatus(response): Promise<unknown> {

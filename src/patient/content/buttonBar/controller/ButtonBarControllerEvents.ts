@@ -10,6 +10,8 @@ import {GeneralAlertController} from "../../generalAlert/GeneralAlertController"
 import {MainContentView} from "../../mainContent/MainContentView";
 import {ButtonBarController} from "./ButtonBarController";
 import {PatientAppController} from "../../../general/controller/PatientAppController";
+import {FormDataSendPageScope} from "../../mainContent/formDataPersist/rest/save/FormDataSendPageScope";
+import {ProgramFetch} from "../../../general/fetch/ProgramFetch";
 
 export class ButtonBarControllerEvents {
 
@@ -70,7 +72,6 @@ export class ButtonBarControllerEvents {
             .then(function() {
                 BackdropSpinnerController.hide();
             });
-
     }
 
     public static actionContentSendButton(): void {
@@ -89,17 +90,24 @@ export class ButtonBarControllerEvents {
         // console.log("SendConfirmed Button gedrückt");
         SendConfirmModalController.hide();
         // FormDataSaver.send();
-        FormDataSavePageScope.execute()
+        const stepId: string = Model.getProgramModel().getCurrentStepId();
+        FormDataSendPageScope.execute()
             .then(function() {
-                MainContentView.disableForm();
-                ButtonBarController.updateView();
+                ProgramFetch.execute().then(function () {
+                    Model.getProgramModel().gotoStep(stepId);
+                });
+            })
+            .then(function() {
+                PatientAppController.stepUpdate();
+                // MainContentView.disableForm();
+                // ButtonBarController.updateView();
             })
             .catch(function() {
                 GeneralAlertController.showSaveError();
             })
-            .then(function() {
-                BackdropSpinnerController.hide()
-            })
+            // .then(function() {
+            //     BackdropSpinnerController.hide()
+            // })
     }
 
 }

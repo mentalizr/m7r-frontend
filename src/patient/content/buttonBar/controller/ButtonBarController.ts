@@ -39,13 +39,17 @@ export class ButtonBarController {
     }
 
     private static hasSavableContent(): boolean {
+        if (Model.getProgramModel().isCurrentStepExercise()
+            && Model.getStepModel().getFormDataModel().hasSentExercise())
+            return false;
+
+        // TODO check text fields marked as readonly
         return (Model.getStepModel().hasPersistableContent() && Model.getStepModel().isEditable());
     }
 
     private static hasSendableContent(): boolean {
-        // TODO rework feedback
-        return false;
-        // return (StepModel.hasPersistableContent() && StepModel.isEditable());
+        return Model.getProgramModel().isCurrentStepExercise()
+            && !Model.getStepModel().getFormDataModel().hasSentExercise();
     }
 
 }

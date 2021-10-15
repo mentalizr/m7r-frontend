@@ -2,6 +2,7 @@ import {Model} from "../model/Model";
 import {SERVICE_BASE} from "../../../Globals";
 import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
+import {Program} from "../entities/Program";
 
 const SERVICE_NAME = "patient/program";
 
@@ -25,8 +26,8 @@ export class ProgramFetch {
         return response.json();
     }
 
-    private static updateModel(data) {
-        Model.updateProgram(data);
+    private static updateModel(program: Program) {
+        Model.updateProgram(program);
     }
 
 }

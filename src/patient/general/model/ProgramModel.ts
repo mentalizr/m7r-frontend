@@ -9,9 +9,11 @@ export class ProgramModel {
     constructor(program: Program) {
         this.program = program;
         this.stepList = new Array<Step>();
+        let i = 0;
         for (let module of program.modules) {
             for (let submodule of module.submodules) {
                 for (let step of submodule.steps) {
+                    i++;
                     this.stepList.push(step);
                 }
             }
@@ -45,6 +47,10 @@ export class ProgramModel {
 
     public hasPreviousStep(): boolean {
         return this.currentIndex > 0;
+    }
+
+    private getCurrentStep(): Step {
+        return this.stepList[this.currentIndex];
     }
 
     public getCurrentStepId(): string {

@@ -3,6 +3,8 @@ import {FeedbackData} from "./formData/FeedbackData";
 import {InputElementsRegistry} from "./InputElementsRegistry/InputElementsRegistry";
 import {InputElementsRegistryFactory} from "./InputElementsRegistry/InputElementsRegistryFactory";
 import {FormDataModel} from "./formData/FormDataModel";
+import {FormData} from "./formData/FormData";
+import {Model} from "../../../general/model/Model";
 
 export class StepModel {
 
@@ -74,6 +76,8 @@ export class StepModel {
     }
 
     public isEditable(): boolean {
+        // const formDataModel: FormDataModel = Model.getStepModel().getFormDataModel();
+
         // TODO rework feedback
         return true;
         // if (this._formDataModel.getInPageScope()) {

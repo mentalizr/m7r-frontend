@@ -1,72 +1,78 @@
 import {FormData} from "./FormData";
+import {FormDataEntity} from "./FormDataEntity";
 
 export class FormDataModel {
 
-    private _formDataPageScope: FormData = undefined;
-    private _formDataProgramGenericScope: FormData = undefined;
-    private _formDataProgramNamedScope: Map<string, FormData>;
+    private formDataPageScope: FormDataEntity = undefined;
+    private formDataProgramGenericScope: FormData = undefined;
+    private formDataProgramNamedScope: Map<string, FormData>;
 
     constructor() {
-        this._formDataProgramNamedScope = new Map();
+        this.formDataProgramNamedScope = new Map();
     }
 
     public setInPageScope(pageFormData: FormData): void {
-        this._formDataPageScope = pageFormData;
+        this.formDataPageScope = new FormDataEntity(pageFormData);
     }
 
     public hasInPageScope(): boolean {
-        return this._formDataPageScope !== undefined;
+        return this.formDataPageScope !== undefined;
     }
 
     public getInPageScope(): FormData {
-        return this._formDataPageScope;
+        if (this.formDataPageScope == undefined) throw new Error("Illegal state. No form data in page scope.");
+        return this.formDataPageScope.getFormData();
     }
 
     public setInProgramGenericScope(programGenericFormData: FormData): void {
-        this._formDataProgramGenericScope = programGenericFormData;
+        this.formDataProgramGenericScope = programGenericFormData;
     }
 
     public hasInProgramGenericScope(): boolean {
-        return this._formDataProgramGenericScope !== undefined;
+        return this.formDataProgramGenericScope !== undefined;
     }
 
     public getInProgramGenericScope(): FormData {
-        return this._formDataProgramGenericScope;
+        return this.formDataProgramGenericScope;
     }
 
     public addInProgramNamedScope(scopeId: string, programScopeFormData: FormData): void {
-        this._formDataProgramNamedScope.set(scopeId, programScopeFormData);
+        this.formDataProgramNamedScope.set(scopeId, programScopeFormData);
     }
 
     public hasInProgramNamedScope(scopeId: string): boolean {
-        return this._formDataProgramNamedScope.has(scopeId);
+        return this.formDataProgramNamedScope.has(scopeId);
     }
 
     public getInProgramNamedScope(scopeId: string): FormData {
-        return this._formDataProgramNamedScope.get(scopeId);
+        return this.formDataProgramNamedScope.get(scopeId);
+    }
+
+    public hasSentExercise(): boolean {
+        return this.hasInPageScope() && this.formDataPageScope.hasSentExercise();
     }
 
     public debugOut(): void {
         console.log("FormDataModel:");
 
         console.log("    PageScope:");
-        console.log("        " + JSON.stringify(this._formDataPageScope));
+        console.log("        " + JSON.stringify(this.formDataPageScope));
 
         console.log("    ProgramGenericScope:");
-        if (this._formDataProgramGenericScope !== undefined) {
-            console.log("        " + JSON.stringify(this._formDataProgramGenericScope));
+        if (this.formDataProgramGenericScope !== undefined) {
+            console.log("        " + JSON.stringify(this.formDataProgramGenericScope));
         } else {
             console.log("        undefined.");
         }
 
         console.log("    ProgramNamedScope:");
-        if (this._formDataProgramNamedScope.size === 0) {
+        if (this.formDataProgramNamedScope.size === 0) {
             console.log("        none.");
             return;
         }
-        for (let scopId of this._formDataProgramNamedScope.keys()) {
+        for (let scopId of this.formDataProgramNamedScope.keys()) {
             console.log("        scopeId: " + scopId);
-            const formData = this._formDataProgramNamedScope.get(scopId);
+            const formData = this.formDataProgramNamedScope.get(scopId);
             console.log("            " + JSON.stringify(formData));
         }
 
