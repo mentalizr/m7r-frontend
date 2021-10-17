@@ -1,14 +1,32 @@
 import {FormData} from "./FormData";
 import {FormDataEntity} from "./FormDataEntity";
+import {Model} from "../../../../general/model/Model";
 
 export class FormDataModel {
 
+    private feedback: boolean;
+    private formDataPageScopePreviousStep: FormDataEntity = undefined;
     private formDataPageScope: FormDataEntity = undefined;
     private formDataProgramGenericScope: FormData = undefined;
     private formDataProgramNamedScope: Map<string, FormData>;
 
     constructor() {
+        this.feedback = Model.getProgramModel().isCurrentStepFeedback();
         this.formDataProgramNamedScope = new Map();
+    }
+
+    public setInPageScopePreviousStep(pageFormData: FormData): void {
+        this.formDataPageScopePreviousStep = new FormDataEntity(pageFormData);
+    }
+
+    public hasInPageScopePreviousStep(): boolean {
+        return this.formDataPageScopePreviousStep !== undefined;
+    }
+
+    public getInPageScopePreviousStep(): FormData {
+        if (this.formDataPageScopePreviousStep === undefined)
+            throw new Error("Illegal state. No form data in page scope for previous step.");
+        return this.formDataPageScopePreviousStep.getFormData();
     }
 
     public setInPageScope(pageFormData: FormData): void {
@@ -20,7 +38,7 @@ export class FormDataModel {
     }
 
     public getInPageScope(): FormData {
-        if (this.formDataPageScope == undefined) throw new Error("Illegal state. No form data in page scope.");
+        if (this.formDataPageScope === undefined) throw new Error("Illegal state. No form data in page scope.");
         return this.formDataPageScope.getFormData();
     }
 
@@ -50,6 +68,16 @@ export class FormDataModel {
 
     public hasSentExercise(): boolean {
         return this.hasInPageScope() && this.formDataPageScope.hasSentExercise();
+    }
+
+    public hasFeedback(): boolean {
+        if (!this.hasInPageScopePreviousStep()) throw new Error("Illegal state. No form data for previous exercise step.");
+        return this.formDataPageScopePreviousStep.isFeedback();
+    }
+
+    public getFeedbackText(): string {
+        if (!this.hasFeedback()) throw new Error("Illegal state. Form data for previous exercise step does not contain feedback.");
+        return this.formDataPageScopePreviousStep.getFeedbackText();
     }
 
     public debugOut(): void {

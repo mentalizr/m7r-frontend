@@ -53,6 +53,11 @@ export class ProgramModel {
         return this.stepList[this.currentIndex];
     }
 
+    public getPreviousStepId(): string {
+        if (this.currentIndex <= 0) throw new Error("Illegal state. No previous step available.");
+        return this.stepList[this.currentIndex - 1].id;
+    }
+
     public getCurrentStepId(): string {
         return this.stepList[this.currentIndex].id;
     }

@@ -11,13 +11,17 @@ export class StepModel {
     private readonly _contentHtml: string = undefined;
     private readonly _inputElementsRegistry: InputElementsRegistry = undefined;
 
+    // private feedback: boolean;
+
     private _formDataModel: FormDataModel = undefined;
-    private _feedbackData: FeedbackData = undefined;
+    // private _feedbackData: FeedbackData = undefined;
 
     private _taggedAsExercise: boolean = undefined;
     private _taggedAsFeedback: boolean = undefined;
 
     constructor(contentHtml: string) {
+
+        // this.feedback = Model.getProgramModel().isCurrentStepFeedback();
 
         this._contentHtml = contentHtml;
         this._inputElementsRegistry = InputElementsRegistryFactory.getInstance(contentHtml);
@@ -43,16 +47,16 @@ export class StepModel {
         return this._inputElementsRegistry;
     }
 
-    public setFeedbackData(feedbackData: FeedbackData) {
-        this._feedbackData = feedbackData;
-    }
+    // public setFeedbackData(feedbackData: FeedbackData) {
+    //     this._feedbackData = feedbackData;
+    // }
 
-    public getFeedbackData(): FeedbackData {
-        if (this._taggedAsFeedback && this._feedbackData == undefined) {
-            console.log("[StepModel] Assertion Error: Not initialized completely. FeedbackData is missing.");
-        }
-        return this._feedbackData;
-    }
+    // public getFeedbackData(): FeedbackData {
+    //     if (this._taggedAsFeedback && this._feedbackData == undefined) {
+    //         console.log("[StepModel] Assertion Error: Not initialized completely. FeedbackData is missing.");
+    //     }
+    //     return this._feedbackData;
+    // }
 
     public setFormDataModel(formDataModel: FormDataModel) {
         this._formDataModel = formDataModel;

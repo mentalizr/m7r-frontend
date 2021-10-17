@@ -12,23 +12,29 @@ export class MainContentController {
         // console.log("[DEBUG] MainContentController.initView()");
 
         const stepModel = Model.getStepModel();
-        const feedbackData = stepModel.getFeedbackData();
+        // const feedbackData = stepModel.getFeedbackData();
 
         // console.log("[DEBUG] feedbackData: " + JSON.stringify(feedbackData));
         // END DEBUG
 
         let html = stepModel.getContentHtml();
 
-        if (stepModel.isTaggedAsFeedback()) {
+        if (Model.getProgramModel().isCurrentStepFeedback()) {
+            const feedbackHtml: string = MainContentView.generateFeedbackHtml();
 
-            // console.log("[DEBUB] [MainContentController]: StepModel.isTaggedAsFeedback = true");
-
-            const feedbackHtml = MainContentView.generateFeedbackHtml(feedbackData);
-
-            // console.log("[DEBUG] [MainContentController]: feedbackHtml: " + feedbackHtml);
-
-            html = html + feedbackHtml;
+            html += feedbackHtml;
         }
+
+        // if (stepModel.isTaggedAsFeedback()) {
+        //
+        //     // console.log("[DEBUB] [MainContentController]: StepModel.isTaggedAsFeedback = true");
+        //
+        //     const feedbackHtml = MainContentView.generateFeedbackHtml(feedbackData);
+        //
+        //     // console.log("[DEBUG] [MainContentController]: feedbackHtml: " + feedbackHtml);
+        //
+        //     html = html + feedbackHtml;
+        // }
 
         // MainContentView.showMainContent(StepModel.getContentHtml());
         ScrollUpController.hide();

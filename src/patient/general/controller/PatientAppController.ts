@@ -26,6 +26,7 @@ import {BackdropSpinnerController} from "./BackdropSpinnerController";
 import {MediaElementCleaner} from "../../content/mainContent/MediaElementCleaner";
 import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {Model} from "../model/Model";
+import {FormDataFetchPageScopePreviousPage} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScopePreviousPage";
 
 export class PatientAppController extends AbstractAppController {
 
@@ -129,7 +130,8 @@ export class PatientAppController extends AbstractAppController {
                 return Promise.all(
                     [FormDataFetchPageScope.execute(),
                         FormDataFetchProgramGenericScope.execute(),
-                        FormDataFetchProgramNamedScope.execute()]);
+                        FormDataFetchProgramNamedScope.execute(),
+                        FormDataFetchPageScopePreviousPage.execute()]);
                         // FeedbackDataFetch.execute()]);
             })
             .then(function() {
@@ -138,7 +140,5 @@ export class PatientAppController extends AbstractAppController {
                 // StepModel.getFormDataModel().debugOut();
             });
     }
-
-
 
 }

@@ -14,4 +14,8 @@ export class ContentId {
         return Model.getProgramModel().getProgramId() + "_program_" + scopeId;
     }
 
+    public static forPageScopePreviousStep(): string {
+        return Model.getProgramModel().getPreviousStepId();
+    }
+
 }

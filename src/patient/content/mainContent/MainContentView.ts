@@ -3,6 +3,9 @@ import {FeedbackData} from "./model/formData/FeedbackData";
 import * as Mustache from "mustache";
 import {Fader} from "../../../helper/Fader";
 import {ScrollUpController} from "../../../general/controller/ScrollUpController";
+import {FormData} from "./model/formData/FormData";
+import {Model} from "../../general/model/Model";
+import {FeedbackSnippetGenerator} from "../../../generator/FeedbackSnippetGenerator";
 
 const ID_FEEDBACK_TEMPLATE = "feedback-template";
 const ID_NO_FEEDBACK_TEMPLATE = "no-feedback-template";
@@ -67,32 +70,41 @@ export class MainContentView {
         return radioGroupsNotChecked;
     }
 
-    // TODO rework feedback
-    public static generateFeedbackHtml(feedbackData: FeedbackData): string {
-
-        // console.log("[DEBUG] [MainContentView]: generateFeedbackHtml aufgerufen!");
-
-        // console.log("[DEBUG] [MainContentView]: feedbackData = " + JSON.stringify(feedbackData));
-
-        if (feedbackData.userId && feedbackData.userId.length > 0) {
-            // has feedback
-            // let template_feedback = $("#" + ID_FEEDBACK_TEMPLATE).html();
-            let template_feedback = document.getElementById(ID_FEEDBACK_TEMPLATE).innerHTML;
-
-            // console.log("[DEBUG] [MainContentView]: template_feedback = " + template_feedback);
-            // console.log("[DEBUG] [MainContentView]: feedbackData = " + JSON.stringify(feedbackData));
-
-            return Mustache.render(template_feedback, feedbackData);
+    public static generateFeedbackHtml(): string {
+        if (Model.getStepModel().getFormDataModel().hasFeedback()) {
+            const feedbackText: string = Model.getStepModel().getFormDataModel().getFeedbackText();
+            return FeedbackSnippetGenerator.generateFeedback(feedbackText);
+        } else {
+            return FeedbackSnippetGenerator.generateNoFeedbackYet();
         }
-
-        // has no feedback
-        // return $("#" + ID_NO_FEEDBACK_TEMPLATE).html();
-        return document.getElementById(ID_NO_FEEDBACK_TEMPLATE).innerHTML;
-
-        // console.log("[DEBUG] [MainContentView]: renderedHtml: " + rendered_html);
-
-        // return rendered_html;
     }
+
+    // TODO rework feedback
+    // public static generateFeedbackHtml(feedbackData: FeedbackData): string {
+    //
+    //     // console.log("[DEBUG] [MainContentView]: generateFeedbackHtml aufgerufen!");
+    //
+    //     // console.log("[DEBUG] [MainContentView]: feedbackData = " + JSON.stringify(feedbackData));
+    //
+    //     if (feedbackData.userId && feedbackData.userId.length > 0) {
+    //         // has feedback
+    //         // let template_feedback = $("#" + ID_FEEDBACK_TEMPLATE).html();
+    //         let template_feedback = document.getElementById(ID_FEEDBACK_TEMPLATE).innerHTML;
+    //
+    //         // console.log("[DEBUG] [MainContentView]: template_feedback = " + template_feedback);
+    //         // console.log("[DEBUG] [MainContentView]: feedbackData = " + JSON.stringify(feedbackData));
+    //
+    //         return Mustache.render(template_feedback, feedbackData);
+    //     }
+    //
+    //     // has no feedback
+    //     // return $("#" + ID_NO_FEEDBACK_TEMPLATE).html();
+    //     return document.getElementById(ID_NO_FEEDBACK_TEMPLATE).innerHTML;
+    //
+    //     // console.log("[DEBUG] [MainContentView]: renderedHtml: " + rendered_html);
+    //
+    //     // return rendered_html;
+    // }
 
     public static scrollUpHard(): void {
         window.scrollTo(0, 0);
