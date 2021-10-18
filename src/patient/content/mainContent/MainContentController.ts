@@ -9,32 +9,12 @@ export class MainContentController {
 
     public static updateView(): void {
 
-        // console.log("[DEBUG] MainContentController.initView()");
-
-        const stepModel = Model.getStepModel();
-        // const feedbackData = stepModel.getFeedbackData();
-
-        // console.log("[DEBUG] feedbackData: " + JSON.stringify(feedbackData));
-        // END DEBUG
-
-        let html = stepModel.getContentHtml();
+        let html = Model.getStepModel().getContentHtml();
 
         if (Model.getProgramModel().isCurrentStepFeedback()) {
             const feedbackHtml: string = MainContentView.generateFeedbackHtml();
-
             html += feedbackHtml;
         }
-
-        // if (stepModel.isTaggedAsFeedback()) {
-        //
-        //     // console.log("[DEBUB] [MainContentController]: StepModel.isTaggedAsFeedback = true");
-        //
-        //     const feedbackHtml = MainContentView.generateFeedbackHtml(feedbackData);
-        //
-        //     // console.log("[DEBUG] [MainContentController]: feedbackHtml: " + feedbackHtml);
-        //
-        //     html = html + feedbackHtml;
-        // }
 
         // MainContentView.showMainContent(StepModel.getContentHtml());
         ScrollUpController.hide();
@@ -43,7 +23,6 @@ export class MainContentController {
         MainContentController.updateViewFormData();
 
         GeneralAlertController.hide();
-
     }
 
     private static updateViewFormData(): void {

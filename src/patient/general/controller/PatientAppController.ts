@@ -132,7 +132,6 @@ export class PatientAppController extends AbstractAppController {
                         FormDataFetchProgramGenericScope.execute(),
                         FormDataFetchProgramNamedScope.execute(),
                         FormDataFetchPageScopePreviousPage.execute()]);
-                        // FeedbackDataFetch.execute()]);
             })
             .then(function() {
                 // const feedbackData: FeedbackData = FeedbackDataFetch.getFeedbackData();
