@@ -28,6 +28,7 @@ export class ProgramFetch {
 
     private static updateModel(program: Program) {
         Model.updateProgram(program);
+        console.log("ProgramFetch. Model updated.");
     }
 
 }

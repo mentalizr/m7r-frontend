@@ -21,6 +21,18 @@ export class ProgramModel {
         this.currentIndex = 0;
     }
 
+    public initializeForStepId(stepId: string): void {
+        let found: boolean = false;
+        for (let i = 0; i < this.stepList.length; i++) {
+            if (this.stepList[i].id == stepId) {
+                this.currentIndex = i;
+                found = true;
+                return;
+            }
+        }
+        if (!found) throw new Error("Illegal argument. Cannot initialize ProgramModel to stepId [" + stepId + "]. Not found.");
+    }
+
     public getProgram(): Program {
         return this.program;
     }

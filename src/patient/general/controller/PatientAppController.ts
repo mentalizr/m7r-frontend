@@ -103,7 +103,7 @@ export class PatientAppController extends AbstractAppController {
                 ErrorHandler.handleError(error);
             })
             .then(function() {
-                // console.log("Initialisierung ProgramContent abgeschossen.");
+                console.log("Initialisierung ProgramContent abgeschossen.");
 
                 BackdropSpinnerController.hide();
 
@@ -134,6 +134,26 @@ export class PatientAppController extends AbstractAppController {
                         FormDataFetchPageScopePreviousPage.execute()]);
             })
             .then(function() {
+                // Debug
+                console.log("getStepContentPromise.then ...");
+
+                console.log("isCurrentStepFeedback? " + Model.getProgramModel().isCurrentStepFeedback());
+                console.log("hasAccessibleNextStep? " + Model.getProgramModel().hasAccessibleNextStep());
+                if (Model.getProgramModel().isCurrentStepFeedback())
+                    console.log("hasFeedback? " + Model.getStepModel().getFormDataModel().hasFeedback());
+
+                if (Model.getProgramModel().isCurrentStepFeedback()
+                && !Model.getProgramModel().hasAccessibleNextStep()
+                && Model.getStepModel().getFormDataModel().hasFeedback()) {
+                    console.log("getStepContentPromise.then ... perform programFetch");
+                    const stepId: string = Model.getProgramModel().getCurrentStepId();
+                    return ProgramFetch.execute().then(() => {
+                        Model.getProgramModel().initializeForStepId(stepId);
+                    });
+                }
+
+                console.log("getStepContentPromise.then finished.");
+
                 // const feedbackData: FeedbackData = FeedbackDataFetch.getFeedbackData();
                 // StepModel.setFeedbackData(feedbackData);
                 // StepModel.getFormDataModel().debugOut();
