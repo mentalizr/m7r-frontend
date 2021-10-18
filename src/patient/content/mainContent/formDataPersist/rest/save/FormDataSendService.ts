@@ -1,6 +1,5 @@
 import {FormData} from "../../../model/formData/FormData";
 import {SERVICE_BASE} from "../../../../../../Globals";
-import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
 const SERVICE_NAME = "patient/formData/send";
@@ -12,8 +11,8 @@ export class FormDataSendService {
         const formDataJSON: string = JSON.stringify(formData);
         const serviceUrl = SERVICE_BASE + "/" + SERVICE_NAME;
 
-        console.log("FormDataSend serviceUrl: " + serviceUrl);
-        console.log("formData: " + formDataJSON);
+        // console.log("FormDataSend serviceUrl: " + serviceUrl);
+        // console.log("formData: " + formDataJSON);
 
         return fetch(serviceUrl,
             {

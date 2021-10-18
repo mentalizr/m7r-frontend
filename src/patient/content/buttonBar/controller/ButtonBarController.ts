@@ -44,7 +44,7 @@ export class ButtonBarController {
             return false;
 
         // TODO check text fields marked as readonly
-        return (Model.getStepModel().hasPersistableContent() && Model.getStepModel().isEditable());
+        return (Model.getStepModel().hasPersistableContent());
     }
 
     private static hasSendableContent(): boolean {

@@ -16,7 +16,6 @@ import {
 import {PatientAppController} from "./PatientAppController";
 import {SideMenuGenerator} from "../../../generator/SideMenuGenerator";
 
-const ID_MENU_ITEM_TEMPLATE = "menu-item-template";
 const ID_MENU_ITEM_LIST = "menu-item-list";
 const ID_SIDEBAR_TOGGLE = "sidebarToggle";
 const ID_SIDEBAR_TOGGLE_TOP = "sidebarToggleTop";
@@ -46,7 +45,7 @@ export class MenuController {
         document.getElementById(ID_LOGO).setAttribute("src", logo);
     }
 
-    private static renderMenu() {
+    public static renderMenu() {
         document.getElementById(ID_MENU_ITEM_LIST).innerHTML
             = SideMenuGenerator.generate(Model.getProgramModel().getProgram());
     }
@@ -59,22 +58,17 @@ export class MenuController {
 
     public static registerUserEvents(): void {
 
-        MenuController.submoduleClicked();
+        MenuController.registerMenuClicks();
         MenuController.registerToggleSideNavigation();
     }
 
-    private static submoduleClicked(): void {
-
+    public static registerMenuClicks(): void {
         let submodules: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>("." + CLASS_SUBMODULE);
-
         submodules.forEach(function (element) {
             element.addEventListener("click", function (event) {
                 event.preventDefault();
-
                 const submodule_id = this.id.substring(15);
-
                 // console.log("Menu Item clicked: " + this.id + " submoduleId: " + submodule_id);
-
                 MenuController.actionSubmoduleSelected(submodule_id);
             });
         })
@@ -84,7 +78,6 @@ export class MenuController {
 
         const selector: string = "#" + ID_SIDEBAR_TOGGLE + ", #" + ID_SIDEBAR_TOGGLE_TOP + "";
         let sidebar: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>(selector)
-
         sidebar.forEach(function (element) {
             element.addEventListener("click", function (event) {
                 document.body.classList.toggle(CLASS_SIDEBAR_TOGGLED);
@@ -100,18 +93,14 @@ export class MenuController {
     }
 
     public static renderDiaries(): void {
-
         const appConfig: AppConfigPatient = Model.appConfigPatient;
         const hasDiaries: boolean = (appConfig.activityDiary || appConfig.moodDiary);
-
         if (hasDiaries) {
             this.showElement(ID_SIDEBAR_DIARIES_DIVIDER);
             this.showElement(ID_SIDEBAR_DIARIES_HEADING);
-
             if (appConfig.activityDiary) {
                 this.showElement(ID_SIDEBAR_DIARIES_ACTIVITIES);
             }
-
             if (appConfig.moodDiary) {
                 this.showElement(ID_SIDEBAR_DIARIES_MOOD);
             }
@@ -119,10 +108,8 @@ export class MenuController {
     }
 
     public static renderCommunication(): void {
-
         const appConfig: AppConfigPatient = Model.appConfigPatient;
         const hasCommunicationItems: boolean = (appConfig.questioning || appConfig.videoConference || appConfig.messages);
-
         if (hasCommunicationItems) {
             this.showElement(ID_SIDEBAR_COMMUNICATION_DIVIDER);
             this.showElement(ID_SIDEBAR_COMMUNICATION_HEADING);
@@ -130,11 +117,9 @@ export class MenuController {
             if (appConfig.questioning) {
                 this.showElement(ID_SIDEBAR_COMMUNICATION_QUESTIONING);
             }
-
             if (appConfig.videoConference) {
                 this.showElement(ID_SIDEBAR_COMMUNICATION_VIDEOCONFERENCE);
             }
-
             if (appConfig.messages) {
                 this.showElement(ID_SIDEBAR_COMMUNICATION_MESSAGES);
             }
@@ -148,7 +133,6 @@ export class MenuController {
     private static actionSubmoduleSelected(submoduleId: string): void {
         const stepId = Model.getProgramModel().getFirstStepIdOfSubmodule(submoduleId);
         Model.getProgramModel().gotoStep(stepId);
-        // Model.updateStatus(stepId);
         PatientAppController.stepUpdate();
     }
 

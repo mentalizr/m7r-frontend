@@ -15,10 +15,8 @@ export class Model {
     private static stepModel: StepModel = undefined;
 
     public static updateProgram(program: Program): void {
-
         // console.log("[Model]: initialize");
         // console.log("    " + JSON.stringify(program));
-
         Model.programModel = new ProgramModel(program);
         Model.infotextStatus = new InfotextStatus(program);
     }

@@ -36,8 +36,6 @@ export class ProgramContentFetch {
 
     private static updateModel(contentHtml: string) {
         Model.updateStepModel(contentHtml);
-        // StepModel.initialize(contentHtml);
-        // console.log("contentHtml: " + ProgramContentFetch._programContentHtml);
     }
 
 }

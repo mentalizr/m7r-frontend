@@ -5,19 +5,14 @@ const ID_STATUS_LABEL = "status_label";
 export class BreadcrumbController {
 
     public static updateView(): void {
-        let breadcrumbString = this.getBreadcrumbString();
-        document.getElementById(ID_STATUS_LABEL).textContent = breadcrumbString;
+        document.getElementById(ID_STATUS_LABEL).textContent
+            = this.getBreadcrumbString();
     }
 
     private static getBreadcrumbString(): string {
-
-        return Model.getInfotextStatus().isInfotextDisplayed() ? BreadcrumbController.getBreadcrumbStringForCurrentInfotext() : BreadcrumbController.getBreadcrumbStringForCurStep();
-
-        // if (Model.isInfotextShown()) {
-        //     return BreadcrumbController.getBreadcrumbStringForCurrentInfotext();
-        // }
-        // return BreadcrumbController.getBreadcrumbStringForCurStep();
-
+        return Model.getInfotextStatus().isInfotextDisplayed()
+            ? BreadcrumbController.getBreadcrumbStringForCurrentInfotext()
+            : BreadcrumbController.getBreadcrumbStringForCurStep();
     }
 
     public static getBreadcrumbStringForCurrentInfotext(): string {
@@ -25,11 +20,9 @@ export class BreadcrumbController {
     }
 
     private static getBreadcrumbStringForCurStep(): string {
-
         const stepId = Model.getProgramModel().getCurrentStepId();
         const modules = Model.getProgramModel().getProgram().modules;
         let breadcrumb = "";
-
         for (let i=0; i < modules.length; i++) {
             if (stepId.startsWith(modules[i].id)) {
                 breadcrumb = modules[i].name;
@@ -46,7 +39,6 @@ export class BreadcrumbController {
                 }
             }
         }
-
         return "";
     }
 

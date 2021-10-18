@@ -27,6 +27,7 @@ import {MediaElementCleaner} from "../../content/mainContent/MediaElementCleaner
 import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {Model} from "../model/Model";
 import {FormDataFetchPageScopePreviousPage} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScopePreviousPage";
+import {RefreshController} from "./RefreshController";
 
 export class PatientAppController extends AbstractAppController {
 
@@ -41,13 +42,11 @@ export class PatientAppController extends AbstractAppController {
                 SplashController.hide();
             })
 
-
         return Promise.resolve(undefined);
     }
 
     private static initAppPatient() {
 
-        // let htmlChunkUserFetch = HtmlChunkUserFetch.execute();
         let appConfigFetch = AppConfigPatientFetch.execute();
         let userFetch = UserFetch.execute();
         let therapistFetch = TherapistFetch.execute();
@@ -59,35 +58,28 @@ export class PatientAppController extends AbstractAppController {
         return Promise.all([appConfigFetch, userFetch, therapistFetch, stepContentPromise])
             .then(function () {
 
-                // console.log("Initialisierung des Modells abgeschlossen.");
-
                 PatientAppController.initView();
                 MenuController.initView();
                 TherapistController.initView();
                 UserController.updateView();
-
-                // MainContentController.updateView();
                 ButtonBarController.updateView();
                 BreadcrumbController.updateView();
+                RefreshController.updateView();
 
                 StartpageController.registerClick();
                 ScrollUpController.register();
                 TimeoutController.registerClick();
                 LogoutController.registerClickLogout();
                 ButtonBarControllerEvents.registerUserEvents();
-                // InfolinkController.registerClickEvent();
                 MenuController.registerUserEvents();
+                RefreshController.registerUserEvents();
 
                 SplashController.hide();
 
                 MainContentController.updateView();
                 InfolinkController.registerClickEvent();
 
-
-                // MCInitializer.initializeQuestions();
-                console.log("Calling MCInitializer.initializeQuestions() ...");
                 MCInitializer.initializeQuestions();
-
             });
 
     }
@@ -103,18 +95,36 @@ export class PatientAppController extends AbstractAppController {
                 ErrorHandler.handleError(error);
             })
             .then(function() {
-                console.log("Initialisierung ProgramContent abgeschossen.");
+                // console.log("Initialisierung ProgramContent abgeschossen.");
 
                 BackdropSpinnerController.hide();
 
-                // MenuController.initView();
                 MainContentController.updateView();
                 ButtonBarController.updateView();
                 BreadcrumbController.updateView();
+                RefreshController.updateView();
                 InfolinkController.registerClickEvent();
 
                 MCInitializer.initializeQuestions();
             })
+    }
+
+    public static refreshFeedbackPage(): Promise<unknown> {
+        BackdropSpinnerController.show();
+
+        return FormDataFetchPageScopePreviousPage.execute()
+            .then(RefreshController.interimProgramUpdate)
+            .then(() => {
+                BackdropSpinnerController.hide();
+
+                MainContentController.updateView();
+                ButtonBarController.updateView();
+                // MenuController.renderMenu();
+                // BreadcrumbController.updateView();
+                RefreshController.updateView();
+                // InfolinkController.registerClickEvent();
+                // MCInitializer.initializeQuestions();
+            });
     }
 
     private static initView(): void {
@@ -135,28 +145,26 @@ export class PatientAppController extends AbstractAppController {
             })
             .then(function() {
                 // Debug
-                console.log("getStepContentPromise.then ...");
+                // console.log("getStepContentPromise.then ...");
+                //
+                // console.log("isCurrentStepFeedback? " + Model.getProgramModel().isCurrentStepFeedback());
+                // console.log("hasAccessibleNextStep? " + Model.getProgramModel().hasAccessibleNextStep());
+                // if (Model.getProgramModel().isCurrentStepFeedback())
+                //     console.log("hasFeedback? " + Model.getStepModel().getFormDataModel().hasFeedback());
 
-                console.log("isCurrentStepFeedback? " + Model.getProgramModel().isCurrentStepFeedback());
-                console.log("hasAccessibleNextStep? " + Model.getProgramModel().hasAccessibleNextStep());
-                if (Model.getProgramModel().isCurrentStepFeedback())
-                    console.log("hasFeedback? " + Model.getStepModel().getFormDataModel().hasFeedback());
+                return RefreshController.interimProgramUpdate();
 
-                if (Model.getProgramModel().isCurrentStepFeedback()
-                && !Model.getProgramModel().hasAccessibleNextStep()
-                && Model.getStepModel().getFormDataModel().hasFeedback()) {
-                    console.log("getStepContentPromise.then ... perform programFetch");
-                    const stepId: string = Model.getProgramModel().getCurrentStepId();
-                    return ProgramFetch.execute().then(() => {
-                        Model.getProgramModel().initializeForStepId(stepId);
-                    });
-                }
+                // if (Model.getProgramModel().isCurrentStepFeedback()
+                // && !Model.getProgramModel().hasAccessibleNextStep()
+                // && Model.getStepModel().getFormDataModel().hasFeedback()) {
+                //     console.log("getStepContentPromise.then ... perform programFetch");
+                //     const stepId: string = Model.getProgramModel().getCurrentStepId();
+                //     return ProgramFetch.execute().then(() => {
+                //         Model.getProgramModel().initializeForStepId(stepId);
+                //     });
+                // }
 
-                console.log("getStepContentPromise.then finished.");
-
-                // const feedbackData: FeedbackData = FeedbackDataFetch.getFeedbackData();
-                // StepModel.setFeedbackData(feedbackData);
-                // StepModel.getFormDataModel().debugOut();
+                // console.log("getStepContentPromise.then finished.");
             });
     }
 
