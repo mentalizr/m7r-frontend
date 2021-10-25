@@ -22,7 +22,6 @@ export interface Feedback {
 export interface FormData {
     userId: string;
     contentId: string;
-    editable: boolean;
     exercise: Exercise;
     formElementDataList: FormElementDataList[];
     feedback: Feedback;

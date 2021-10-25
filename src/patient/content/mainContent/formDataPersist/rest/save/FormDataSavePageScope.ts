@@ -24,7 +24,6 @@ export class FormDataSavePageScope {
 
         let formData: FormData = FormDataSavePageScope.createFormDataEnvelope();
         formData = FormDataUpdater.refreshFormData(formData, inputElements);
-        formData.editable = false;
 
         return formData;
     }

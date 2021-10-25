@@ -9,7 +9,6 @@ describe("FormData", () => {
             = JSON.parse("{\n" +
             "  \"userId\": \"userId\",\n" +
             "  \"contentId\": \"contentId\",\n" +
-            "  \"editable\": true,\n" +
             "  \"formElementDataList\": [\n" +
             "    {\n" +
             "      \"formElementId\": \"elementId\",\n" +
@@ -21,7 +20,6 @@ describe("FormData", () => {
 
         assert.equal(formData.userId, "userId", "userId");
         assert.equal(formData.contentId, "contentId", "contentId")
-        assert.isTrue(formData.editable, "editable");
         assert.isNotOk(formData.exercise);
         assert.isOk(formData.formElementDataList);
         assert.equal(formData.formElementDataList.length, 1);
@@ -36,7 +34,6 @@ describe("FormData", () => {
             = JSON.parse("{\n" +
             "  \"userId\": \"userId\",\n" +
             "  \"contentId\": \"contentId\",\n" +
-            "  \"editable\": true,\n" +
             "  \"exercise\": {\n" +
             "    \"sent\": true,\n" +
             "    \"lastModifiedTimestamp\": \"lastModifiedTimestamp\",\n" +
@@ -64,7 +61,6 @@ describe("FormData", () => {
             = JSON.parse("{\n" +
             "  \"userId\": \"userId\",\n" +
             "  \"contentId\": \"contentId\",\n" +
-            "  \"editable\": true,\n" +
             "  \"exercise\": {\n" +
             "    \"sent\": true,\n" +
             "    \"lastModifiedTimestamp\": \"lastModifiedTimestamp\",\n" +
