@@ -24,11 +24,10 @@ export class FormDataSendPageScope {
     private static getFormData(): FormData {
         const inputElements: Set<AbstractInputElement> = FormDataSendPageScope.getPageScopeElements();
 
-        // TODO feedback rework: editable flag beachten!
-        // Hier muss ein in der DB persistiertes Flag übernommen werden.
         let formData: FormData = FormDataSendPageScope.createFormDataEnvelope();
         formData = FormDataUpdater.refreshFormData(formData, inputElements);
 
+        // TODO Exercise Subdocument beim Senden serverseitig erzeugen, dann exercise.sent property entfernen
         formData.exercise = <Exercise> {};
         formData.exercise.lastModifiedTimestamp = new Date(0).toISOString();
         formData.exercise.seenByTherapist = false;

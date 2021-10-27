@@ -44,7 +44,7 @@ export class AppStateTherapist {
     }
 
     public static getStateMessages(): AppStateTherapistMessages {
-        if (!this.isStateMessages()) Logger("Not int state messages!");
+        if (!this.isStateMessages()) Logger("Not in state messages!");
         return AppStateTherapist.stateMessages;
     }
 
