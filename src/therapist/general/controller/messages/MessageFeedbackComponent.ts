@@ -9,8 +9,8 @@ export class MessageFeedbackComponent extends AbstractMessageComponent {
     public readByReceiver: boolean;
 
     constructor(patientMessage: PatientMessage) {
-        super();
         const patientMessageFeedback: PatientMessageFeedback = patientMessage.patientMessageFeedback;
+        super (patientMessageFeedback.messageId);
         this.exerciseName = patientMessageFeedback.exerciseId;
         this.text = patientMessageFeedback.text;
         this.date = patientMessageFeedback.date;
@@ -19,6 +19,9 @@ export class MessageFeedbackComponent extends AbstractMessageComponent {
 
     getTemplateName(): string {
         return "message-feedback-template";
+    }
+
+    registerEvents() {
     }
 
 }

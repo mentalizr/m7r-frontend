@@ -7,14 +7,17 @@ export class MessagePlainReceivedComponent extends AbstractMessageComponent {
     public date: string;
 
     constructor(patientMessage: PatientMessage) {
-        super();
         const patientMessagePlain: PatientMessagePlain = patientMessage.patientMessagePlain;
+        super(patientMessagePlain.messageId);
         this.text = patientMessagePlain.text;
         this.date = patientMessagePlain.date;
     }
 
     getTemplateName(): string {
         return "message-plain-received-template";
+    }
+
+    registerEvents() {
     }
 
 }

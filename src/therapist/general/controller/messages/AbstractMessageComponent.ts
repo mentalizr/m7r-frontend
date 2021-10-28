@@ -4,6 +4,12 @@ const ID_MESSAGE_CONTENT = "message-content";
 
 export abstract class AbstractMessageComponent {
 
+    public messageId: string;
+
+    protected constructor(messageId: string) {
+        this.messageId = messageId;
+    }
+
     public abstract getTemplateName(): string;
 
     render() {
@@ -14,5 +20,6 @@ export abstract class AbstractMessageComponent {
         document.getElementById(ID_MESSAGE_CONTENT).innerHTML = currentContent + rendered;
     }
 
+    abstract registerEvents();
 
 }

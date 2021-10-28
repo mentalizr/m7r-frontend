@@ -8,8 +8,8 @@ export class MessagePlainSentComponent extends AbstractMessageComponent {
     public readByReceiver: boolean;
 
     constructor(patientMessage: PatientMessage) {
-        super();
         const patientMessagePlain: PatientMessagePlain = patientMessage.patientMessagePlain;
+        super(patientMessagePlain.messageId);
         this.text = patientMessagePlain.text;
         this.date = patientMessagePlain.date;
         this.readByReceiver = patientMessagePlain.readByReceiver;
@@ -17,6 +17,9 @@ export class MessagePlainSentComponent extends AbstractMessageComponent {
 
     getTemplateName(): string {
         return "message-plain-sent-template";
+    }
+
+    registerEvents() {
     }
 
 }

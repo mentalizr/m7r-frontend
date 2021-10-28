@@ -1,4 +1,6 @@
 export interface PatientMessageBase {
+    messageId: string;
+    timestamp: number;
     senderId: string;
     date: string;
     new: boolean;

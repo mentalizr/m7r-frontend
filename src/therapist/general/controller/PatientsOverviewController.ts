@@ -39,6 +39,8 @@ export class PatientsOverviewController {
         const userId = this.getAttribute("data-user-id");
         console.log("clicked ID: " + this.id);
         console.log("patientId: " + userId);
-        PatientMessagesController.initialize(userId).then(r => Logger("PatientMessagesController initialized."));
+        PatientMessagesController.initialize(userId).then(
+        //    r => Logger("PatientMessagesController initialized.")
+        );
     }
 }

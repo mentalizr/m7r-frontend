@@ -26,7 +26,7 @@ export class PatientMessagesController {
 
         return Promise.all([patientMessagesFetch])
             .then(function() {
-                Logger(JSON.stringify(PatientMessagesFetch.patientMessages));
+                // Logger(JSON.stringify(PatientMessagesFetch.patientMessages));
                 AppStateTherapist.setStateMessages(patientId);
                 PatientMessagesController.render();
                 NavbarTherapistController.showArrowBack();
@@ -42,6 +42,7 @@ export class PatientMessagesController {
             const messageComponent: AbstractMessageComponent
                 = MessageComponentFactory.createMessageComponent(patientMessage);
             messageComponent.render();
+            messageComponent.registerEvents();
         }
 
         window.scrollTo(0, document.body.scrollHeight);
