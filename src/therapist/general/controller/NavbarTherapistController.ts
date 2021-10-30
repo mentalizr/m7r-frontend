@@ -1,6 +1,7 @@
 import {PatientOverview} from "../entities/PatientsOverview";
 import {AppStateTherapist} from "../model/AppStateTherapist";
 import {TherapistAppController} from "../../TherapistAppController";
+import {SplashController} from "../../../general/controller/SplashController";
 
 const ID_NAVBAR_BACK = "navbar-back-arrow--link";
 const ID_NAVBAR_REFRESH = "navbar-refresh--link";
@@ -12,12 +13,14 @@ export class NavbarTherapistController {
 
     public static registerUserEvents() {
         document.getElementById(ID_NAVBAR_BACK).addEventListener("click", function () {
+            SplashController.show();
             TherapistAppController.refreshAppTherapist(true)
-                .then(r => console.log("Refresh overview after back button pressed."));
+                .then(r => SplashController.hide());
         })
         document.getElementById(ID_NAVBAR_REFRESH).addEventListener("click", function () {
+            SplashController.show();
             TherapistAppController.refreshAppTherapist(false)
-                .then(r => console.log("Refresh overview after refresh button pressed."));
+                .then(r => SplashController.hide());
         })
     }
 

@@ -1,8 +1,8 @@
 import {PatientMessages} from "../entities/PatientMessages";
-import {PatientMessagesFetch} from "../fetch/PatientMessagesFetch";
+import {PatientMessagesService} from "../rest/PatientMessagesService";
 import {Logger} from "../../../helper/Logger";
 import {PatientOverview, PatientsOverview, PatientsOverviewHelper} from "../entities/PatientsOverview";
-import {PatientsOverviewFetch} from "../fetch/PatientsOverviewFetch";
+import {PatientsOverviewService} from "../rest/PatientsOverviewService";
 
 const STATE_OVERVIEW: number = 0;
 const STATE_MESSAGES: number = 1;
@@ -28,14 +28,14 @@ export class AppStateTherapist {
     public static setStateOverview() {
         AppStateTherapist.state = STATE_OVERVIEW;
         AppStateTherapist.stateOverview = new AppStateTherapistOverview();
-        AppStateTherapist.stateOverview.patientsOverview = PatientsOverviewFetch.patientsOverview;
+        AppStateTherapist.stateOverview.patientsOverview = PatientsOverviewService.patientsOverview;
     }
 
     public static setStateMessages(userIdPatient: string) {
         AppStateTherapist.state = STATE_MESSAGES;
         AppStateTherapist.stateMessages = new AppStateTherapistMessages();
         AppStateTherapist.stateMessages.userIdPatient = userIdPatient;
-        AppStateTherapist.stateMessages.patientMessages = PatientMessagesFetch.patientMessages;
+        AppStateTherapist.stateMessages.patientMessages = PatientMessagesService.patientMessages;
     }
 
     public static getStateOverview(): AppStateTherapistOverview {
@@ -49,7 +49,7 @@ export class AppStateTherapist {
     }
 
     public static getPatientOverviewForUser(userIdPatient: string): PatientOverview {
-        return PatientsOverviewHelper.getPatientOverviewForUser(PatientsOverviewFetch.patientsOverview, userIdPatient);
+        return PatientsOverviewHelper.getPatientOverviewForUser(PatientsOverviewService.patientsOverview, userIdPatient);
     }
 
 }

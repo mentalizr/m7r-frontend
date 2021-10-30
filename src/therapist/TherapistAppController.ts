@@ -3,15 +3,14 @@ import {SplashController} from "../general/controller/SplashController";
 import {LogoutController} from "../general/logout/LogoutController";
 import {UserFetch} from "../patient/general/fetch/UserFetch";
 import {UserController} from "../patient/general/controller/UserController";
-import {AppConfigTherapistFetch} from "./general/fetch/AppConfigTherapistFetch";
+import {AppConfigTherapistServide} from "./general/rest/AppConfigTherapistServide";
 import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
-import {PatientsOverviewFetch} from "./general/fetch/PatientsOverviewFetch";
+import {PatientsOverviewService} from "./general/rest/PatientsOverviewService";
 import {PatientsOverviewController} from "./general/controller/PatientsOverviewController";
 import {AppStateTherapist} from "./general/model/AppStateTherapist";
 import {NavbarTherapistController} from "./general/controller/NavbarTherapistController";
-import {Logger} from "../helper/Logger";
 import {PatientMessagesController} from "./general/controller/PatientMessagesController";
 import {ScrollUpController} from "../general/controller/ScrollUpController";
 
@@ -36,42 +35,30 @@ export class TherapistAppController extends AbstractAppController {
 
     private static initAppTherapist() {
 
-        let appConfigFetch = AppConfigTherapistFetch.execute();
+        let appConfigFetch = AppConfigTherapistServide.execute();
         let userFetch = UserFetch.execute();
-        let patientsOverviewFetch = PatientsOverviewFetch.execute();
+        let patientsOverviewFetch = PatientsOverviewService.execute();
 
         return Promise.all([userFetch, appConfigFetch, patientsOverviewFetch])
             .then(function () {
                 TherapistAppController.globalInit();
-                // TherapistAppController.initView();
-                // MenuTherapistController.initView();
-                // UserController.updateView();
-                // LogoutController.registerClickLogout();
-                // MenuTherapistController.registerUserEvents();
-
                 TherapistAppController.contentInit();
-                // AppStateTherapist.initialize();
-                // PatientsOverviewController.initView();
-                // PatientsOverviewController.registerEvents();
             });
     }
 
-    public static refreshAppTherapist(backToOverview: boolean) {
+    public static refreshAppTherapist(backToOverview: boolean): Promise<unknown> {
         if (AppStateTherapist.isStateOverview() || backToOverview) {
-            let patientsOverviewFetch = PatientsOverviewFetch.execute();
-
-            SplashController.show();
+            let patientsOverviewFetch = PatientsOverviewService.execute();
 
             return Promise.all([patientsOverviewFetch])
                 .then(function () {
                     TherapistAppController.contentInit();
-                    SplashController.hide();
                 });
         } else if (AppStateTherapist.isStateMessages()) {
             const patientId = AppStateTherapist.getStateMessages().userIdPatient;
             return PatientMessagesController.initialize(patientId);
         } else {
-            Logger("Unknown state of therapist app.");
+            throw new Error("Unknown state of therapist app.");
         }
     }
 

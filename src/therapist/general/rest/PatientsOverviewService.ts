@@ -1,22 +1,21 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
-import {ModelTherapist} from "../model/ModelTherapist";
-import {PatientMessages} from "../entities/PatientMessages";
+import {PatientsOverview} from "../entities/PatientsOverview";
 
-const SERVICE_NAME = "therapist/patientMessages";
+const SERVICE_NAME = "therapist/patientsOverview";
 
-export class PatientMessagesFetch {
+export class PatientsOverviewService {
 
-    public static patientMessages: PatientMessages = undefined;
+    public static patientsOverview: PatientsOverview = undefined;
 
-    public static execute(patientId: string) {
+    public static execute() {
 
-        const service: string = SERVICE_BASE + "/" + SERVICE_NAME + "/" + patientId;
+        const service: string = SERVICE_BASE + "/" + SERVICE_NAME;
 
         return fetch(service, {credentials: "include"})
-            .then(PatientMessagesFetch.status)
-            .then(PatientMessagesFetch.json)
-            .then(PatientMessagesFetch.updateModel);
+            .then(PatientsOverviewService.status)
+            .then(PatientsOverviewService.json)
+            .then(PatientsOverviewService.updateModel);
     }
 
     private static status(response): Promise<unknown> {
@@ -28,7 +27,7 @@ export class PatientMessagesFetch {
     }
 
     private static updateModel(data) {
-        PatientMessagesFetch.patientMessages = data;
+        PatientsOverviewService.patientsOverview = data;
         // TODO debug
         // console.log("AppConfig: " + JSON.stringify(ModelTherapist.patientsOverview));
         // for (let patientOverview of ModelTherapist.patientsOverview.patientOverviews) {

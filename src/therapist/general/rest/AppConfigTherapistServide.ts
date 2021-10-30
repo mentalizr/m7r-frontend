@@ -4,16 +4,16 @@ import {ModelTherapist} from "../model/ModelTherapist";
 
 const SERVICE_NAME = "therapist/appConfig";
 
-export class AppConfigTherapistFetch {
+export class AppConfigTherapistServide {
 
     public static execute() {
 
         const service: string = SERVICE_BASE + "/" + SERVICE_NAME;
 
         return fetch(service, {credentials: "include"})
-            .then(AppConfigTherapistFetch.status)
-            .then(AppConfigTherapistFetch.json)
-            .then(AppConfigTherapistFetch.updateModel);
+            .then(AppConfigTherapistServide.status)
+            .then(AppConfigTherapistServide.json)
+            .then(AppConfigTherapistServide.updateModel);
     }
 
     private static status(response): Promise<unknown> {
