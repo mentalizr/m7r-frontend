@@ -6,9 +6,7 @@ export class FeedbackSnippetGenerator {
         let html: string = "";
         html += "<p class=\"h3 mt-4 mb-4\">Feedback von Ihrer Therapeutin oder Ihrem Therapeuten</p>\n" +
             "<div class=\"card border-secondary bg-white mb-4\">\n" +
-            "    <div class=\"card-body\">\n" +
-            feedbackText + "\n" +
-            "    </div>\n" +
+            "    <div class=\"card-body m7r-patient-feedback-text\">" + feedbackText + "</div>\n" +
             "</div>\n";
 
         if (!Model.getProgramModel().isBlockingMode())
