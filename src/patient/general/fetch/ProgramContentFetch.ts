@@ -2,8 +2,8 @@ import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
 import {RestResponse} from "../../../helper/RestResponse";
 
-const SERVICE_NAME_PROGRAM_CONTENT = "programContent";
-const SERVICE_NAME_INFO_CONTENT = "programInfoContent";
+const SERVICE_NAME_PROGRAM_CONTENT = "patient/programContent";
+// const SERVICE_NAME_INFO_CONTENT = "programInfoContent";
 
 export class ProgramContentFetch {
 
@@ -11,13 +11,16 @@ export class ProgramContentFetch {
 
     public static execute() {
 
-        if (Model.getInfotextStatus().isInfotextDisplayed()) {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/"
-                + Model.getInfotextStatus().getCurrentInfotextId();
-        } else {
-            ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
-                + Model.getProgramModel().getCurrentStepId();
-        }
+        ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
+            + Model.getProgramModel().getCurrentStepId();
+
+        // if (Model.getInfotextStatus().isInfotextDisplayed()) {
+        //     ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/"
+        //         + Model.getInfotextStatus().getCurrentInfotextId();
+        // } else {
+        //     ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
+        //         + Model.getProgramModel().getCurrentStepId();
+        // }
 
         return fetch(ProgramContentFetch._service, {credentials: "include"})
             .then(ProgramContentFetch.status)
@@ -26,8 +29,8 @@ export class ProgramContentFetch {
     }
 
     private static status(response) {
-        const serviceName: string = SERVICE_NAME_PROGRAM_CONTENT + " or " + SERVICE_NAME_INFO_CONTENT;
-        return RestResponse.check(serviceName, response);
+        // const serviceName: string = SERVICE_NAME_PROGRAM_CONTENT + " or " + SERVICE_NAME_INFO_CONTENT;
+        return RestResponse.check(SERVICE_NAME_PROGRAM_CONTENT, response);
     }
 
     private static asText(response) {

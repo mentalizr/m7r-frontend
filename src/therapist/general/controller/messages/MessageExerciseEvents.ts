@@ -2,11 +2,18 @@ import {FeedbackSubmission} from "../../entities/FeedbackSubmission";
 import {SplashController} from "../../../../general/controller/SplashController";
 import {SubmitFeedbackService} from "../../rest/SubmitFeedbackService";
 import {TherapistAppController} from "../../../TherapistAppController";
+import {PatientExerciseController} from "../PatientExerciseController";
 
 export class MessageExerciseEvents {
 
     public static showExerciseEvent(patientId: string, exerciseId: string): void {
         console.log("Show exercise [" + exerciseId + "] for patient [" + patientId + "]");
+
+        SplashController.show();
+        PatientExerciseController.initialize(patientId, exerciseId)
+            .then(() => {
+                SplashController.hide();
+        });
     }
 
     public static sendFeedback(patientId: string, exerciseId: string, feedbackTextareaId: string): Promise<unknown> {
