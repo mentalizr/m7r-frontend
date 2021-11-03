@@ -8,10 +8,10 @@ import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
 import {PatientsOverviewService} from "./general/rest/PatientsOverviewService";
-import {PatientsOverviewController} from "./general/controller/PatientsOverviewController";
+import {PatientsOverviewController} from "./general/controller/pages/PatientsOverviewController";
 import {AppStateTherapist} from "./general/model/AppStateTherapist";
 import {NavbarTherapistController} from "./general/controller/NavbarTherapistController";
-import {PatientMessagesController} from "./general/controller/PatientMessagesController";
+import {PatientMessagesController} from "./general/controller/pages/PatientMessagesController";
 import {ScrollUpController} from "../general/controller/ScrollUpController";
 
 const ID_MAIN_CONTENT = "main-content";
@@ -46,10 +46,9 @@ export class TherapistAppController extends AbstractAppController {
             });
     }
 
-    public static refreshAppTherapist(backToOverview: boolean): Promise<unknown> {
-        if (AppStateTherapist.isStateOverview() || backToOverview) {
+    public static refreshAppTherapist(): Promise<unknown> {
+        if (AppStateTherapist.isStateOverview()) {
             let patientsOverviewFetch = PatientsOverviewService.execute();
-
             return Promise.all([patientsOverviewFetch])
                 .then(function () {
                     TherapistAppController.contentInit();
@@ -57,6 +56,25 @@ export class TherapistAppController extends AbstractAppController {
         } else if (AppStateTherapist.isStateMessages()) {
             const patientId = AppStateTherapist.getStateMessages().userIdPatient;
             return PatientMessagesController.initialize(patientId);
+        } else if (AppStateTherapist.isStateViewExercise()) {
+            throw new Error("No refresh button in state VIEW_EXERCISE.");
+        } else {
+            throw new Error("Unknown state of therapist app.");
+        }
+    }
+
+    public static goBack(): Promise<unknown> {
+        if (AppStateTherapist.isStateMessages()) {
+            let patientsOverviewFetch = PatientsOverviewService.execute();
+            return Promise.all([patientsOverviewFetch])
+                .then(function () {
+                    TherapistAppController.contentInit();
+                });
+        } else if (AppStateTherapist.isStateViewExercise()) {
+            const patientId = AppStateTherapist.getStateViewExercise().userIdPatient;
+            return PatientMessagesController.initialize(patientId);
+        } else if (AppStateTherapist.isStateOverview()) {
+            throw new Error("No back button in state OVERVIEW.");
         } else {
             throw new Error("Unknown state of therapist app.");
         }

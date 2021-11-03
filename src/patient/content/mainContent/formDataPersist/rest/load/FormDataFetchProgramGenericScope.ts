@@ -5,7 +5,7 @@ import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 import {Model} from "../../../../../general/model/Model";
 
-const SERVICE_NAME = "formData";
+const SERVICE_NAME = "patient/formData";
 
 export class FormDataFetchProgramGenericScope {
 

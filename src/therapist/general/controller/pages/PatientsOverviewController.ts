@@ -1,10 +1,10 @@
 import * as Mustache from "mustache";
 import {PatientMessagesController} from "./PatientMessagesController";
-import {TherapistAppController} from "../../TherapistAppController";
-import {NavbarTherapistController} from "./NavbarTherapistController";
-import {PatientsOverview} from "../entities/PatientsOverview";
-import {AppStateTherapist} from "../model/AppStateTherapist";
-import {SplashController} from "../../../general/controller/SplashController";
+import {TherapistAppController} from "../../../TherapistAppController";
+import {NavbarTherapistController} from "../NavbarTherapistController";
+import {PatientsOverview} from "../../entities/PatientsOverview";
+import {AppStateTherapist} from "../../model/AppStateTherapist";
+import {SplashController} from "../../../../general/controller/SplashController";
 
 const ID_PATIENT_OVERVIEW_TEMPLATE = "patient-overview-template";
 const ID_MAIN_CONTENT = "main-content";
@@ -14,6 +14,7 @@ export class PatientsOverviewController {
     public static initView() {
         TherapistAppController.cleanView();
         PatientsOverviewController.render();
+        NavbarTherapistController.showRefreshButton();
         NavbarTherapistController.hideArrowBack();
         NavbarTherapistController.hidePatient();
     }

@@ -2,7 +2,7 @@ import {FeedbackSubmission} from "../../entities/FeedbackSubmission";
 import {SplashController} from "../../../../general/controller/SplashController";
 import {SubmitFeedbackService} from "../../rest/SubmitFeedbackService";
 import {TherapistAppController} from "../../../TherapistAppController";
-import {PatientExerciseController} from "../PatientExerciseController";
+import {PatientExerciseController} from "../pages/PatientExerciseController";
 
 export class MessageExerciseEvents {
 
@@ -30,7 +30,7 @@ export class MessageExerciseEvents {
 
         return SubmitFeedbackService.execute(feedbackSubmission)
             .then(function () {
-                TherapistAppController.refreshAppTherapist(false)
+                TherapistAppController.refreshAppTherapist()
                     .then(function () {
                         SplashController.hide();
                     });

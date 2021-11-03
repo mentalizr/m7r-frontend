@@ -27,24 +27,28 @@ export class MessageExerciseComponent extends AbstractMessageComponent {
     }
 
     registerEvents() {
+        console.log("register events for MessageExercise, exerciseId: [" + this.exerciseId + "].");
+        this.registerShowExerciseEvent();
+        if (!this.hasFeedback) this.registerSendFeedbackEvent();
+    }
+
+    private registerShowExerciseEvent(): void {
         const idShowExercise: string = "button-show-exercise-" + this.messageId;
         const patientId: string = this.patientId;
         const exerciseId: string = this.exerciseId;
         document.getElementById(idShowExercise).addEventListener("click", function() {
             MessageExerciseEvents.showExerciseEvent(patientId, exerciseId);
         });
+    }
 
-        if (this.hasFeedback) return;
-
+    private registerSendFeedbackEvent(): void {
         const idButtonSendFeedback: string = "button-send-feedback-" + this.messageId;
+        const patientId: string = this.patientId;
+        const exerciseId: string = this.exerciseId;
         const idTextareaFeedback: string = "textarea-feedback-" + this.messageId;
         document.getElementById(idButtonSendFeedback).addEventListener("click", function () {
             MessageExerciseEvents.sendFeedback(patientId, exerciseId, idTextareaFeedback);
         });
     }
-
-
-
-
 
 }

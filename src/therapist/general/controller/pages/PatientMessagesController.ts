@@ -1,9 +1,9 @@
-import {PatientMessagesService} from "../rest/PatientMessagesService";
-import {AbstractMessageComponent} from "./messages/AbstractMessageComponent";
-import {MessageComponentFactory} from "./messages/MessageComponentFactory";
-import {AppStateTherapist} from "../model/AppStateTherapist";
-import {TherapistAppController} from "../../TherapistAppController";
-import {NavbarTherapistController} from "./NavbarTherapistController";
+import {PatientMessagesService} from "../../rest/PatientMessagesService";
+import {AbstractMessageComponent} from "../messages/AbstractMessageComponent";
+import {MessageComponentFactory} from "../messages/MessageComponentFactory";
+import {AppStateTherapist} from "../../model/AppStateTherapist";
+import {TherapistAppController} from "../../../TherapistAppController";
+import {NavbarTherapistController} from "../NavbarTherapistController";
 
 export class PatientMessagesController {
 
@@ -15,7 +15,9 @@ export class PatientMessagesController {
                 // Logger(JSON.stringify(PatientMessagesFetch.patientMessages));
                 AppStateTherapist.setStateMessages(patientId);
                 PatientMessagesController.render();
+                PatientMessagesController.registerEvents();
                 NavbarTherapistController.showArrowBack();
+                NavbarTherapistController.showRefreshButton();
                 NavbarTherapistController.showPatient(patientId);
             });
     }
@@ -28,10 +30,18 @@ export class PatientMessagesController {
             const messageComponent: AbstractMessageComponent
                 = MessageComponentFactory.createMessageComponent(patientMessage);
             messageComponent.render();
-            messageComponent.registerEvents();
         }
 
         window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    private static registerEvents(): void {
+        let patientMessages = AppStateTherapist.getStateMessages().patientMessages;
+        for (let patientMessage of patientMessages.patientMessages) {
+            const messageComponent: AbstractMessageComponent
+                = MessageComponentFactory.createMessageComponent(patientMessage);
+            messageComponent.registerEvents();
+        }
     }
 
 }

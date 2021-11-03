@@ -28,9 +28,6 @@ export class FormDataUpdater {
             const id: string = formDataList.formElementId;
             const value: string = formDataList.formElementValue;
 
-            // let abstractInputElement: AbstractInputElement = inputElementsRegistry.getElementById(id);
-            // abstractInputElement.setValue(value);
-
             if (!inputElementsRegistry.hasElement(id)) continue;
 
             let abstractInputElements: Set<AbstractInputElement> = inputElementsRegistry.getAbstractInputElements(id);

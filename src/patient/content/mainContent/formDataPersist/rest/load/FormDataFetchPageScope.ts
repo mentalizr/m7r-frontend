@@ -5,7 +5,7 @@ import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
 
-const SERVICE_NAME = "formData";
+const SERVICE_NAME = "patient/formData";
 
 export class FormDataFetchPageScope {
 
