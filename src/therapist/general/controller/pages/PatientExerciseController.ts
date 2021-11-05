@@ -8,6 +8,7 @@ import {FormData} from "../../../../patient/content/mainContent/model/formData/F
 import {Model} from "../../../../patient/general/model/Model";
 import {AbstractInputElement} from "../../../../patient/content/mainContent/model/InputElementsRegistry/AbstractInputElement";
 import {FormDataService} from "../../rest/FormDataService";
+import {CSS_CLASS_NS_INPUT} from "../../../../Globals";
 
 const ID_MAIN_CONTENT = "main-content";
 
@@ -25,20 +26,11 @@ export class PatientExerciseController {
             AppStateTherapist.setStateExercise(patientId, contentId);
             PatientExerciseController.render(contentId);
             PatientExerciseController.fillInFormData(FormDataService.formData);
+            PatientExerciseController.disableForm();
             NavbarTherapistController.showArrowBack();
             NavbarTherapistController.hideRefreshButton();
             NavbarTherapistController.showPatient(patientId);
         });
-
-        // return programContentService.then(function () {
-        //     PatientExerciseController.inputElementsRegistry
-        //         = InputElementsRegistryFactory.getInstance(ProgramContentService.contentHtml);
-        //     AppStateTherapist.setStateExercise(patientId, contentId);
-        //     PatientExerciseController.render(contentId);
-        //     NavbarTherapistController.showArrowBack();
-        //     NavbarTherapistController.hideRefreshButton();
-        //     NavbarTherapistController.showPatient(patientId);
-        // });
     }
 
     private static render(contentId: string) {
@@ -49,9 +41,7 @@ export class PatientExerciseController {
     }
 
     private static fillInFormData(formData: FormData): void {
-
         for (let formDataList of formData.formElementDataList) {
-
             const id: string = formDataList.formElementId;
             const value: string = formDataList.formElementValue;
 
@@ -63,8 +53,15 @@ export class PatientExerciseController {
                 abstractInputElement.setValue(value);
             }
         }
-
     }
 
+    private static disableForm(): void {
+        document.querySelectorAll("#" + ID_MAIN_CONTENT + " input").forEach(function (element) {
+            element.setAttribute("disabled", "disabled");
+        });
+        document.querySelectorAll("." + CSS_CLASS_NS_INPUT).forEach(function (element) {
+            element.setAttribute("disabled", "disabled");
+        });
+    }
 
 }
