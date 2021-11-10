@@ -3,7 +3,6 @@ import {Model} from "../model/Model";
 import {RestResponse} from "../../../helper/RestResponse";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "patient/programContent";
-// const SERVICE_NAME_INFO_CONTENT = "programInfoContent";
 
 export class ProgramContentFetch {
 
@@ -11,16 +10,9 @@ export class ProgramContentFetch {
 
     public static execute() {
 
-        ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
-            + Model.getProgramModel().getCurrentStepId();
+        const contentId: string = this.obtainContentId();
 
-        // if (Model.getInfotextStatus().isInfotextDisplayed()) {
-        //     ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_INFO_CONTENT + "/"
-        //         + Model.getInfotextStatus().getCurrentInfotextId();
-        // } else {
-        //     ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/"
-        //         + Model.getProgramModel().getCurrentStepId();
-        // }
+        ProgramContentFetch._service = SERVICE_BASE + "/" + SERVICE_NAME_PROGRAM_CONTENT + "/" + contentId;
 
         return fetch(ProgramContentFetch._service, {credentials: "include"})
             .then(ProgramContentFetch.status)
@@ -28,8 +20,15 @@ export class ProgramContentFetch {
             .then(ProgramContentFetch.updateModel);
     }
 
+    private static obtainContentId(): string {
+        if (Model.getInfotextStatus().isInfotextDisplayed()) {
+            return Model.getInfotextStatus().getCurrentInfotextId();
+        } else {
+            return Model.getProgramModel().getCurrentStepId();
+        }
+    }
+
     private static status(response) {
-        // const serviceName: string = SERVICE_NAME_PROGRAM_CONTENT + " or " + SERVICE_NAME_INFO_CONTENT;
         return RestResponse.check(SERVICE_NAME_PROGRAM_CONTENT, response);
     }
 
