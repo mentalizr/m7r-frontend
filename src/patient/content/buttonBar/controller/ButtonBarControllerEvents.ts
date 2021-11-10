@@ -93,8 +93,12 @@ export class ButtonBarControllerEvents {
         const stepId: string = Model.getProgramModel().getCurrentStepId();
         FormDataSendPageScope.execute()
             .then(function() {
-                ProgramFetch.execute().then(function () {
-                    Model.getProgramModel().gotoStep(stepId);
+                return ProgramFetch.execute().then(function () {
+                    return new Promise<void>((resolve, reject) => {
+                        Model.getProgramModel().gotoStep(stepId);
+                        resolve();
+                    })
+
                 });
             })
             .then(function() {
