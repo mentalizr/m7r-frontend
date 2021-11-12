@@ -21,6 +21,12 @@ export class Model {
         Model.infotextStatus = new InfotextStatus(program);
     }
 
+    public static updateProgramWithContentId(program: Program, contentId: string): void {
+        Model.programModel = new ProgramModel(program);
+        Model.programModel.initializeForStepId(contentId);
+        Model.infotextStatus = new InfotextStatus(program);
+    }
+
     public static getProgramModel(): ProgramModel {
         if (Model.programModel == undefined) throw new Error("Illegal state. Program model not initialized yet.");
         return Model.programModel;

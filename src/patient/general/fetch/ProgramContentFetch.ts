@@ -1,6 +1,7 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
 import {RestResponse} from "../../../helper/RestResponse";
+import {PatientStatusFetch} from "./PatientStatusFetch";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "patient/programContent";
 

@@ -3,6 +3,7 @@ import {SERVICE_BASE} from "../../../Globals";
 import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
 import {Program} from "../entities/Program";
+import {PatientStatusFetch} from "./PatientStatusFetch";
 
 const SERVICE_NAME = "patient/program";
 
@@ -27,8 +28,13 @@ export class ProgramFetch {
     }
 
     private static updateModel(program: Program) {
-        Model.updateProgram(program);
-        // console.log("ProgramFetch. Model updated.");
+        if (PatientStatusFetch.hasLastContentId()) {
+            const lastContentId: string = PatientStatusFetch.getLastContentId();
+            Model.updateProgramWithContentId(program, lastContentId);
+        } else {
+            Model.updateProgram(program);
+            // console.log("ProgramFetch. Model updated.");
+        }
     }
 
 }

@@ -28,6 +28,7 @@ import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
 import {Model} from "../model/Model";
 import {FormDataFetchPageScopePreviousPage} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScopePreviousPage";
 import {RefreshController} from "./RefreshController";
+import {PatientStatusFetch} from "../fetch/PatientStatusFetch";
 
 export class PatientAppController extends AbstractAppController {
 
@@ -50,37 +51,72 @@ export class PatientAppController extends AbstractAppController {
         let appConfigFetch = AppConfigPatientFetch.execute();
         let userFetch = UserFetch.execute();
         let therapistFetch = TherapistFetch.execute();
-        let stepContentPromise = ProgramFetch.execute()
-            .then(function() {
-                return PatientAppController.getStepContentPromise();
-            })
+        let patientStatus = PatientStatusFetch.execute();
 
-        return Promise.all([appConfigFetch, userFetch, therapistFetch, stepContentPromise])
+        // let stepContentPromise = ProgramFetch.execute()
+        //     .then(function() {
+        //         return PatientAppController.getStepContentPromise();
+        //     })
+
+        return Promise.all([appConfigFetch, userFetch, therapistFetch, patientStatus])
             .then(function () {
+                return ProgramFetch.execute()
+                    .then(function () {
+                        return PatientAppController.getStepContentPromise();
+                    })
+                    .then(function () {
+                        PatientAppController.initView();
+                        MenuController.initView();
+                        TherapistController.initView();
+                        UserController.updateView();
+                        ButtonBarController.updateView();
+                        BreadcrumbController.updateView();
+                        RefreshController.updateView();
 
-                PatientAppController.initView();
-                MenuController.initView();
-                TherapistController.initView();
-                UserController.updateView();
-                ButtonBarController.updateView();
-                BreadcrumbController.updateView();
-                RefreshController.updateView();
+                        StartpageController.registerClick();
+                        ScrollUpController.register();
+                        TimeoutController.registerClick();
+                        LogoutController.registerClickLogout();
+                        ButtonBarControllerEvents.registerUserEvents();
+                        MenuController.registerUserEvents();
+                        RefreshController.registerUserEvents();
 
-                StartpageController.registerClick();
-                ScrollUpController.register();
-                TimeoutController.registerClick();
-                LogoutController.registerClickLogout();
-                ButtonBarControllerEvents.registerUserEvents();
-                MenuController.registerUserEvents();
-                RefreshController.registerUserEvents();
+                        SplashController.hide();
 
-                SplashController.hide();
+                        MainContentController.updateView();
+                        InfolinkController.registerClickEvent();
 
-                MainContentController.updateView();
-                InfolinkController.registerClickEvent();
-
-                MCInitializer.initializeQuestions();
+                        MCInitializer.initializeQuestions();
+                    });
             });
+
+
+        // return Promise.all([appConfigFetch, userFetch, therapistFetch, stepContentPromise])
+        //     .then(function () {
+        //
+        //         PatientAppController.initView();
+        //         MenuController.initView();
+        //         TherapistController.initView();
+        //         UserController.updateView();
+        //         ButtonBarController.updateView();
+        //         BreadcrumbController.updateView();
+        //         RefreshController.updateView();
+        //
+        //         StartpageController.registerClick();
+        //         ScrollUpController.register();
+        //         TimeoutController.registerClick();
+        //         LogoutController.registerClickLogout();
+        //         ButtonBarControllerEvents.registerUserEvents();
+        //         MenuController.registerUserEvents();
+        //         RefreshController.registerUserEvents();
+        //
+        //         SplashController.hide();
+        //
+        //         MainContentController.updateView();
+        //         InfolinkController.registerClickEvent();
+        //
+        //         MCInitializer.initializeQuestions();
+        //     });
 
     }
 
