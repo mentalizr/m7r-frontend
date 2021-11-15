@@ -2,6 +2,7 @@ import {GeneralAlertController} from "../../content/generalAlert/GeneralAlertCon
 import {TimeoutController} from "./TimeoutController";
 import {Logger} from "../../../helper/Logger";
 import {FetchResponseError} from "../../content/mainContent/formDataPersist/rest/FetchResponseError";
+import {ErrorController} from "./ErrorController";
 
 export class ErrorHandler {
 
@@ -16,8 +17,8 @@ export class ErrorHandler {
                 GeneralAlertController.showWithText("Es ist ein Fehler aufgetreten. Bitte prüfen Sie die Internetverbindung und versuchen Sie es erneut.");
             }
         } else {
-            Logger("[AppController.initApp] Error: " + error.message);
-            console.trace();
+            ErrorController.showErrorModal();
+            // GeneralAlertController.showWithText("Es ist ein Fehler aufgetreten. Bitte prüfen Sie die Internetverbindung und versuchen Sie es erneut.");
         }
     }
 

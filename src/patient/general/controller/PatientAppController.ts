@@ -29,6 +29,7 @@ import {Model} from "../model/Model";
 import {FormDataFetchPageScopePreviousPage} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScopePreviousPage";
 import {RefreshController} from "./RefreshController";
 import {PatientStatusFetch} from "../fetch/PatientStatusFetch";
+import {ErrorController} from "./ErrorController";
 
 export class PatientAppController extends AbstractAppController {
 
@@ -38,25 +39,21 @@ export class PatientAppController extends AbstractAppController {
 
         SplashController.show();
 
-        PatientAppController.initAppPatient()
+        return PatientAppController.initAppPatient()
             .then(() => {
                 SplashController.hide();
             })
 
-        return Promise.resolve(undefined);
+        // return Promise.resolve(undefined);
     }
 
     private static initAppPatient() {
+        ErrorController.registerClick();
 
         let appConfigFetch = AppConfigPatientFetch.execute();
         let userFetch = UserFetch.execute();
         let therapistFetch = TherapistFetch.execute();
         let patientStatus = PatientStatusFetch.execute();
-
-        // let stepContentPromise = ProgramFetch.execute()
-        //     .then(function() {
-        //         return PatientAppController.getStepContentPromise();
-        //     })
 
         return Promise.all([appConfigFetch, userFetch, therapistFetch, patientStatus])
             .then(function () {
@@ -88,36 +85,11 @@ export class PatientAppController extends AbstractAppController {
 
                         MCInitializer.initializeQuestions();
                     });
+            })
+            .catch(function(error) {
+                BackdropSpinnerController.hide();
+                ErrorHandler.handleError(error);
             });
-
-
-        // return Promise.all([appConfigFetch, userFetch, therapistFetch, stepContentPromise])
-        //     .then(function () {
-        //
-        //         PatientAppController.initView();
-        //         MenuController.initView();
-        //         TherapistController.initView();
-        //         UserController.updateView();
-        //         ButtonBarController.updateView();
-        //         BreadcrumbController.updateView();
-        //         RefreshController.updateView();
-        //
-        //         StartpageController.registerClick();
-        //         ScrollUpController.register();
-        //         TimeoutController.registerClick();
-        //         LogoutController.registerClickLogout();
-        //         ButtonBarControllerEvents.registerUserEvents();
-        //         MenuController.registerUserEvents();
-        //         RefreshController.registerUserEvents();
-        //
-        //         SplashController.hide();
-        //
-        //         MainContentController.updateView();
-        //         InfolinkController.registerClickEvent();
-        //
-        //         MCInitializer.initializeQuestions();
-        //     });
-
     }
 
     public static stepUpdate(): void {
@@ -127,12 +99,7 @@ export class PatientAppController extends AbstractAppController {
         MediaElementCleaner.clean();
 
         PatientAppController.getStepContentPromise()
-            .catch(function(error) {
-                ErrorHandler.handleError(error);
-            })
             .then(function() {
-                // console.log("Initialisierung ProgramContent abgeschossen.");
-
                 BackdropSpinnerController.hide();
 
                 MainContentController.updateView();
@@ -143,6 +110,11 @@ export class PatientAppController extends AbstractAppController {
 
                 MCInitializer.initializeQuestions();
             })
+            .catch(function(error) {
+                BackdropSpinnerController.hide();
+                ErrorHandler.handleError(error);
+            })
+
     }
 
     public static refreshFeedbackPage(): Promise<unknown> {
@@ -155,11 +127,11 @@ export class PatientAppController extends AbstractAppController {
 
                 MainContentController.updateView();
                 ButtonBarController.updateView();
-                // MenuController.renderMenu();
-                // BreadcrumbController.updateView();
                 RefreshController.updateView();
-                // InfolinkController.registerClickEvent();
-                // MCInitializer.initializeQuestions();
+            })
+            .catch(function(error) {
+                BackdropSpinnerController.hide();
+                ErrorHandler.handleError(error);
             });
     }
 
@@ -180,27 +152,7 @@ export class PatientAppController extends AbstractAppController {
                         FormDataFetchPageScopePreviousPage.execute()]);
             })
             .then(function() {
-                // Debug
-                // console.log("getStepContentPromise.then ...");
-                //
-                // console.log("isCurrentStepFeedback? " + Model.getProgramModel().isCurrentStepFeedback());
-                // console.log("hasAccessibleNextStep? " + Model.getProgramModel().hasAccessibleNextStep());
-                // if (Model.getProgramModel().isCurrentStepFeedback())
-                //     console.log("hasFeedback? " + Model.getStepModel().getFormDataModel().hasFeedback());
-
                 return RefreshController.interimProgramUpdate();
-
-                // if (Model.getProgramModel().isCurrentStepFeedback()
-                // && !Model.getProgramModel().hasAccessibleNextStep()
-                // && Model.getStepModel().getFormDataModel().hasFeedback()) {
-                //     console.log("getStepContentPromise.then ... perform programFetch");
-                //     const stepId: string = Model.getProgramModel().getCurrentStepId();
-                //     return ProgramFetch.execute().then(() => {
-                //         Model.getProgramModel().initializeForStepId(stepId);
-                //     });
-                // }
-
-                // console.log("getStepContentPromise.then finished.");
             });
     }
 

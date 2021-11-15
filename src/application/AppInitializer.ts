@@ -8,6 +8,7 @@ import {Logger} from "../helper/Logger";
 import {EntrypointOption} from "../routing/EntryPointOptions/EntrypointOption";
 import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
 import {TherapistAppController} from "../therapist/TherapistAppController";
+import {ErrorHandler} from "../patient/general/controller/ErrorHandler";
 
 const USER_ROLE_PATIENT = "PATIENT";
 const USER_ROLE_THERAPIST = "THERAPIST";
@@ -23,7 +24,12 @@ export class AppInitializer {
         AppInitializer.execute()
             .then(function () {
                 // console.log("Application is initialized!");
-            });
+            })
+            // .catch(function(error) {
+            //     // TODO debug
+            //     console.log("Error catched: " + error);
+            //     ErrorHandler.handleError(error);
+            // });
 
     }
 

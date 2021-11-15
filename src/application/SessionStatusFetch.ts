@@ -1,6 +1,5 @@
 import {SERVICE_BASE} from "../Globals";
 import {RestResponse} from "../helper/RestResponse";
-import {AppModel} from "./AppModel";
 import {SessionStatus} from "../patient/general/entities/SessionStatus";
 
 const SERVICE_NAME = "sessionStatus";
