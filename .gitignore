@@ -7,6 +7,8 @@ gradlew.bat
 dist/
 js-out/*
 node_modules/*
+.nyc_output/
+coverage/
 
 
 
