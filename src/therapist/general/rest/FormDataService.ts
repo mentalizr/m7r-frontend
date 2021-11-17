@@ -1,6 +1,7 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {FormData} from "../../../patient/content/mainContent/model/formData/FormData";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "therapist/formData";
 
@@ -16,7 +17,8 @@ export class FormDataService {
         return fetch(FormDataService.service, {credentials: "include"})
             .then(FormDataService.status)
             .then(FormDataService.json)
-            .then(FormDataService.updateModel);
+            .then(FormDataService.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response) {

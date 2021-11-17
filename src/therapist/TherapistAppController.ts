@@ -1,9 +1,8 @@
 import {AbstractAppController} from "../application/AbstractAppController";
 import {SplashController} from "../general/controller/SplashController";
-import {LogoutController} from "../general/logout/LogoutController";
 import {UserFetch} from "../patient/general/fetch/UserFetch";
 import {UserController} from "../patient/general/controller/UserController";
-import {AppConfigTherapistServide} from "./general/rest/AppConfigTherapistServide";
+import {AppConfigTherapistService} from "./general/rest/AppConfigTherapistService";
 import {ModelTherapist} from "./general/model/ModelTherapist";
 import {AppConfigTherapist} from "./general/entities/AppConfigTherapist";
 import {MenuTherapistController} from "./general/controller/MenuTherapistController";
@@ -13,6 +12,9 @@ import {AppStateTherapist} from "./general/model/AppStateTherapist";
 import {NavbarTherapistController} from "./general/controller/NavbarTherapistController";
 import {PatientMessagesController} from "./general/controller/pages/PatientMessagesController";
 import {ScrollUpController} from "../general/controller/ScrollUpController";
+import {ModalLogout} from "../general/logout/ModalLogout";
+import {ModalTimeout} from "../general/timeout/ModalTimeout";
+import {ModalError} from "../general/error/ModalError";
 
 const ID_MAIN_CONTENT = "main-content";
 const ID_MESSAGE_CONTENT = "message-content";
@@ -22,8 +24,13 @@ export class TherapistAppController extends AbstractAppController {
     initialize(htmlChunk: string): Promise<any> {
 
         this.mountHtmlChunk(htmlChunk);
-
         SplashController.show();
+        ModalLogout.create();
+        ModalLogout.registerConfirmedButton();
+        ModalTimeout.create();
+        ModalTimeout.registerConfirmedButton();
+        ModalError.create();
+        ModalError.registerConfirmedButton();
 
         TherapistAppController.initAppTherapist()
             .then(() => {
@@ -35,7 +42,7 @@ export class TherapistAppController extends AbstractAppController {
 
     private static initAppTherapist() {
 
-        let appConfigFetch = AppConfigTherapistServide.execute();
+        let appConfigFetch = AppConfigTherapistService.execute();
         let userFetch = UserFetch.execute();
         let patientsOverviewFetch = PatientsOverviewService.execute();
 
@@ -84,7 +91,7 @@ export class TherapistAppController extends AbstractAppController {
         TherapistAppController.initView();
         MenuTherapistController.initView();
         UserController.updateView();
-        LogoutController.registerClickLogout();
+        // LogoutController.registerClickLogout();
         MenuTherapistController.registerUserEvents();
         ScrollUpController.register();
         NavbarTherapistController.registerUserEvents();

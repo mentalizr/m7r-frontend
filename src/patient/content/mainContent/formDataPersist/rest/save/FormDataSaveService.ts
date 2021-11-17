@@ -1,7 +1,7 @@
 import {FormData} from "../../../model/formData/FormData";
 import {SERVICE_BASE} from "../../../../../../Globals";
-import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {RestResponse} from "../../../../../../helper/RestResponse";
+import {ErrorHandler} from "../../../../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/formData/save";
 
@@ -23,7 +23,8 @@ export class FormDataSaveService {
                 body: formDataJSON
             },
         )
-            .then(FormDataSaveService.checkStatus);
+            .then(FormDataSaveService.checkStatus)
+            .catch(ErrorHandler.handleError);
     }
 
     private static checkStatus(response): Promise<unknown> {

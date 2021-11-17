@@ -4,6 +4,7 @@ import {FormData} from "../../../model/formData/FormData";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
+import {ErrorHandler} from "../../../../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/formData";
 
@@ -59,6 +60,7 @@ export class FormDataFetchProgramNamedScope {
                 fetch(serviceUrl, {credentials: "include"})
                     .then(FormDataFetchProgramNamedScope.status)
                     .then(FormDataFetchProgramNamedScope.json)
+                    .catch(ErrorHandler.handleError)
             );
         }
         return fetchPromises;

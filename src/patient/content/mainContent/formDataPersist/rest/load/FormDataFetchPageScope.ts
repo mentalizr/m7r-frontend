@@ -4,6 +4,7 @@ import {FormData} from "../../../model/formData/FormData";
 import {FormDataFetchHelper} from "../FormDataFetchHelper";
 import {ContentId} from "../ContentId";
 import {RestResponse} from "../../../../../../helper/RestResponse";
+import {ErrorHandler} from "../../../../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/formData";
 
@@ -20,7 +21,8 @@ export class FormDataFetchPageScope {
         return fetch(serviceUrl, {credentials: "include"})
             .then(FormDataFetchPageScope.checkResponseStatus)
             .then(FormDataFetchPageScope.toJson)
-            .then(FormDataFetchPageScope.updateModel);
+            .then(FormDataFetchPageScope.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static getServiceUrl() {

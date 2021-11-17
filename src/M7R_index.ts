@@ -1,4 +1,4 @@
-import {ErrorHandler} from "./patient/general/controller/ErrorHandler";
+import {ErrorHandler} from "./general/error/ErrorHandler";
 import {AppInitializer} from "./application/AppInitializer";
 
 function docReady(fn) {

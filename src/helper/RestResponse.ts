@@ -2,7 +2,7 @@ import {FetchResponseError} from "../patient/content/mainContent/formDataPersist
 
 export class RestResponse {
 
-    public static check(serviceName: string, response: Response): Promise<unknown> {
+    public static check(serviceName: string, response: Response): Promise<any> {
         if (response.ok) {
             return Promise.resolve(response);
         } else {

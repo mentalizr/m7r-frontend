@@ -4,6 +4,8 @@ import {MessageComponentFactory} from "../messages/MessageComponentFactory";
 import {AppStateTherapist} from "../../model/AppStateTherapist";
 import {TherapistAppController} from "../../../TherapistAppController";
 import {NavbarTherapistController} from "../NavbarTherapistController";
+import {BackdropSpinnerController} from "../../../../patient/general/controller/BackdropSpinnerController";
+import {ErrorHandler} from "../../../../general/error/ErrorHandler";
 
 export class PatientMessagesController {
 
@@ -19,6 +21,10 @@ export class PatientMessagesController {
                 NavbarTherapistController.showArrowBack();
                 NavbarTherapistController.showRefreshButton();
                 NavbarTherapistController.showPatient(patientId);
+            })
+            .catch(function(error) {
+                BackdropSpinnerController.hide();
+                ErrorHandler.handleError(error);
             });
     }
 

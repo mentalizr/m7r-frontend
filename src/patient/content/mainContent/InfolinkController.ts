@@ -1,6 +1,6 @@
 import {Model} from "../../general/model/Model";
 import {ID_MAIN_CONTENT} from "../../../Globals";
-import {ErrorHandler} from "../../general/controller/ErrorHandler";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 import {PatientAppController} from "../../general/controller/PatientAppController";
 
 const CLASS_INFOLINK = "infolink";

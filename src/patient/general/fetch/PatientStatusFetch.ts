@@ -2,6 +2,7 @@ import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {Model} from "../model/Model";
 import {PatientStatus} from "../entities/PatientStatus";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/patientStatus";
 
@@ -16,7 +17,8 @@ export class PatientStatusFetch {
         return fetch(service, {credentials: "include"})
             .then(PatientStatusFetch.status)
             .then(PatientStatusFetch.json)
-            .then(PatientStatusFetch.updateModel);
+            .then(PatientStatusFetch.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response): Promise<unknown> {

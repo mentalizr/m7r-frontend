@@ -1,6 +1,6 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
-import {FetchResponseError} from "../../content/mainContent/formDataPersist/rest/FetchResponseError";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "htmlChunk";
 const SERVICE_PARAMETER = "login";
@@ -19,26 +19,23 @@ export class HtmlChunkFetch {
     public execute() {
 
         return fetch(this.service, {credentials: "include"})
+            .then(response => {
+                const serviceName: string = SERVICE_NAME + "/" + SERVICE_PARAMETER;
+                return RestResponse.check(serviceName, response);
+            })
             .then(response => response.text())
             .then(data => {
                 this.htmlChunk = data;
             })
             .catch((error) => {
-                return Promise.reject(new FetchResponseError(SERVICE_NAME, error.status, error.statusText));
+                // TODO Errorhandling by modal does not work here
+                ErrorHandler.handleError(error);
+                // return Promise.reject(new FetchResponseError(SERVICE_NAME, error.status, error.statusText));
             });
     }
 
     public getHtmlChunk(): string {
         return this.htmlChunk;
-    }
-
-    private status(response: Response): Promise<unknown> {
-        const serviceName: string = SERVICE_NAME + "/" + SERVICE_PARAMETER;
-        return RestResponse.check(serviceName, response);
-    }
-
-    private asText(response: Response): Promise<string> {
-        return response.text();
     }
 
 }

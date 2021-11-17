@@ -2,6 +2,7 @@ import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
 import {RestResponse} from "../../../helper/RestResponse";
 import {PatientStatusFetch} from "./PatientStatusFetch";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "patient/programContent";
 
@@ -18,7 +19,8 @@ export class ProgramContentFetch {
         return fetch(ProgramContentFetch._service, {credentials: "include"})
             .then(ProgramContentFetch.status)
             .then(ProgramContentFetch.asText)
-            .then(ProgramContentFetch.updateModel);
+            .then(ProgramContentFetch.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static obtainContentId(): string {

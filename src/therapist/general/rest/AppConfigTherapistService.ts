@@ -1,19 +1,21 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {ModelTherapist} from "../model/ModelTherapist";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "therapist/appConfig";
 
-export class AppConfigTherapistServide {
+export class AppConfigTherapistService {
 
     public static execute() {
 
         const service: string = SERVICE_BASE + "/" + SERVICE_NAME;
 
         return fetch(service, {credentials: "include"})
-            .then(AppConfigTherapistServide.status)
-            .then(AppConfigTherapistServide.json)
-            .then(AppConfigTherapistServide.updateModel);
+            .then(AppConfigTherapistService.status)
+            .then(AppConfigTherapistService.json)
+            .then(AppConfigTherapistService.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response): Promise<unknown> {

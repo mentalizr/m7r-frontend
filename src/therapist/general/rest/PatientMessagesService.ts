@@ -2,6 +2,8 @@ import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
 import {ModelTherapist} from "../model/ModelTherapist";
 import {PatientMessages} from "../entities/PatientMessages";
+import {FetchResponseError} from "../../../patient/content/mainContent/formDataPersist/rest/FetchResponseError";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "therapist/patientMessages";
 
@@ -16,7 +18,8 @@ export class PatientMessagesService {
         return fetch(service, {credentials: "include"})
             .then(PatientMessagesService.status)
             .then(PatientMessagesService.json)
-            .then(PatientMessagesService.updateModel);
+            .then(PatientMessagesService.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response): Promise<unknown> {

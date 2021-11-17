@@ -1,5 +1,6 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME_PROGRAM_CONTENT = "therapist/programContent";
 
@@ -16,7 +17,8 @@ export class ProgramContentService {
         return fetch(ProgramContentService._service, {credentials: "include"})
             .then(ProgramContentService.status)
             .then(ProgramContentService.asText)
-            .then(ProgramContentService.updateModel);
+            .then(ProgramContentService.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response) {

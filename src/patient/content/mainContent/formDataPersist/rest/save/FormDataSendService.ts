@@ -1,6 +1,7 @@
 import {FormData} from "../../../model/formData/FormData";
 import {SERVICE_BASE} from "../../../../../../Globals";
 import {RestResponse} from "../../../../../../helper/RestResponse";
+import {ErrorHandler} from "../../../../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/formData/send";
 
@@ -22,7 +23,8 @@ export class FormDataSendService {
                 body: formDataJSON
             },
         )
-            .then(FormDataSendService.checkStatus);
+            .then(FormDataSendService.checkStatus)
+            .catch(ErrorHandler.handleError);
     }
 
     private static checkStatus(response): Promise<unknown> {

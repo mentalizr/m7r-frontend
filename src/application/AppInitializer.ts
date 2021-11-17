@@ -8,7 +8,7 @@ import {Logger} from "../helper/Logger";
 import {EntrypointOption} from "../routing/EntryPointOptions/EntrypointOption";
 import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
 import {TherapistAppController} from "../therapist/TherapistAppController";
-import {ErrorHandler} from "../patient/general/controller/ErrorHandler";
+import {ErrorHandler} from "../general/error/ErrorHandler";
 
 const USER_ROLE_PATIENT = "PATIENT";
 const USER_ROLE_THERAPIST = "THERAPIST";

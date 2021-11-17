@@ -2,6 +2,7 @@ import {SERVICE_BASE} from "../../../Globals";
 import {Model} from "../model/Model";
 import {FormDataFetchHelper} from "../../content/mainContent/formDataPersist/rest/FormDataFetchHelper";
 import {RestResponse} from "../../../helper/RestResponse";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "patient/therapist";
 
@@ -14,7 +15,8 @@ export class TherapistFetch {
         return fetch(service, {credentials: "include"})
             .then(TherapistFetch.status)
             .then(TherapistFetch.json)
-            .then(TherapistFetch.updateModel);
+            .then(TherapistFetch.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response): Promise<unknown> {

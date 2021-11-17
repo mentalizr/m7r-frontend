@@ -1,5 +1,6 @@
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "htmlChunk";
 const SERVICE_PARAMETER = "login";
@@ -13,7 +14,8 @@ export class HtmlChunkLoginFetch {
         return fetch(HtmlChunkLoginFetch._service, {credentials: "include"})
             .then(HtmlChunkLoginFetch.status)
             .then(HtmlChunkLoginFetch.asText)
-            .then(HtmlChunkLoginFetch.updateModel);
+            .then(HtmlChunkLoginFetch.updateModel)
+            .catch(ErrorHandler.handleError);
     }
 
     private static status(response) {

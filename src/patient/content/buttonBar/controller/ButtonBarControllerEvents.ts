@@ -1,5 +1,4 @@
 import {ID_BACK_BUTTON, ID_NEXT_BUTTON, ID_SAVE_BUTTON, ID_SEND_BUTTON} from "../ButtonBarIDs";
-import {SendConfirmModalController} from "../../mainContent/formDataPersist/SendConfirmModalController";
 import {Model} from "../../../general/model/Model";
 import {FormDataValidator} from "../../mainContent/formDataPersist/FormDataValidator";
 import {BackdropSpinnerController} from "../../../general/controller/BackdropSpinnerController";
@@ -7,11 +6,10 @@ import {FormDataSavePageScope} from "../../mainContent/formDataPersist/rest/save
 import {FormDataSaveProgramGenericScope} from "../../mainContent/formDataPersist/rest/save/FormDataSaveProgramGenericScope";
 import {FormDataSaveProgramNamedScope} from "../../mainContent/formDataPersist/rest/save/FormDataSaveProgramNamedScope";
 import {GeneralAlertController} from "../../generalAlert/GeneralAlertController";
-import {MainContentView} from "../../mainContent/MainContentView";
-import {ButtonBarController} from "./ButtonBarController";
 import {PatientAppController} from "../../../general/controller/PatientAppController";
 import {FormDataSendPageScope} from "../../mainContent/formDataPersist/rest/save/FormDataSendPageScope";
 import {ProgramFetch} from "../../../general/fetch/ProgramFetch";
+import {ModalSendConfirm} from "../../../general/component/ModalSendConfirm";
 
 export class ButtonBarControllerEvents {
 
@@ -33,7 +31,8 @@ export class ButtonBarControllerEvents {
             ButtonBarControllerEvents.actionContentSendButton();
         });
 
-        SendConfirmModalController.registerConfirmedButton();
+        // SendConfirmModalController.registerConfirmedButton();
+        ModalSendConfirm.registerConfirmedButton();
     }
 
     private static actionContentNextButton(): void {
@@ -66,9 +65,6 @@ export class ButtonBarControllerEvents {
 
         BackdropSpinnerController.show();
         Promise.all([FormDataSavePageScope.execute(), FormDataSaveProgramGenericScope.execute(), FormDataSaveProgramNamedScope.execute()])
-            .catch(function() {
-                GeneralAlertController.showSaveError();
-            })
             .then(function() {
                 BackdropSpinnerController.hide();
             });
@@ -82,13 +78,15 @@ export class ButtonBarControllerEvents {
         if (!validationSuccess) {
             GeneralAlertController.showWithText("Bitte vervollständigen Sie zum Speichern Ihre Eingaben.");
         } else {
-            SendConfirmModalController.show();
+            // SendConfirmModalController.show();
+            ModalSendConfirm.show();
         }
     }
 
     public static actionContentSendConfirmedButton(): void {
         // console.log("SendConfirmed Button gedrückt");
-        SendConfirmModalController.hide();
+        // SendConfirmModalController.hide();
+        ModalSendConfirm.hide();
         // FormDataSaver.send();
         const stepId: string = Model.getProgramModel().getCurrentStepId();
         FormDataSendPageScope.execute()
@@ -106,9 +104,9 @@ export class ButtonBarControllerEvents {
                 // MainContentView.disableForm();
                 // ButtonBarController.updateView();
             })
-            .catch(function() {
-                GeneralAlertController.showSaveError();
-            })
+            // .catch(function() {
+            //     GeneralAlertController.showSaveError();
+            // })
             // .then(function() {
             //     BackdropSpinnerController.hide()
             // })

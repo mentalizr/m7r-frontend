@@ -3,6 +3,8 @@ import {SplashController} from "../../../../general/controller/SplashController"
 import {SubmitFeedbackService} from "../../rest/SubmitFeedbackService";
 import {TherapistAppController} from "../../../TherapistAppController";
 import {PatientExerciseController} from "../pages/PatientExerciseController";
+import {BackdropSpinnerController} from "../../../../patient/general/controller/BackdropSpinnerController";
+import {ErrorHandler} from "../../../../general/error/ErrorHandler";
 
 export class MessageExerciseEvents {
 
@@ -13,7 +15,11 @@ export class MessageExerciseEvents {
         PatientExerciseController.initialize(patientId, exerciseId)
             .then(() => {
                 SplashController.hide();
-        });
+            })
+            .catch(function(error) {
+                BackdropSpinnerController.hide();
+                ErrorHandler.handleError(error);
+            });
     }
 
     public static sendFeedback(patientId: string, exerciseId: string, feedbackTextareaId: string): Promise<unknown> {

@@ -1,5 +1,5 @@
 import {AbstractAppController} from "../../../application/AbstractAppController";
-import {ErrorHandler} from "./ErrorHandler";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 import {ProgramContentFetch} from "../fetch/ProgramContentFetch";
 import {FormDataFetchPageScope} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchPageScope";
 import {FormDataFetchProgramGenericScope} from "../../content/mainContent/formDataPersist/rest/load/FormDataFetchProgramGenericScope";
@@ -16,8 +16,6 @@ import {ButtonBarController} from "../../content/buttonBar/controller/ButtonBarC
 import {BreadcrumbController} from "./BreadcrumbController";
 import {StartpageController} from "./StartpageController";
 import {ScrollUpController} from "../../../general/controller/ScrollUpController";
-import {TimeoutController} from "./TimeoutController";
-import {LogoutController} from "../../../general/logout/LogoutController";
 import {ButtonBarControllerEvents} from "../../content/buttonBar/controller/ButtonBarControllerEvents";
 import {MainContentController} from "../../content/mainContent/MainContentController";
 import {InfolinkController} from "../../content/mainContent/InfolinkController";
@@ -30,14 +28,45 @@ import {FormDataFetchPageScopePreviousPage} from "../../content/mainContent/form
 import {RefreshController} from "./RefreshController";
 import {PatientStatusFetch} from "../fetch/PatientStatusFetch";
 import {ErrorController} from "./ErrorController";
+import {ModalSendConfirm} from "../component/ModalSendConfirm";
+import {ModalLogout} from "../../../general/logout/ModalLogout";
+import {ModalTimeout} from "../../../general/timeout/ModalTimeout";
+import {ModalError} from "../../../general/error/ModalError";
+import {ModalNIY} from "../../../general/niy/ModalNIY";
 
 export class PatientAppController extends AbstractAppController {
 
     initialize(htmlChunk: string): Promise<any> {
 
-        this.mountHtmlChunk(htmlChunk);
+        // TODO test
+        // console.log("Paragraph as string:");
+        // console.log(HtmlTest.getParagraphAsString());
+        // HtmlTest.logParagraph();
+        // console.log(para);
 
+        // const modalConfig: ModalConfig = new ModalConfig();
+        // modalConfig.id = "test";
+        // modalConfig.header = "headerText";
+        // modalConfig.text = "modalText";
+        // modalConfig.buttonConfirmId = "confirmId";
+        // modalConfig.buttonConfirmLabel = "confirmLabel";
+        // modalConfig.buttonCancelLabel = "cancelLabel";
+        // console.log(ModalAlert.html(modalConfig));
+
+        // const test: string = Mustache.render("text: {{text}}", {text: "hallöschen<br/>"});
+        // console.log(test);
+
+        this.mountHtmlChunk(htmlChunk);
         SplashController.show();
+        ModalLogout.create();
+        ModalLogout.registerConfirmedButton();
+        ModalTimeout.create();
+        ModalTimeout.registerConfirmedButton();
+        ModalSendConfirm.create();
+        ModalError.create();
+        ModalError.registerConfirmedButton();
+        ModalNIY.create();
+        ModalNIY.registerConfirmedButton();
 
         return PatientAppController.initAppPatient()
             .then(() => {
@@ -48,7 +77,7 @@ export class PatientAppController extends AbstractAppController {
     }
 
     private static initAppPatient() {
-        ErrorController.registerClick();
+        // ErrorController.registerClick();
 
         let appConfigFetch = AppConfigPatientFetch.execute();
         let userFetch = UserFetch.execute();
@@ -72,8 +101,8 @@ export class PatientAppController extends AbstractAppController {
 
                         StartpageController.registerClick();
                         ScrollUpController.register();
-                        TimeoutController.registerClick();
-                        LogoutController.registerClickLogout();
+                        // TimeoutController.registerClick();
+                        // LogoutController.registerClickLogout();
                         ButtonBarControllerEvents.registerUserEvents();
                         MenuController.registerUserEvents();
                         RefreshController.registerUserEvents();
@@ -85,10 +114,6 @@ export class PatientAppController extends AbstractAppController {
 
                         MCInitializer.initializeQuestions();
                     });
-            })
-            .catch(function(error) {
-                BackdropSpinnerController.hide();
-                ErrorHandler.handleError(error);
             });
     }
 
@@ -109,11 +134,7 @@ export class PatientAppController extends AbstractAppController {
                 InfolinkController.registerClickEvent();
 
                 MCInitializer.initializeQuestions();
-            })
-            .catch(function(error) {
-                BackdropSpinnerController.hide();
-                ErrorHandler.handleError(error);
-            })
+            });
 
     }
 
@@ -128,10 +149,6 @@ export class PatientAppController extends AbstractAppController {
                 MainContentController.updateView();
                 ButtonBarController.updateView();
                 RefreshController.updateView();
-            })
-            .catch(function(error) {
-                BackdropSpinnerController.hide();
-                ErrorHandler.handleError(error);
             });
     }
 

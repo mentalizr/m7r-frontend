@@ -8,27 +8,27 @@ const ID_TIMEOUT_MODAL = "general-timeout--modal";
 
 export class TimeoutController {
 
-    public static registerClick() {
+    // public static registerClick() {
+    //
+    //     let timeoutOkLink = document.getElementById(ID_TIMEOUT_OK);
+    //     timeoutOkLink.addEventListener("click", function(event) {
+    //
+    //         event.preventDefault();
+    //
+    //         LogoutRest.execute()
+    //             .catch(function(error: FetchResponseError) {
+    //                 // din
+    //             })
+    //             .then(function() {
+    //                 // location.reload();
+    //                 AppInitializer.start();
+    //             })
+    //     })
+    //
+    // }
 
-        let timeoutOkLink = document.getElementById(ID_TIMEOUT_OK);
-        timeoutOkLink.addEventListener("click", function(event) {
-
-            event.preventDefault();
-
-            LogoutRest.execute()
-                .catch(function(error: FetchResponseError) {
-                    // din
-                })
-                .then(function() {
-                    // location.reload();
-                    AppInitializer.start();
-                })
-        })
-
-    }
-
-    public static showTimoutModal() {
-        Modal.show(ID_TIMEOUT_MODAL);
-    }
+    // public static showTimoutModal() {
+    //     Modal.show(ID_TIMEOUT_MODAL);
+    // }
 
 }

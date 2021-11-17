@@ -1,6 +1,7 @@
 import {FeedbackSubmission} from "../entities/FeedbackSubmission";
 import {SERVICE_BASE} from "../../../Globals";
 import {RestResponse} from "../../../helper/RestResponse";
+import {ErrorHandler} from "../../../general/error/ErrorHandler";
 
 const SERVICE_NAME = "therapist/submitFeedback";
 
@@ -22,7 +23,8 @@ export class SubmitFeedbackService {
                 body: formDataJSON
             },
         )
-            .then(SubmitFeedbackService.checkStatus);
+            .then(SubmitFeedbackService.checkStatus)
+            .catch(ErrorHandler.handleError);
     }
 
     private static checkStatus(response): Promise<unknown> {
