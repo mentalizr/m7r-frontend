@@ -6,6 +6,7 @@ import {Dispatcher} from "../../routing/Dispatcher";
 import {FetchResponseError} from "../../patient/content/mainContent/formDataPersist/rest/FetchResponseError";
 import {Logger} from "../../helper/Logger";
 import {ErrorHandler} from "../error/ErrorHandler";
+import {EntryPoint} from "../../routing/EntryPointOptions/EntryPoint";
 
 const ID_LOGOUT_MODAL = "logoutModal";
 const ID_LOGOUT_CONFIRMED_BUTTON = "general-logout--link";
@@ -40,7 +41,14 @@ export class ModalLogout {
                 .then(function() {
                     // location.reload();
                     // AppInitializer.start();
-                    Dispatcher.toVoucher();
+                    const entryPoint = new EntryPoint();
+                    // this will bring the user back to the login screen he came from
+                    // this is not necessarily the configured one.
+                    if (entryPoint.isVoucher) {
+                        Dispatcher.toVoucher();
+                    } else {
+                        Dispatcher.toLogin();
+                    }
                 })
                 .catch(ErrorHandler.handleError);
         });
