@@ -1,5 +1,6 @@
 import {SERVICE_BASE} from "../Globals";
 import {RestResponse} from "../helper/RestResponse";
+import {SessionStatusEntity} from "../patient/general/entities/SessionStatusEntity";
 import {SessionStatus} from "../patient/general/entities/SessionStatus";
 
 const SERVICE_NAME = "sessionStatus";
@@ -7,15 +8,17 @@ const SERVICE_NAME = "sessionStatus";
 export class SessionStatusFetch {
 
     private static _service: string = SERVICE_BASE + "/" + SERVICE_NAME;
-
-    public static sessionStatus: SessionStatus;
+    private static sessionStatusEntity: SessionStatusEntity;
 
     public static execute(): Promise<void> {
-
         return fetch(SessionStatusFetch._service, {credentials: "include"})
             .then(SessionStatusFetch.status)
             .then(SessionStatusFetch.json)
             .then(SessionStatusFetch.updateModel);
+    }
+
+    public static getSessionStatus(): SessionStatus {
+        return new SessionStatus(SessionStatusFetch.sessionStatusEntity);
     }
 
     private static status(response): Promise<unknown> {
@@ -27,7 +30,7 @@ export class SessionStatusFetch {
     }
 
     private static updateModel(data) {
-        SessionStatusFetch.sessionStatus = data;
+        SessionStatusFetch.sessionStatusEntity = data;
         // console.log("hasSession? " + SessionStatusFetch.sessionStatus.hasSession);
         // console.log("sessionId: " + SessionStatusFetch.sessionStatus.sessionId);
         // console.log("userRole: " + SessionStatusFetch.sessionStatus.userRole);

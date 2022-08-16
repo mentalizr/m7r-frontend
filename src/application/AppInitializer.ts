@@ -10,10 +10,6 @@ import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
 import {TherapistAppController} from "../therapist/TherapistAppController";
 import {ErrorHandler} from "../general/error/ErrorHandler";
 
-const USER_ROLE_PATIENT = "PATIENT";
-const USER_ROLE_THERAPIST = "THERAPIST";
-const USER_ROLE_ADMIN = "ADMIN";
-
 export class AppInitializer {
 
     private static abstractAppChunkFetch: AbstractAppChunkFetch = undefined;
@@ -44,9 +40,9 @@ export class AppInitializer {
 
     private static build() {
 
-        const sessionStatus: SessionStatus = SessionStatusFetch.sessionStatus;
+        const sessionStatus: SessionStatus = SessionStatusFetch.getSessionStatus();
 
-        if (!sessionStatus.valid) {
+        if (!sessionStatus.isValid()) {
 
             const entryPointOption: EntrypointOption = new EntrypointOption();
 
@@ -56,17 +52,17 @@ export class AppInitializer {
             AppInitializer.abstractAppChunkFetch = entryPointOption.abstractAppChunkFetch;
             AppInitializer.abstractAppController = entryPointOption.abstractAppController;
 
-        } else if (sessionStatus.userRole.toLowerCase() === USER_ROLE_PATIENT.toLowerCase()) {
+        } else if (sessionStatus.isUserInRolePatient()) {
             AppInitializer.abstractAppChunkFetch = new AppChunkFetchPatient();
             AppInitializer.abstractAppController = new PatientAppController();
 
-        } else if (sessionStatus.userRole.toLowerCase() === USER_ROLE_THERAPIST.toLowerCase()) {
+        } else if (sessionStatus.isUserInRoleTherapist()) {
             AppInitializer.abstractAppChunkFetch = new AppChunkFetchTherapist();
             AppInitializer.abstractAppController = new TherapistAppController();
 
         } else {
 
-            Logger("Unrecognized user role: [" + sessionStatus.userRole + "].");
+            Logger("Unrecognized user role: [" + sessionStatus.getUserRole() + "].");
         }
 
         // TODO Add further roles here
