@@ -3,11 +3,12 @@ import {SessionStatusEntity} from "./SessionStatusEntity";
 const STATUS_VALID = "VALID";
 const STATUS_INVALID = "INVALID";
 const STATUS_INTERMEDIATE = "INTERMEDIATE";
-const REQUIRE_POLICY_CONSENT = "POLICYCONSENT";
+const REQUIRE_POLICY_CONSENT = "POLICY_CONSENT";
 const REQUIRE_RENEW_PASSWORD = "RENEWPASSWORD";
 const REQUIRE_EMAIL_CONFIRMATION = "EMAILCONFIRMATION";
 const REQUIRE_2FA = "2FA";
-const USER_ROLE_PATIENT = "PATIENT";
+const USER_ROLE_LOGIN_PATIENT = "LOGIN_PATIENT";
+const USER_ROLE_ANONYMOUS_PATIENT = "ANONYMOUS_PATIENT";
 const USER_ROLE_THERAPIST = "THERAPIST";
 const USER_ROLE_ADMIN = "ADMIN";
 
@@ -48,7 +49,8 @@ export class SessionStatus {
     }
 
     isUserInRolePatient(): boolean {
-        return this.sessionStatusEntity.userRole.toUpperCase() === USER_ROLE_PATIENT;
+        return this.sessionStatusEntity.userRole.toUpperCase() === USER_ROLE_LOGIN_PATIENT ||
+            this.sessionStatusEntity.userRole.toUpperCase() === USER_ROLE_ANONYMOUS_PATIENT;
     }
 
     isUserInRoleTherapist(): boolean {
