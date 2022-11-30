@@ -6,49 +6,48 @@ describe("SessionStatusEntity", () => {
 
     it("admin session", () => {
         const sessionStatusEntity: SessionStatusEntity
-            = JSON.parse("{\"sessionId\":\"0AF68AEFADCE4733B91AB320378D69D4\",\"userRole\":\"ADMIN\",\"status\":\"valid\"}");
+            = JSON.parse("{\"require\":\"\",\"sessionId\":\"A308B869030D4DBFE1B7DB5D1E1A3FB1\",\"status\":\"VALID\",\"userRole\":\"ADMIN\"}");
 
-        assert.equal(sessionStatusEntity.sessionId, "0AF68AEFADCE4733B91AB320378D69D4", "sessionId");
+        assert.equal(sessionStatusEntity.sessionId, "A308B869030D4DBFE1B7DB5D1E1A3FB1", "sessionId");
         assert.equal(sessionStatusEntity.userRole, "ADMIN", "userRole")
-        assert.equal(sessionStatusEntity.status, "valid", "status");
+        assert.equal(sessionStatusEntity.status, "VALID", "status");
     });
 
     it("patient session", () => {
         const sessionStatus: SessionStatusEntity
-            = JSON.parse("{\"sessionId\":\"18380415ECF42B0FACAF8FDC2ED1D05C\",\"userRole\":\"PATIENT\",\"status\":\"valid\"}");
+            = JSON.parse("{\"require\":\"\",\"sessionId\":\"18380415ECF42B0FACAF8FDC2ED1D05C\",\"userRole\":\"LOGIN_PATIENT\",\"status\":\"VALID\"}");
 
         assert.equal(sessionStatus.sessionId, "18380415ECF42B0FACAF8FDC2ED1D05C", "sessionId");
-        assert.equal(sessionStatus.userRole, "PATIENT", "userRole")
-        assert.equal(sessionStatus.status, "valid", "status");
+        assert.equal(sessionStatus.userRole, "LOGIN_PATIENT", "userRole")
+        assert.equal(sessionStatus.status, "VALID", "status");
     });
 
     it("therapist session", () => {
         const sessionStatus: SessionStatusEntity
-            = JSON.parse("{\"sessionId\":\"5BB4A5370546C03FBE72C04E806A0116\",\"userRole\":\"THERAPIST\",\"status\":\"valid\"}");
+            = JSON.parse("{\"require\":\"\",\"sessionId\":\"5BB4A5370546C03FBE72C04E806A0116\",\"userRole\":\"THERAPIST\",\"status\":\"VALID\"}");
 
         assert.equal(sessionStatus.sessionId, "5BB4A5370546C03FBE72C04E806A0116", "sessionId");
         assert.equal(sessionStatus.userRole, "THERAPIST", "userRole")
-        assert.equal(sessionStatus.status, "valid", "status");
+        assert.equal(sessionStatus.status, "VALID", "status");
     });
 
     it("intermediate session", () => {
         const sessionStatus: SessionStatusEntity
-            = JSON.parse("{\"sessionId\":\"\",\"userRole\":\"UNDEFINED\",\"status\":\"intermediate\" , \""
-         + "require\":\"POLICY_CONSENT\"}");
+            = JSON.parse("{\"require\":\"POLICY_CONSENT\",\"sessionId\":\"59C998090AE499CCE0DA30E6E9AABF68\",\"status\":\"INTERMEDIATE\",\"userRole\":\"LOGIN_PATIENT\"}");
 
-        assert.isNotOk(sessionStatus.sessionId, "sessionId");
-        assert.equal(sessionStatus.userRole, "UNDEFINED", "userRole")
-        assert.equal(sessionStatus.status, "intermediate", "status");
+        assert.equal(sessionStatus.sessionId, "59C998090AE499CCE0DA30E6E9AABF68", "sessionId");
+        assert.equal(sessionStatus.userRole, "LOGIN_PATIENT", "userRole")
+        assert.equal(sessionStatus.status, "INTERMEDIATE", "status");
         assert.equal(sessionStatus.require, "POLICY_CONSENT", "require");
     });
 
     it("invalid session", () => {
         const sessionStatus: SessionStatusEntity
-            = JSON.parse("{\"sessionId\":\"\",\"userRole\":\"UNDEFINED\",\"status\":\"invalid\"}");
+            = JSON.parse("{\"require\":\"\",\"sessionId\":\"\",\"userRole\":\"UNDEFINED\",\"status\":\"INVALID\"}");
 
         assert.isNotOk(sessionStatus.sessionId, "sessionId");
         assert.equal(sessionStatus.userRole, "UNDEFINED", "userRole")
-        assert.equal(sessionStatus.status, "invalid", "status");
+        assert.equal(sessionStatus.status, "INVALID", "status");
     });
 
 })

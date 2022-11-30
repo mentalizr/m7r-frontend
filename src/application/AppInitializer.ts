@@ -9,6 +9,8 @@ import {EntrypointOption} from "../routing/EntryPointOptions/EntrypointOption";
 import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
 import {TherapistAppController} from "../therapist/TherapistAppController";
 import {ErrorHandler} from "../general/error/ErrorHandler";
+import {AppChunkFetchPolicy} from "./AppChunkFetchPolicy";
+import {PolicyController} from "../policy/PolicyController";
 
 export class AppInitializer {
 
@@ -19,7 +21,7 @@ export class AppInitializer {
 
         AppInitializer.execute()
             .then(function () {
-                // console.log("Application is initialized!");
+                console.log("Application is initialized! Hoho!");
             })
             // .catch(function(error) {
             //     // TODO debug
@@ -42,12 +44,21 @@ export class AppInitializer {
 
         const sessionStatus: SessionStatus = SessionStatusFetch.getSessionStatus();
 
-        if (!sessionStatus.isValid()) {
+        if (sessionStatus.isIntermediate()) {
+
+            Logger("Session is intermediate.")
+
+            if (sessionStatus.isPolicyConsentRequired()) {
+                Logger("Policy consent required.");
+                AppInitializer.abstractAppChunkFetch = new AppChunkFetchPolicy();
+                AppInitializer.abstractAppController = new PolicyController();
+            }
+
+        } else if (!sessionStatus.isValid()) {
+
+            Logger("Session is not valid")
 
             const entryPointOption: EntrypointOption = new EntrypointOption();
-
-            // AppInitializer.abstractAppChunkFetch = new LoginChunkFetch();
-            // AppInitializer.abstractAppController = new LoginController();
 
             AppInitializer.abstractAppChunkFetch = entryPointOption.abstractAppChunkFetch;
             AppInitializer.abstractAppController = entryPointOption.abstractAppController;
