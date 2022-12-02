@@ -1,32 +1,38 @@
-import {SERVICE_BASE} from "../Globals";
-import {RestResponse} from "../helper/RestResponse";
-import {FetchResponseError} from "../patient/content/mainContent/formDataPersist/rest/FetchResponseError";
-import {LoginView} from "../login/LoginView";
-import {LoginElements} from "../login/LoginElements";
 import {AbstractAppController} from "../application/AbstractAppController";
-import {AppInitializer} from "../application/AppInitializer";
-import {Modal} from "../helper/Modal";
 import {Dispatcher} from "../routing/Dispatcher";
+import {PolicyConsentElements} from "./PolicyConsentElements";
+import {Logger} from "../helper/Logger";
+import {LogoutHelper} from "../general/logout/LogoutHelper";
+import {ConsentPolicyFetch} from "../application/ConsentPolicyFetch";
 
-export class PolicyController extends AbstractAppController {
+export class PolicyConsentController extends AbstractAppController {
 
     public initialize(htmlChunk: string): Promise<any> {
 
         this.mountHtmlChunk(htmlChunk);
-
-        // LoginView.focusOnUserInput();
-        // LoginController.registerUserEvents();
+        PolicyConsentController.registerUserEvents();
 
         return Promise.resolve(undefined);
     }
 
     private static registerUserEvents(): void {
 
-        // LoginElements.privacyConsentLink().addEventListener("click", function (event) {
-        //     event.preventDefault();
-        //     Modal.show(LoginElements.privacyConsentModalID());
-        // });
-        //
+        PolicyConsentElements.buttonAccept().addEventListener("click", function (event) {
+            Logger("button 'accept' clicked.")
+            event.preventDefault();
+            ConsentPolicyFetch.execute()
+                .then(function () {
+                    Dispatcher.restart();
+                });
+        });
+
+        PolicyConsentElements.buttonReject().addEventListener("click", function (event) {
+            Logger("button 'reject' clicked.")
+            event.preventDefault();
+            LogoutHelper.logoutAndRestart();
+        });
+
+
         // LoginElements.credentialsForgottenLink().addEventListener("click", function (event) {
         //     event.preventDefault();
         //     Modal.show(LoginElements.credentialsForgottenModalId());

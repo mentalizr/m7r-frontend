@@ -9,8 +9,8 @@ import {EntrypointOption} from "../routing/EntryPointOptions/EntrypointOption";
 import {AppChunkFetchTherapist} from "./AppChunkFetchTherapist";
 import {TherapistAppController} from "../therapist/TherapistAppController";
 import {ErrorHandler} from "../general/error/ErrorHandler";
-import {AppChunkFetchPolicy} from "./AppChunkFetchPolicy";
-import {PolicyController} from "../policy/PolicyController";
+import {AppChunkFetchPolicyConsent} from "./AppChunkFetchPolicyConsent";
+import {PolicyConsentController} from "../policyConsent/PolicyConsentController";
 
 export class AppInitializer {
 
@@ -50,8 +50,8 @@ export class AppInitializer {
 
             if (sessionStatus.isPolicyConsentRequired()) {
                 Logger("Policy consent required.");
-                AppInitializer.abstractAppChunkFetch = new AppChunkFetchPolicy();
-                AppInitializer.abstractAppController = new PolicyController();
+                AppInitializer.abstractAppChunkFetch = new AppChunkFetchPolicyConsent();
+                AppInitializer.abstractAppController = new PolicyConsentController();
             }
 
         } else if (!sessionStatus.isValid()) {

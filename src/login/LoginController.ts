@@ -111,8 +111,9 @@ export class LoginController extends AbstractAppController {
                 return RestResponse.check(serviceUrl, response);
             })
             .then(function (response) {
-                LoginController.unregisterUserEvents();
-                AppInitializer.start();
+                // LoginController.unregisterUserEvents();
+                // AppInitializer.start();
+                Dispatcher.restart();
             })
             .catch((error) => {
 

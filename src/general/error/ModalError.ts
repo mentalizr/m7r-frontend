@@ -40,7 +40,8 @@ export class ModalError {
         document.getElementById(ID_ERROR_CONFIRMED_BUTTON).addEventListener("click", function(event) {
             event.preventDefault();
             console.log("ErrorController: OK clicked!");
-            AppInitializer.start();
+            Dispatcher.restart();
+            // AppInitializer.start();
         });
     }
 

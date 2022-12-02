@@ -96,8 +96,9 @@ export class VoucherController extends AbstractAppController {
                 return RestResponse.check(serviceUrl, response);
             })
             .then(function (response) {
-                VoucherController.unregisterEvents();
-                AppInitializer.start();
+                // VoucherController.unregisterEvents();
+                // AppInitializer.start();
+                Dispatcher.restart();
             })
             .catch((error) => {
 
