@@ -11,6 +11,7 @@ import {TherapistAppController} from "../therapist/TherapistAppController";
 import {ErrorHandler} from "../general/error/ErrorHandler";
 import {AppChunkFetchPolicyConsent} from "./AppChunkFetchPolicyConsent";
 import {PolicyConsentController} from "../policyConsent/PolicyConsentController";
+import {Dispatcher} from "../routing/Dispatcher";
 
 export class AppInitializer {
 
@@ -46,12 +47,14 @@ export class AppInitializer {
 
         if (sessionStatus.isIntermediate()) {
 
-            Logger("Session is intermediate.")
+            Logger("Session is intermediate. #2")
 
             if (sessionStatus.isPolicyConsentRequired()) {
                 Logger("Policy consent required.");
                 AppInitializer.abstractAppChunkFetch = new AppChunkFetchPolicyConsent();
                 AppInitializer.abstractAppController = new PolicyConsentController();
+            } else if (sessionStatus.isEmailConfirmationRequired()) {
+                Logger("ERROR. Email confirmation required. Not yet supported by frontend.");
             }
 
         } else if (!sessionStatus.isValid()) {

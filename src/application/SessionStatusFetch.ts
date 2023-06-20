@@ -31,9 +31,10 @@ export class SessionStatusFetch {
 
     private static updateModel(data) {
         SessionStatusFetch.sessionStatusEntity = data;
-        // console.log("hasSession? " + SessionStatusFetch.sessionStatus.hasSession);
-        // console.log("sessionId: " + SessionStatusFetch.sessionStatus.sessionId);
-        // console.log("userRole: " + SessionStatusFetch.sessionStatus.userRole);
+        console.log("hasSession? " + SessionStatusFetch.sessionStatusEntity.status);
+        console.log("userRole: " + SessionStatusFetch.sessionStatusEntity.userRole);
+        console.log("require: " + SessionStatusFetch.sessionStatusEntity.require)
+        console.log("sessionId: " + SessionStatusFetch.sessionStatusEntity.sessionId);
     }
 
 }
