@@ -6,9 +6,6 @@ const ID_AUTH_FAILED_ALERT: string = "login--auth-failed--alert";
 const ID_EXCEPTION_ALERT: string = "login--general-exception--alert";
 const ID_SUBMIT_BUTTON_SPINNER: string = "login--submit-button--spinner";
 const ID_REMEMBER_ME_CHECKBOX: string = "login--remember--input";
-const ID_PRIVACY_CONSENT_CHECKBOX: string = "login--privacy-consent--input";
-const ID_PRIVACY_CONSENT_LINK: string = "login--privacy-consent--link";
-const ID_PRIVACY_CONSENT_MODAL: string = "login--privacy-consent--modal";
 const ID_LOGIN_WITH_ACCESS_KEY_LINK: string = "login--login-access-key--link";
 const ID_CREDENTIALS_FORGOTTEN_LINK: string = "login--credentials-forgotten--link";
 const ID_CREDENTIALS_FORGOTTEN_MODAL: string = "login--credentials-forgotten--modal";
@@ -35,17 +32,17 @@ export class LoginElements {
         return <HTMLInputElement>document.getElementById(ID_REMEMBER_ME_CHECKBOX)
     }
 
-    public static privacyConsentCheckBox(): HTMLInputElement {
-        return <HTMLInputElement>document.getElementById(ID_PRIVACY_CONSENT_CHECKBOX);
-    }
-
-    public static privacyConsentLink(): HTMLElement {
-        return document.getElementById(ID_PRIVACY_CONSENT_LINK);
-    }
-
-    public static privacyConsentModalID(): string {
-        return ID_PRIVACY_CONSENT_MODAL;
-    }
+    // public static privacyConsentCheckBox(): HTMLInputElement {
+    //     return <HTMLInputElement>document.getElementById(ID_PRIVACY_CONSENT_CHECKBOX);
+    // }
+    //
+    // public static privacyConsentLink(): HTMLElement {
+    //     return document.getElementById(ID_PRIVACY_CONSENT_LINK);
+    // }
+    //
+    // public static privacyConsentModalID(): string {
+    //     return ID_PRIVACY_CONSENT_MODAL;
+    // }
 
     public static authFailedAlert(): HTMLElement {
         return document.getElementById(ID_AUTH_FAILED_ALERT);

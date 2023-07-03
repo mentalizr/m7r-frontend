@@ -4,7 +4,6 @@ import {FetchResponseError} from "../patient/content/mainContent/formDataPersist
 import {LoginView} from "./LoginView";
 import {LoginElements} from "./LoginElements";
 import {AbstractAppController} from "../application/AbstractAppController";
-import {AppInitializer} from "../application/AppInitializer";
 import {Modal} from "../helper/Modal";
 import {Dispatcher} from "../routing/Dispatcher";
 
@@ -21,11 +20,6 @@ export class LoginController extends AbstractAppController {
     }
 
     private static registerUserEvents(): void {
-
-        LoginElements.privacyConsentLink().addEventListener("click", function (event) {
-            event.preventDefault();
-            Modal.show(LoginElements.privacyConsentModalID());
-        });
 
         LoginElements.credentialsForgottenLink().addEventListener("click", function (event) {
             event.preventDefault();
@@ -80,15 +74,7 @@ export class LoginController extends AbstractAppController {
             LoginView.focusOnUserInput();
         }
 
-        const privacyConsentAccepted: boolean = LoginView.isPrivacyConsentChecked();
-        if (privacyConsentAccepted) {
-            LoginView.unmarkPrivacyConsentCheckBoxAsInvalid();
-        } else {
-            LoginView.markPrivacyConsentCheckBoxAsInvalid();
-            LoginView.hideAllAlerts();
-        }
-
-        const readyForSubmit = isUserNameSet && isPasswordSet && privacyConsentAccepted;
+        const readyForSubmit = isUserNameSet && isPasswordSet;
         if (readyForSubmit) {
             LoginController.loginOnServer(username, password, rememberMe);
         }
@@ -111,8 +97,6 @@ export class LoginController extends AbstractAppController {
                 return RestResponse.check(serviceUrl, response);
             })
             .then(function (response) {
-                // LoginController.unregisterUserEvents();
-                // AppInitializer.start();
                 Dispatcher.restart();
             })
             .catch((error) => {

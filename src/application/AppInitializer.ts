@@ -22,7 +22,7 @@ export class AppInitializer {
 
         AppInitializer.execute()
             .then(function () {
-                console.log("Application is initialized! Hoho!");
+                // console.log("Application is initialized!");
             })
             // .catch(function(error) {
             //     // TODO debug
@@ -47,7 +47,7 @@ export class AppInitializer {
 
         if (sessionStatus.isIntermediate()) {
 
-            Logger("Session is intermediate. #2")
+            Logger("Session is intermediate.")
 
             if (sessionStatus.isPolicyConsentRequired()) {
                 Logger("Policy consent required.");
