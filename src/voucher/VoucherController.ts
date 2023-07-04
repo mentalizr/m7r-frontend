@@ -7,6 +7,7 @@ import {AbstractAppController} from "../application/AbstractAppController";
 import {AppInitializer} from "../application/AppInitializer";
 import {Modal} from "../helper/Modal";
 import {Dispatcher} from "../routing/Dispatcher";
+import {HtmlChunkFetch} from "../application/HtmlChunkFetch";
 
 export class VoucherController extends AbstractAppController {
 
@@ -22,11 +23,6 @@ export class VoucherController extends AbstractAppController {
 
     private static registerUserEvents(): void {
 
-        VoucherElements.privacyConsentLink().addEventListener("click", function (event) {
-            event.preventDefault();
-            Modal.show(VoucherElements.privacyConsentModalID());
-        });
-
         VoucherElements.accessKeyForgottenLink().addEventListener("click", function (event) {
             event.preventDefault();
             Modal.show(VoucherElements.accessKeyForgottenModalId());
@@ -35,6 +31,11 @@ export class VoucherController extends AbstractAppController {
         VoucherElements.loginWithCredentialsLink().addEventListener("click", function (event) {
             event.preventDefault();
             Dispatcher.toLogin();
+        });
+
+        VoucherElements.imprintLink().addEventListener("click", function (event) {
+            event.preventDefault();
+            VoucherController.showImprintModal();
         });
 
         VoucherElements.submitButton().addEventListener("click", function (event) {
@@ -60,23 +61,21 @@ export class VoucherController extends AbstractAppController {
 
         const accessKey: string = VoucherView.getAccessKey();
         const rememberMe: boolean = VoucherView.isRememberMeChecked();
-        const privacyConsentAccepted: boolean = VoucherView.isPrivacyConsentChecked();
+        // const privacyConsentAccepted: boolean = VoucherView.isPrivacyConsentChecked();
 
         const isAccessKeySet = accessKey.length > 0;
-        const readyForSubmit = isAccessKeySet && privacyConsentAccepted;
+        // const readyForSubmit = isAccessKeySet && privacyConsentAccepted;
 
-        if (readyForSubmit) {
+        if (isAccessKeySet) {
             VoucherView.unmarkAccessKeyFieldAsInvalid();
-            VoucherView.unmarkPrivacyConsentCheckBoxAsInvalid();
+            // VoucherView.unmarkPrivacyConsentCheckBoxAsInvalid();
             VoucherController.loginOnServer(accessKey, rememberMe);
-        } else if (!isAccessKeySet) {
+        } else {
             VoucherView.hideAllAlerts();
             VoucherView.markAccessKeyFieldAsInvalid();
             VoucherView.focusOnAccessKeyInput();
-        } else if (!privacyConsentAccepted) {
-            VoucherView.hideAllAlerts();
-            VoucherView.markPrivacyConsentCheckBoxAsInvalid();
         }
+
     }
 
     private static loginOnServer(accessKey: string, rememberMe: boolean) {
@@ -124,6 +123,27 @@ export class VoucherController extends AbstractAppController {
         VoucherView.hideSubmitButtonSpinner();
         VoucherView.clearAccessKeyField();
         VoucherView.focusOnAccessKeyInput();
+    }
+
+    private static showImprintModal(): void {
+
+        console.log("showImprintModal")
+
+        let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("imprint");
+
+        htmlChunkFetch.execute()
+            .then(function () {
+                console.log("fetched imprint chunk: " + htmlChunkFetch.getHtmlChunk());
+            })
+            .then(function () {
+                let imprintModalBody: HTMLElement = VoucherElements.imprintModalBody();
+                imprintModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
+                Modal.show(VoucherElements.imprintModalId());
+            })
+            .catch((error) => {
+                console.log("Error: " + error)
+            })
+
     }
 
 }
