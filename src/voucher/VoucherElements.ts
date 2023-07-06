@@ -11,6 +11,10 @@ const ID_ACCESS_KEY_FORGOTTEN_MODAL: string = "login-voucher--access-key-forgott
 const ID_IMPRINT_LINK: string = "login-voucher--imprint--link";
 const ID_IMPRINT_MODAL: string = "login-voucher--imprint--modal";
 const ID_IMPRINT_MODAL_BODY: string = "login-voucher--imprint--modal-body";
+const ID_POLICY_LINK: string = "login-voucher--policy--link";
+const ID_POLICY_MODAL: string = "login-voucher--policy--modal";
+const ID_POLICY_MODAL_BODY: string = "login-voucher--policy--modal-body";
+
 
 export class VoucherElements {
 
@@ -65,5 +69,18 @@ export class VoucherElements {
     public static imprintModalBody(): HTMLElement {
         return document.getElementById(ID_IMPRINT_MODAL_BODY);
     }
+
+    public static policyLink(): HTMLElement {
+        return document.getElementById(ID_POLICY_LINK);
+    }
+
+    public static policyModalId(): string {
+        return ID_POLICY_MODAL;
+    }
+
+    public static policyModalBody(): HTMLElement {
+        return document.getElementById(ID_POLICY_MODAL_BODY);
+    }
+
 
 }

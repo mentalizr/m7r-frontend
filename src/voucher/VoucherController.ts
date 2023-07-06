@@ -38,6 +38,11 @@ export class VoucherController extends AbstractAppController {
             VoucherController.showImprintModal();
         });
 
+        VoucherElements.policyLink().addEventListener("click", function (event) {
+            event.preventDefault();
+            VoucherController.showPolicyModal();
+        });
+
         VoucherElements.submitButton().addEventListener("click", function (event) {
             event.preventDefault();
             VoucherController.submit();
@@ -143,7 +148,26 @@ export class VoucherController extends AbstractAppController {
             .catch((error) => {
                 console.log("Error: " + error)
             })
+    }
 
+    private static showPolicyModal(): void {
+
+        console.log("showPolicyModal")
+
+        let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("policy_modal");
+
+        htmlChunkFetch.execute()
+            .then(function () {
+                console.log("fetched policy_modal chunk: " + htmlChunkFetch.getHtmlChunk());
+            })
+            .then(function () {
+                let policyModalBody: HTMLElement = VoucherElements.policyModalBody();
+                policyModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
+                Modal.show(VoucherElements.policyModalId());
+            })
+            .catch((error) => {
+                console.log("Error: " + error)
+            })
     }
 
 }
