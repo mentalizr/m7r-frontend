@@ -8,6 +8,7 @@ import {AppInitializer} from "../application/AppInitializer";
 import {Modal} from "../helper/Modal";
 import {Dispatcher} from "../routing/Dispatcher";
 import {HtmlChunkFetch} from "../application/HtmlChunkFetch";
+import {Logger} from "../helper/Logger";
 
 export class VoucherController extends AbstractAppController {
 
@@ -131,42 +132,34 @@ export class VoucherController extends AbstractAppController {
     }
 
     private static showImprintModal(): void {
-
-        console.log("showImprintModal")
-
+        VoucherView.hideAllAlerts();
         let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("imprint");
-
         htmlChunkFetch.execute()
-            .then(function () {
-                console.log("fetched imprint chunk: " + htmlChunkFetch.getHtmlChunk());
-            })
             .then(function () {
                 let imprintModalBody: HTMLElement = VoucherElements.imprintModalBody();
                 imprintModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
                 Modal.show(VoucherElements.imprintModalId());
             })
             .catch((error) => {
-                console.log("Error: " + error)
+                Logger(error);
+                VoucherView.showGeneralFailureAlert();
+                VoucherController.resetViewAfterFailure();
             })
     }
 
     private static showPolicyModal(): void {
-
-        console.log("showPolicyModal")
-
+        VoucherView.hideAllAlerts();
         let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("policy_modal");
-
         htmlChunkFetch.execute()
-            .then(function () {
-                console.log("fetched policy_modal chunk: " + htmlChunkFetch.getHtmlChunk());
-            })
             .then(function () {
                 let policyModalBody: HTMLElement = VoucherElements.policyModalBody();
                 policyModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
                 Modal.show(VoucherElements.policyModalId());
             })
             .catch((error) => {
-                console.log("Error: " + error)
+                Logger(error);
+                VoucherView.showGeneralFailureAlert();
+                VoucherController.resetViewAfterFailure();
             })
     }
 
