@@ -9,6 +9,13 @@ const ID_REMEMBER_ME_CHECKBOX: string = "login--remember--input";
 const ID_LOGIN_WITH_ACCESS_KEY_LINK: string = "login--login-access-key--link";
 const ID_CREDENTIALS_FORGOTTEN_LINK: string = "login--credentials-forgotten--link";
 const ID_CREDENTIALS_FORGOTTEN_MODAL: string = "login--credentials-forgotten--modal";
+const ID_IMPRINT_LINK: string = "login--imprint--link";
+const ID_IMPRINT_MODAL: string = "login--imprint--modal";
+const ID_IMPRINT_MODAL_BODY: string = "login--imprint--modal-body";
+const ID_POLICY_LINK: string = "login--policy--link";
+const ID_POLICY_MODAL: string = "login--policy--modal";
+const ID_POLICY_MODAL_BODY: string = "login--policy--modal-body";
+
 
 export class LoginElements {
 
@@ -32,18 +39,6 @@ export class LoginElements {
         return <HTMLInputElement>document.getElementById(ID_REMEMBER_ME_CHECKBOX)
     }
 
-    // public static privacyConsentCheckBox(): HTMLInputElement {
-    //     return <HTMLInputElement>document.getElementById(ID_PRIVACY_CONSENT_CHECKBOX);
-    // }
-    //
-    // public static privacyConsentLink(): HTMLElement {
-    //     return document.getElementById(ID_PRIVACY_CONSENT_LINK);
-    // }
-    //
-    // public static privacyConsentModalID(): string {
-    //     return ID_PRIVACY_CONSENT_MODAL;
-    // }
-
     public static authFailedAlert(): HTMLElement {
         return document.getElementById(ID_AUTH_FAILED_ALERT);
     }
@@ -66,6 +61,30 @@ export class LoginElements {
 
     public static credentialsForgottenModalId(): string {
         return ID_CREDENTIALS_FORGOTTEN_MODAL;
+    }
+
+    public static imprintLink(): HTMLElement {
+        return document.getElementById(ID_IMPRINT_LINK);
+    }
+
+    public static imprintModalId(): string {
+        return ID_IMPRINT_MODAL;
+    }
+
+    public static imprintModalBody(): HTMLElement {
+        return document.getElementById(ID_IMPRINT_MODAL_BODY);
+    }
+
+    public static policyLink(): HTMLElement {
+        return document.getElementById(ID_POLICY_LINK);
+    }
+
+    public static policyModalId(): string {
+        return ID_POLICY_MODAL;
+    }
+
+    public static policyModalBody(): HTMLElement {
+        return document.getElementById(ID_POLICY_MODAL_BODY);
     }
 
 }

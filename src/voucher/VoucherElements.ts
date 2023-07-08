@@ -82,5 +82,4 @@ export class VoucherElements {
         return document.getElementById(ID_POLICY_MODAL_BODY);
     }
 
-
 }

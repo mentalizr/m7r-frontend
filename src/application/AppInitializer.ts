@@ -29,7 +29,6 @@ export class AppInitializer {
             //     console.log("Error catched: " + error);
             //     ErrorHandler.handleError(error);
             // });
-
     }
 
     public static execute(): Promise<void> {
@@ -47,8 +46,6 @@ export class AppInitializer {
 
         if (sessionStatus.isIntermediate()) {
 
-            Logger("Session is intermediate.")
-
             if (sessionStatus.isPolicyConsentRequired()) {
                 Logger("Policy consent required.");
                 AppInitializer.abstractAppChunkFetch = new AppChunkFetchPolicyConsent();
@@ -58,8 +55,6 @@ export class AppInitializer {
             }
 
         } else if (!sessionStatus.isValid()) {
-
-            Logger("Session is not valid")
 
             const entryPointOption: EntrypointOption = new EntrypointOption();
 
@@ -78,8 +73,6 @@ export class AppInitializer {
 
             Logger("Unrecognized user role: [" + sessionStatus.getUserRole() + "].");
         }
-
-        // TODO Add further roles here
     }
 
     private static fetchChunk() {

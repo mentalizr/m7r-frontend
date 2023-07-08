@@ -6,6 +6,10 @@ import {LoginElements} from "./LoginElements";
 import {AbstractAppController} from "../application/AbstractAppController";
 import {Modal} from "../helper/Modal";
 import {Dispatcher} from "../routing/Dispatcher";
+import {VoucherView} from "../voucher/VoucherView";
+import {HtmlChunkFetch} from "../application/HtmlChunkFetch";
+import {VoucherElements} from "../voucher/VoucherElements";
+import {Logger} from "../helper/Logger";
 
 export class LoginController extends AbstractAppController {
 
@@ -29,6 +33,16 @@ export class LoginController extends AbstractAppController {
         LoginElements.loginWithAccessKeyLink().addEventListener("click", function (event) {
             event.preventDefault();
             Dispatcher.toVoucher();
+        });
+
+        LoginElements.imprintLink().addEventListener("click", function (event) {
+            event.preventDefault();
+            LoginController.showImprintModal();
+        });
+
+        LoginElements.policyLink().addEventListener("click", function (event) {
+            event.preventDefault();
+            LoginController.showPolicyModal();
         });
 
         LoginElements.submitButton().addEventListener("click", function (event) {
@@ -123,6 +137,38 @@ export class LoginController extends AbstractAppController {
         LoginView.hideSubmitButtonSpinner();
         LoginView.clearPasswordField();
         LoginView.focusOnPasswordInput();
+    }
+
+    private static showImprintModal(): void {
+        LoginView.hideAllAlerts();
+        let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("imprint");
+        htmlChunkFetch.execute()
+            .then(function () {
+                let imprintModalBody: HTMLElement = LoginElements.imprintModalBody();
+                imprintModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
+                Modal.show(LoginElements.imprintModalId());
+            })
+            .catch((error) => {
+                Logger(error);
+                LoginView.showGeneralFailureAlert();
+                LoginController.resetViewAfterFailure();
+            })
+    }
+
+    private static showPolicyModal(): void {
+        LoginView.hideAllAlerts();
+        let htmlChunkFetch: HtmlChunkFetch = new HtmlChunkFetch("policy_modal");
+        htmlChunkFetch.execute()
+            .then(function () {
+                let policyModalBody: HTMLElement = LoginElements.policyModalBody();
+                policyModalBody.innerHTML = htmlChunkFetch.getHtmlChunk().trim();
+                Modal.show(LoginElements.policyModalId());
+            })
+            .catch((error) => {
+                Logger(error);
+                LoginView.showGeneralFailureAlert();
+                LoginController.resetViewAfterFailure();
+            })
     }
 
 }
