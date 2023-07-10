@@ -7,6 +7,7 @@ import {FetchResponseError} from "../../patient/content/mainContent/formDataPers
 import {Logger} from "../../helper/Logger";
 import {ErrorHandler} from "../error/ErrorHandler";
 import {AppInitializer} from "../../application/AppInitializer";
+import {LogoutHelper} from "../logout/LogoutHelper";
 
 const ID_TIMEOUT_MODAL = "general-timeout--modal";
 const ID_TIMEOUT_CONFIRMED_BUTTON = "general-timeout-info--modal-link";
@@ -40,13 +41,14 @@ export class ModalTimeout {
         document.getElementById(ID_TIMEOUT_CONFIRMED_BUTTON)
             .addEventListener("click", function(event) {
                 event.preventDefault();
-                LogoutRest.execute()
-                    .catch(function(error: FetchResponseError) {
-                        // din
-                    })
-                    .then(function() {
-                        AppInitializer.start();
-                    });
+                LogoutHelper.logoutAndRestart();
+                // LogoutRest.execute()
+                //     .catch(function(error: FetchResponseError) {
+                //         // din
+                //     })
+                //     .then(function() {
+                //         AppInitializer.start();
+                //     });
             });
     }
 

@@ -1,8 +1,8 @@
-import {SERVICE_BASE} from "../../../Globals";
-import {RestResponse} from "../../../helper/RestResponse";
-import {ErrorHandler} from "../../../general/error/ErrorHandler";
+import {SERVICE_BASE} from "../Globals";
+import {RestResponse} from "../helper/RestResponse";
+import {ErrorHandler} from "../general/error/ErrorHandler";
 
-const SERVICE_NAME = "htmlChunk";
+const SERVICE_NAME = "generic/htmlChunk";
 const SERVICE_PARAMETER = "login";
 
 export class HtmlChunkFetch {

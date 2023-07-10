@@ -1,4 +1,4 @@
-import {HtmlChunkFetch} from "../patient/general/fetch/HtmlChunkFetch";
+import {HtmlChunkFetch} from "./HtmlChunkFetch";
 
 export abstract class AbstractAppChunkFetch {
 

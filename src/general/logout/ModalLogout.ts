@@ -7,6 +7,7 @@ import {FetchResponseError} from "../../patient/content/mainContent/formDataPers
 import {Logger} from "../../helper/Logger";
 import {ErrorHandler} from "../error/ErrorHandler";
 import {EntryPoint} from "../../routing/EntryPointOptions/EntryPoint";
+import {LogoutHelper} from "./LogoutHelper";
 
 const ID_LOGOUT_MODAL = "logoutModal";
 const ID_LOGOUT_CONFIRMED_BUTTON = "general-logout--link";
@@ -37,20 +38,7 @@ export class ModalLogout {
     public static registerConfirmedButton() {
         document.getElementById(ID_LOGOUT_CONFIRMED_BUTTON).addEventListener("click", function(event) {
             event.preventDefault();
-            LogoutRest.execute()
-                .then(function() {
-                    // location.reload();
-                    // AppInitializer.start();
-                    const entryPoint = new EntryPoint();
-                    // this will bring the user back to the login screen he came from
-                    // this is not necessarily the configured one.
-                    if (entryPoint.isVoucher) {
-                        Dispatcher.toVoucher();
-                    } else {
-                        Dispatcher.toLogin();
-                    }
-                })
-                .catch(ErrorHandler.handleError);
+            LogoutHelper.logoutAndRestart();
         });
     }
 

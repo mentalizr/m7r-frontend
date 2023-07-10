@@ -1,4 +1,4 @@
-import {VoucherElements} from "../voucher/VoucherElements";
+import {VoucherElements} from "./VoucherElements";
 
 const CLASS_D_NONE: string = "d-none";
 const CLASS_IS_INVALID: string = "is-invalid";
@@ -11,18 +11,6 @@ export class VoucherView {
 
     public static isRememberMeChecked(): boolean {
         return VoucherElements.rememberMeCheckBox().checked;
-    }
-
-    public static isPrivacyConsentChecked(): boolean {
-        return VoucherElements.privacyConsentCheckBox().checked;
-    }
-
-    public static markPrivacyConsentCheckBoxAsInvalid(): void {
-        VoucherElements.privacyConsentCheckBox().classList.add(CLASS_IS_INVALID);
-    }
-
-    public static unmarkPrivacyConsentCheckBoxAsInvalid(): void {
-        VoucherElements.privacyConsentCheckBox().classList.remove(CLASS_IS_INVALID);
     }
 
     public static clearAccessKeyField(): void {
@@ -63,6 +51,5 @@ export class VoucherView {
     public static hideSubmitButtonSpinner(): void {
         VoucherElements.submitButtonSpinner().classList.add(CLASS_D_NONE);
     }
-
 
 }

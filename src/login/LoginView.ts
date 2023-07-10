@@ -45,17 +45,17 @@ export class LoginView {
         return LoginElements.rememberMeCheckBox().checked;
     }
 
-    public static isPrivacyConsentChecked(): boolean {
-        return LoginElements.privacyConsentCheckBox().checked;
-    }
-
-    public static markPrivacyConsentCheckBoxAsInvalid(): void {
-        LoginElements.privacyConsentCheckBox().classList.add(CLASS_IS_INVALID);
-    }
-
-    public static unmarkPrivacyConsentCheckBoxAsInvalid(): void {
-        LoginElements.privacyConsentCheckBox().classList.remove(CLASS_IS_INVALID);
-    }
+    // public static isPrivacyConsentChecked(): boolean {
+    //     return LoginElements.privacyConsentCheckBox().checked;
+    // }
+    //
+    // public static markPrivacyConsentCheckBoxAsInvalid(): void {
+    //     LoginElements.privacyConsentCheckBox().classList.add(CLASS_IS_INVALID);
+    // }
+    //
+    // public static unmarkPrivacyConsentCheckBoxAsInvalid(): void {
+    //     LoginElements.privacyConsentCheckBox().classList.remove(CLASS_IS_INVALID);
+    // }
 
     public static hideAllAlerts(): void {
         LoginElements.authFailedAlert().classList.add(CLASS_D_NONE);

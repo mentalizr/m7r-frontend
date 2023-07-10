@@ -1,7 +1,7 @@
-import {SessionStatus} from "../patient/general/entities/SessionStatus";
+import {SessionStatusEntity} from "../patient/general/entities/SessionStatusEntity";
 
 export class AppModel {
 
-    public static sessionStatus: SessionStatus;
+    public static sessionStatus: SessionStatusEntity;
 
 }
