@@ -20,6 +20,7 @@ import {ButtonBarControllerEvents} from "../../content/buttonBar/controller/Butt
 import {MainContentController} from "../../content/mainContent/MainContentController";
 import {InfolinkController} from "../../content/mainContent/InfolinkController";
 import {MCInitializer} from "../../../../../m7r-web-components";
+import {MultiAudioInitializer} from "../../../../../m7r-web-components/js-out/multiAudio/MultiAudioInitializer";
 import {BackdropSpinnerController} from "./BackdropSpinnerController";
 import {MediaElementCleaner} from "../../content/mainContent/MediaElementCleaner";
 import {AppConfigPatient} from "../../appFrame/model/AppConfigPatient";
@@ -113,6 +114,7 @@ export class PatientAppController extends AbstractAppController {
                         InfolinkController.registerClickEvent();
 
                         MCInitializer.initializeQuestions();
+                        MultiAudioInitializer.initialize();
                     });
             });
     }
