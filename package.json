@@ -34,7 +34,7 @@
     "@types/jquery": "^3.5.8",
     "@types/mustache": "^4.1.2",
     "bootstrap": "^4.6.1",
-    "bootstrap-icons": "^1.7.0",
+    "bootstrap-icons": "^1.11.1",
     "jquery": "^3.6.0",
     "m7r-web-components": "file:../m7r-web-components",
     "mustache": "^4.2.0",
